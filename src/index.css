@@ -1,0 +1,15 @@
+:root {
+  /* PFLO design tokens — 待填入 */
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+}
