@@ -1163,3 +1163,36 @@
   margin: 0 0 0 26.25%;
   width: 72.083%;
 }
+
+/* ---- P1 · 目标3 策略01 优势信息屏 ---- */
+/* 航班优势徽标 chip(白底 + 6% 色调) */
+.p1-adv-chip {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4.7px;
+  height: 23.5px;
+  padding: 2.35px 9.4px;
+  border-radius: 2.35px;
+  box-sizing: border-box;
+  font-size: 14.1px;
+  line-height: 18.8px;
+  white-space: nowrap;
+}
+
+.p1-adv-chip--green {
+  background: #f8fcf7;
+  color: #2d9917;
+}
+
+.p1-adv-chip--gray {
+  background: #f8f8f8;
+  color: #6b6c6f;
+}
+
+.p1-adv-chip img {
+  display: block;
+  width: 14.1px;
+  height: 14.1px;
+}

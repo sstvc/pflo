@@ -29,6 +29,17 @@ import depStrip2 from '../../assets/projects/p1/dep-strip-2.png'
 import depStrip3 from '../../assets/projects/p1/dep-strip-3.png'
 import depStrip4 from '../../assets/projects/p1/dep-strip-4.png'
 import interactScreen from '../../assets/projects/p1/interact-screen.png'
+import advSrc from '../../assets/projects/p1/adv-src.png'
+import advStripA from '../../assets/projects/p1/adv-strip-a.png'
+import advStripB from '../../assets/projects/p1/adv-strip-b.png'
+import icMealGray from '../../assets/projects/p1/ic-meal-gray.svg'
+import icWifiGray from '../../assets/projects/p1/ic-wifi-gray.svg'
+import icWifi2Gray from '../../assets/projects/p1/ic-wifi2-gray.svg'
+import icChargeGray from '../../assets/projects/p1/ic-charge-gray.svg'
+import icMealGreen from '../../assets/projects/p1/ic-meal-green.svg'
+import icWifiGreen from '../../assets/projects/p1/ic-wifi-green.svg'
+import icWifi2Green from '../../assets/projects/p1/ic-wifi2-green.svg'
+import icChargeGreen from '../../assets/projects/p1/ic-charge-green.svg'
 
 /**
  * Project 1 — Flight List Page Redesign / 机票列表页改版项目
@@ -1254,6 +1265,119 @@ function O2Strategy3() {
   )
 }
 
+/* 目标3 · 策略01 航班优势信息强化(1:919)*/
+
+/* 旧卡片截图的两种裁切(同源) */
+const advCropTop = { h: '750%', l: '-14.07%', t: '-203.57%', w: '128.14%' }
+const advCropBot = { h: '750%', l: '-14.07%', t: '-307.14%', w: '128.14%' }
+
+/* 小药丸放大镜:内部两条同源条带 */
+function AdvPill({ x, y, w, h, W, H, innerX, innerTops, crops, imgs }) {
+  return (
+    <div className="p1-spot-panel" style={{ left: pct(x, W), top: pct(y, H), width: pct(w, W), height: pct(h, H) }}>
+      {innerTops.map((t, i) => (
+        <Strip
+          key={i}
+          x={innerX}
+          y={t}
+          w={1180}
+          h={crops ? 112 : 132}
+          W={w}
+          H={h}
+          src={imgs ? imgs[i] : advSrc}
+          crop={crops ? crops[i] : undefined}
+          radius={crops ? 8 : 0}
+        />
+      ))}
+    </div>
+  )
+}
+
+const advChipIcons = {
+  gray: [icMealGray, icWifiGray, icWifi2Gray, icChargeGray],
+  green: [icMealGreen, icWifiGreen, icWifi2Green, icChargeGreen],
+  mixed: [icMealGreen, icWifiGreen, icWifi2Gray, icChargeGreen],
+}
+
+function O3Strategy1() {
+  const W = 1440
+  const BH = 416
+  const AH = 771
+  return (
+    <section data-node-id="1:919">
+      <div className="proj-strathead">
+        <strong>01</strong>
+        <span>航班优势信息强化</span>
+      </div>
+
+      {/* BEFORE:徽标散落的旧卡片(暗化)+ 4 个药丸放大镜 */}
+      <div className="p1-spot" style={{ aspectRatio: `${W} / ${BH}` }}>
+        <p className="proj-stagelabel" style={{ left: pct(24, W), top: 0 }}>
+          Before
+        </p>
+        <Strip x={496} y={0} w={1180} h={112} W={W} H={BH} src={advSrc} crop={advCropTop} opacity={0.4} alt="旧版航班卡片(暗化)" />
+        <Strip x={496} y={120} w={1180} h={112} W={W} H={BH} src={advSrc} crop={advCropBot} opacity={0.4} alt="旧版航班卡片(暗化)" />
+        <AdvPill x={598} y={76} w={110} h={32} W={W} H={BH} innerX={-103} innerTops={[-77, 43]} crops={[advCropTop, advCropBot]} />
+        <AdvPill x={598} y={198} w={110} h={32} W={W} H={BH} innerX={-103} innerTops={[-199, -79]} crops={[advCropTop, advCropBot]} />
+        <AdvPill x={1206} y={64} w={120} h={32} W={W} H={BH} innerX={-711} innerTops={[-65, 55]} crops={[advCropTop, advCropBot]} />
+        <AdvPill x={1206} y={184} w={120} h={32} W={W} H={BH} innerX={-711} innerTops={[-185, -65]} crops={[advCropTop, advCropBot]} />
+        <hr className="p1-spot-row-rule" style={{ left: pct(496, W), top: pct(264, BH), width: pct(920, W) }} />
+        <span className="p1-spot-dt" style={{ left: pct(496, W), top: pct(296, BH) }}>航班舒适度信息</span>
+        <span className="p1-spot-dt" style={{ left: pct(968, W), top: pct(296, BH) }}>碳排放信息</span>
+        <span className="p1-spot-dd" style={{ left: pct(496, W), top: pct(328, BH) }}>
+          仅展示包含服务，用户对优势航班缺乏感知
+        </span>
+        <span className="p1-spot-dd" style={{ left: pct(968, W), top: pct(328, BH) }}>
+          孤立展示，位置突兀不易理解
+        </span>
+      </div>
+      <hr className="proj-divider" />
+
+      {/* AFTER:统一后的优势徽标(暗化)+ 高亮竖窗 + 徽标样例 */}
+      <div className="p1-spot" style={{ aspectRatio: `${W} / ${AH}` }}>
+        <p className="proj-stagelabel" style={{ left: pct(24, W), top: 0 }}>
+          After
+        </p>
+        <Strip x={496} y={32} w={1180} h={132} W={W} H={AH} src={advStripA} opacity={0.4} radius={0} alt="新版航班卡片(暗化)" />
+        <Strip x={496} y={172} w={1180} h={132} W={W} H={AH} src={advStripB} opacity={0.4} radius={0} alt="新版航班卡片(暗化)" />
+        <AdvPill x={964} y={0} w={160} h={336} W={W} H={AH} innerX={-469} innerTops={[31, 171]} imgs={[advStripA, advStripB]} />
+        <hr className="p1-spot-row-rule" style={{ left: pct(496, W), top: pct(400, AH), width: pct(920, W) }} />
+        <span className="p1-int-title" style={{ left: pct(496, W), top: pct(432, AH) }}>集中展示区域</span>
+        <span className="p1-int-title" style={{ left: pct(968, W), top: pct(432, AH) }}>统一展示方式</span>
+        <span className="p1-spot-dt" style={{ left: pct(496, W), top: pct(508, AH), width: pct(330, W) }}>
+          形成视觉聚焦，方便用户对比航班的优势信息，快速决策
+        </span>
+        <span className="p1-spot-dt" style={{ left: pct(968, W), top: pct(508, AH), width: pct(330, W) }}>
+          仅使用颜色提示优势信息，确保用户认知的一致性，放大航班优势
+        </span>
+        <span className="p1-adv-chip p1-adv-chip--gray" style={{ left: pct(968, W), top: pct(588, AH), width: pct(94, W) }}>
+          8% CO2e
+        </span>
+        <span className="p1-adv-chip p1-adv-chip--green" style={{ left: pct(1086, W), top: pct(588, AH), width: pct(94, W) }}>
+          -27% CO2e
+        </span>
+        {[
+          { x: 968, icons: 'gray' },
+          { x: 1086, icons: 'green' },
+          { x: 1206, icons: 'mixed' },
+        ].map((chip) => (
+          <span
+            key={chip.x}
+            className="p1-adv-chip p1-adv-chip--gray"
+            style={{ left: pct(chip.x, W), top: pct(643.5, AH), width: pct(94, W) }}
+          >
+            {advChipIcons[chip.icons].map((src, i) => (
+              <img key={i} src={src} alt="" />
+            ))}
+          </span>
+        ))}
+      </div>
+      <hr className="proj-divider" />
+      <div style={{ height: 40 }} />
+    </section>
+  )
+}
+
 function Project1() {
   return (
     <>
@@ -1284,7 +1408,16 @@ function Project1() {
       <O2Strategy1 />
       <O2Strategy2 />
       <O2Strategy3 />
-      {/* 目标2(1:628)完成 */}
+      <ObjectiveOpener
+        nodeId="1:902"
+        heading="Objective No.3"
+        goal="提升可用性"
+        cnTitle="强化关键信息感知"
+        enSub="Information Visibility"
+        strategies={['航班优势信息强化', '多运价信息对比效率提升']}
+      />
+      <O3Strategy1 />
+      {/* TODO: 目标3 最后内容屏(1:1009) */}
       {/* TODO: 目标3(1:901) */}
       {/* TODO: 对比&总结(1:1045) */}
     </>
