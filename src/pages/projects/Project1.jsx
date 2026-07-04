@@ -88,26 +88,23 @@ function Background() {
           </p>
           <p>持续的局部优化和内容堆叠导致页面设计混乱，用户体验下降，客诉频繁</p>
         </div>
-        <figure className="p1-bg-fig">
-          <div className="proj-figure">
-            <img src={bgOldListA} alt="现状:机票列表页内容持续堆叠的页面截图" />
-            <span
-              className="proj-figure__patch"
-              style={{ left: '92.7%', top: '73.9%', width: '7.3%', height: '26.1%' }}
-            />
-          </div>
-          <figcaption>持续新增的内容导致页面结构失衡、难以拓展</figcaption>
-        </figure>
-        <figure className="p1-bg-fig">
-          <div className="proj-figure">
-            <img src={bgOldListB} alt="现状:局部优化后设计割裂的机票列表页截图" />
-            <span
-              className="proj-figure__patch"
-              style={{ left: '92.7%', top: '71.8%', width: '7.3%', height: '28.2%' }}
-            />
-          </div>
-          <figcaption>局部优化导致页面设计缺乏整体型、体验不佳</figcaption>
-        </figure>
+        <div className="proj-figure">
+          <img src={bgOldListA} alt="现状:机票列表页内容持续堆叠的页面截图" />
+          <span
+            className="proj-figure__patch"
+            style={{ left: '92.7%', top: '73.9%', width: '7.3%', height: '26.1%' }}
+          />
+        </div>
+        <div className="proj-figure">
+          <img src={bgOldListB} alt="现状:局部优化后设计割裂的机票列表页截图" />
+          <span
+            className="proj-figure__patch"
+            style={{ left: '92.7%', top: '71.8%', width: '7.3%', height: '28.2%' }}
+          />
+        </div>
+        <hr className="p1-bg-rule" />
+        <p className="p1-bg-caption p1-bg-caption--a">持续新增的内容导致页面结构失衡、难以拓展</p>
+        <p className="p1-bg-caption p1-bg-caption--b">局部优化导致页面设计缺乏整体型、体验不佳</p>
       </div>
       <hr className="proj-divider" />
       <div className="proj-stats">
