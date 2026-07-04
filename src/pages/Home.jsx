@@ -7,7 +7,7 @@ import { projects } from '../data/projects.js'
  */
 function Home() {
   return (
-    <main className="page page--home">
+    <main className="page page--center page--home">
       <h1>PFLO</h1>
       <nav aria-label="Projects">
         <ul className="home-project-list">

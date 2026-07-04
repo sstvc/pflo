@@ -6,7 +6,13 @@
  * figmaNodeId: Page 1 上对应画板的节点 id,便于回溯设计稿。
  */
 export const projects = [
-  { slug: 'project-1', title: 'Project 1', accent: 1, figmaNodeId: '1:161' },
+  {
+    slug: 'project-1',
+    title: 'Flight List Page Redesign',
+    titleZh: '机票列表页改版项目',
+    accent: 1,
+    figmaNodeId: '1:161',
+  },
   { slug: 'project-2', title: 'Project 2', accent: 2, figmaNodeId: '1:1128' },
   { slug: 'project-3', title: 'Project 3', accent: 3, figmaNodeId: '167:501' },
   { slug: 'project-4', title: 'Project 4', accent: 4, figmaNodeId: '167:998' },

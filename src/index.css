@@ -104,16 +104,20 @@ h1 {
   color: var(--color-heading);
 }
 
-/* ---- 骨架页面基础样式(正式还原设计稿时逐步替换) ---- */
+/* ---- 页面基础 ---- */
 .page {
   flex: 1;
+  background: var(--color-bg-1);
+  color: var(--color-body-1);
+}
+
+/* 居中式页面(临时首页 / 404) */
+.page--center {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 16px;
-  background: var(--color-bg-1);
-  color: var(--color-body-1);
   text-align: center;
 }
 
