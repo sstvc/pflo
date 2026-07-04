@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers 配置(Git 集成构建时会读取此文件)
+  // name 必须与现有 Worker 名一致,否则会新建一个项目
+  "name": "pflo",
+  "compatibility_date": "2026-07-04",
+  "assets": {
+    "directory": "./dist",
+    // SPA 回退:直接访问 /projects/xxx 等深链时返回 index.html,由前端路由接管
+    "not_found_handling": "single-page-application"
+  }
+}

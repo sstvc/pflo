@@ -1,15 +1,131 @@
+/* ============================================================
+   PFLO design tokens
+   Source of truth: Figma `pflo-for-cc` → Page 1 → Styles (194:2)
+   + file variables. Do not hand-edit values; re-sync from Figma.
+   ============================================================ */
+
 :root {
-  /* PFLO design tokens — 待填入 */
+  /* ---- Font stacks ----
+     Latin: Montserrat (headings) / Inter (body)
+     CJK:  Source Han Sans SC (= Noto Sans SC); system CJK as fallback
+     自托管 @fontsource-variable 可变字体,family 名带 "Variable" 后缀 */
+  --font-heading: 'Montserrat Variable', 'Noto Sans SC Variable', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-body: 'Inter Variable', 'Noto Sans SC Variable', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+
+  /* ---- Type scale (desktop @1440) ---- */
+  /* Display: Montserrat 800 / 思源 Heavy */
+  --text-display: 144px; --leading-display: 160px; --tracking-display: -2.88px;
+  /* H1: Montserrat 800 / 思源 Heavy */
+  --text-h1: 72px; --leading-h1: 84px; --tracking-h1: -1.44px;
+  /* H2: Montserrat 700 / 思源 Bold */
+  --text-h2: 60px; --leading-h2: 72px; --tracking-h2: -0.6px;
+  /* H3: Montserrat 600 / 思源 Medium */
+  --text-h3: 36px; --leading-h3: 44px;
+  /* H4: Montserrat 600 / 思源 Medium */
+  --text-h4: 24px; --leading-h4: 36px; --tracking-h4: 0.24px;
+  /* Body 1: Inter 400/600 / 思源 Regular/Medium */
+  --text-body-1: 16px; --leading-body-1: 24px;
+  /* Body 2 / Caption: Inter 400/500 */
+  --text-body-2: 14px; --leading-body-2: 20px; --tracking-body-2: 0.28px;
+
+  /* ---- Brand ---- */
+  --brand-primary: #7f7ebc;
+  --brand-secondary: #c1bcd9;
+
+  /* ---- Palette · Light(一级页面) ---- */
+  --light-bg-1: #f6fafd;          /* 主背景 */
+  --light-bg-2: #eef2f5;          /* 区块背景 */
+  --light-text-heading: #1a1a1a;  /* 标题文字 */
+  --light-text-body-1: #444444;   /* 正文文字 */
+  --light-text-body-2: #767676;   /* 辅助文字 */
+  --light-border: #dadce0;        /* 分割线 */
+
+  /* ---- Palette · Dark(二级页面 / project 页) ---- */
+  --dark-bg-1: #1a1a1a;
+  --dark-bg-2: #2a2b3a;
+  --dark-text-heading: #f6fafd;
+  --dark-text-body-1: #dddddd;
+  --dark-text-body-2: #aaaaaa;
+  --dark-border-light: #dadce0;   /* 浅分割线 */
+  --dark-border-dark: #888a8e;    /* 深分割线 */
+
+  /* ---- 项目主题色(各项目独立使用,不跨项目混用) ---- */
+  --p1-primary: #4a5d8d; --p1-secondary: #8d4a64;
+  --p2-primary: #4a8d6d; --p2-secondary: #d97b3f;
+  --p3-primary: #3a5270; --p3-secondary: #c97a58;
+  --p4-primary: #554a6d; --p4-secondary: #5e7e6a;
+  --p5-primary: #3a6e6e; --p5-secondary: #7a5a4a;
+
+  /* ---- 语义色:默认 = Light(一级页面) ---- */
+  --color-bg-1: var(--light-bg-1);
+  --color-bg-2: var(--light-bg-2);
+  --color-heading: var(--light-text-heading);
+  --color-body-1: var(--light-text-body-1);
+  --color-body-2: var(--light-text-body-2);
+  --color-border: var(--light-border);
 }
 
+/* 二级页面(project 子页)整体切换为 Dark */
+[data-theme='dark'] {
+  --color-bg-1: var(--dark-bg-1);
+  --color-bg-2: var(--dark-bg-2);
+  --color-heading: var(--dark-text-heading);
+  --color-body-1: var(--dark-text-body-1);
+  --color-body-2: var(--dark-text-body-2);
+  --color-border: var(--dark-border-dark);
+  --color-border-subtle: var(--dark-border-light);
+}
+
+/* 每个 project 页挂 data-project,取用专属强调色 */
+[data-project='1'] { --accent-primary: var(--p1-primary); --accent-secondary: var(--p1-secondary); }
+[data-project='2'] { --accent-primary: var(--p2-primary); --accent-secondary: var(--p2-secondary); }
+[data-project='3'] { --accent-primary: var(--p3-primary); --accent-secondary: var(--p3-secondary); }
+[data-project='4'] { --accent-primary: var(--p4-primary); --accent-secondary: var(--p4-secondary); }
+[data-project='5'] { --accent-primary: var(--p5-primary); --accent-secondary: var(--p5-secondary); }
+
+/* ---- Base ---- */
 body {
   margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body-1);
+  line-height: var(--leading-body-1);
+  background: var(--color-bg-1);
+  color: var(--color-body-1);
 }
 
 #root {
   min-height: 100svh;
   display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-family: var(--font-heading);
+  color: var(--color-heading);
+}
+
+/* ---- 骨架页面基础样式(正式还原设计稿时逐步替换) ---- */
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  gap: 16px;
+  background: var(--color-bg-1);
+  color: var(--color-body-1);
+  text-align: center;
+}
+
+.page a {
+  color: inherit;
+}
+
+.home-project-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
