@@ -7,6 +7,11 @@ import introStep2 from '../../assets/projects/p1/intro-step2.png'
 import introStep3 from '../../assets/projects/p1/intro-step3.png'
 import problemOldPage from '../../assets/projects/p1/problem-old-page.png'
 import frameAfter from '../../assets/projects/p1/frame-after.png'
+import cardBefore from '../../assets/projects/p1/card-before.png'
+import cardBeforeMask from '../../assets/projects/p1/card-before-mask.png'
+import cardAfter from '../../assets/projects/p1/card-after.png'
+import cardAfterMask from '../../assets/projects/p1/card-after-mask.png'
+import cardExpand from '../../assets/projects/p1/card-expand.png'
 
 /**
  * Project 1 — Flight List Page Redesign / 机票列表页改版项目
@@ -590,6 +595,183 @@ function Strategy1() {
   )
 }
 
+/* 优先级色块示意舞台:块/标签/图/虚线全部按百分比绝对定位 */
+function PriStage({ w, h, style, items }) {
+  const S = (x, y, ww, hh) => ({
+    left: pct(x, w),
+    top: pct(y, h),
+    ...(ww != null && { width: pct(ww, w) }),
+    ...(hh != null && { height: pct(hh, h) }),
+  })
+  return (
+    <div className="p1-pri-stage" style={{ aspectRatio: `${w} / ${h}`, ...style }}>
+      {items.map((it, i) => {
+        if (it.k === 'block')
+          return <div key={i} className={`p1-pri-block p1-pri-block--${it.v}`} style={S(it.x, it.y, it.w, it.h)} />
+        if (it.k === 'img')
+          return (
+            <div key={i} className="p1-pri-img" style={S(it.x, it.y, it.w)}>
+              <img src={it.src} alt={it.alt} />
+            </div>
+          )
+        if (it.k === 'label')
+          return (
+            <span
+              key={i}
+              className={`p1-pri-label${it.lit ? ' p1-pri-label--lit' : ''}${it.align ? ` p1-pri-label--${it.align}` : ''}`}
+              style={S(it.x, it.y)}
+            >
+              {it.text}
+            </span>
+          )
+        if (it.k === 'title')
+          return (
+            <span key={i} className={`p1-pri-title${it.s ? ' p1-pri-title--s' : ''}`} style={S(it.x, it.y)}>
+              {it.text}
+            </span>
+          )
+        if (it.k === 'desc')
+          return (
+            <span key={i} className="p1-pri-desc" style={S(it.x, it.y)}>
+              {it.text}
+            </span>
+          )
+        if (it.k === 'sq') return <span key={i} className={`p1-pri-sq p1-pri-sq--${it.o}`} style={S(it.x, it.y)} />
+        if (it.k === 'vdash')
+          return <div key={i} className="p1-pri-vdash" style={{ ...S(it.x, it.y), height: pct(it.h, h) }} />
+        if (it.k === 'hdash')
+          return <div key={i} className="p1-pri-hdash" style={{ ...S(it.x, it.y), width: pct(it.w, w) }} />
+        return null
+      })}
+    </div>
+  )
+}
+
+/* 目标1 · 策略02 航班卡片信息元素分区(1:480)*/
+
+/* BEFORE:卡片元素按优先级拆解(舞台 1062×208,较内容列左溢 24px) */
+const priBefore = [
+  { k: 'block', v: 'a20', x: 0, y: 0, w: 282, h: 110 },
+  { k: 'block', v: 'a50', x: 294, y: 0, w: 272, h: 208 },
+  { k: 'block', v: 'a20', x: 578, y: 0, w: 98, h: 87 },
+  { k: 'block', v: 'a50', x: 688, y: 0, w: 280, h: 110 },
+  { k: 'block', v: 'a50', x: 110, y: 122, w: 172, h: 86 },
+  { k: 'block', v: 'a50', x: 578, y: 106, w: 98, h: 102 },
+  { k: 'block', v: 'a20', x: 688, y: 122, w: 280, h: 86 },
+  { k: 'img', src: cardBeforeMask, alt: '航班卡片元素高亮拆解', x: 24, y: 52, w: 920 },
+  { k: 'label', text: '航班信息', x: 24, y: 8 },
+  { k: 'label', text: '行程信息', x: 306, y: 8, lit: true },
+  { k: 'label', text: '详情按钮', x: 590, y: 8 },
+  { k: 'label', text: '运价信息', x: 944, y: 8, lit: true, align: 'right' },
+  { k: 'label', text: '航班舒适度', x: 122, y: 180, lit: true },
+  { k: 'label', text: '碳排放信息', x: 590, y: 180, lit: true },
+  { k: 'label', text: '运价标签', x: 944, y: 180, align: 'right' },
+  { k: 'sq', o: 20, x: 980, y: 138 },
+  { k: 'label', text: '低优先级', x: 1000, y: 136 },
+  { k: 'sq', o: 50, x: 980, y: 182 },
+  { k: 'label', text: '高优先级', x: 1000, y: 180, lit: true },
+]
+
+/* AFTER:商品陈列 / 动作唤起 分区(舞台 1156×360,左溢 118px) */
+const priAfter = [
+  { k: 'title', text: '商品陈列', x: 118, y: 0 },
+  { k: 'title', text: '动作唤起', x: 894, y: 0, s: true },
+  { k: 'desc', text: '航班行程信息、航班优势信息', x: 118, y: 52 },
+  { k: 'desc', text: '运价相关信息、CTA', x: 894, y: 52 },
+  { k: 'label', text: '低优先级', x: 629.5, y: 48, align: 'center' },
+  { k: 'vdash', x: 630, y: 76, h: 256 },
+  { k: 'hdash', x: 0, y: 195, w: 1156 },
+  { k: 'block', v: 'a20', x: 94, y: 100, w: 530, h: 89 },
+  { k: 'block', v: 's20', x: 636, y: 100, w: 426, h: 89 },
+  { k: 'block', v: 'a50', x: 94, y: 201, w: 376, h: 106 },
+  { k: 'block', v: 'a50', x: 482, y: 201, w: 142, h: 106 },
+  { k: 'block', v: 's50', x: 636, y: 201, w: 270, h: 106 },
+  { k: 'block', v: 's50', x: 918, y: 201, w: 144, h: 106 },
+  { k: 'img', src: cardAfterMask, alt: '新版航班卡片分区高亮', x: 118, y: 152, w: 920 },
+  { k: 'label', text: '航班信息', x: 118, y: 108 },
+  { k: 'label', text: '运价标签', x: 1032, y: 108, align: 'right' },
+  { k: 'label', text: '行程信息', x: 118, y: 279, lit: true },
+  { k: 'label', text: '舒适度/碳排放', x: 494, y: 279, lit: true },
+  { k: 'label', text: '运价信息', x: 648, y: 279, lit: true },
+  { k: 'label', text: 'CTA', x: 1038, y: 279, lit: true, align: 'right' },
+  { k: 'label', text: '高优先级', x: 629.5, y: 340, lit: true, align: 'center' },
+]
+
+function Strategy2() {
+  return (
+    <section data-node-id="1:480">
+      <div className="proj-strathead">
+        <strong>02</strong>
+        <span>航班卡片信息元素分区</span>
+      </div>
+
+      {/* BEFORE */}
+      <div className="p1-split">
+        <p className="proj-stagelabel">Before</p>
+        <div>
+          <img className="p1-split__card" src={cardBefore} alt="改版前航班卡片" />
+          <PriStage
+            w={1062}
+            h={208}
+            style={{ marginLeft: '-2.312%', width: '102.312%' }}
+            items={priBefore}
+          />
+        </div>
+      </div>
+      <div className="p1-after-notes">
+        <hr />
+        <dl>
+          <dt>问题 1</dt>
+          <dd>信息展示缺乏分类和主次关系</dd>
+        </dl>
+        <dl>
+          <dt>问题 2</dt>
+          <dd>信息展示空间分割不合理</dd>
+        </dl>
+        <dl>
+          <dt>问题 3</dt>
+          <dd>布局破碎造成阅读动线跳跃</dd>
+        </dl>
+      </div>
+      <hr className="proj-divider" />
+
+      {/* AFTER */}
+      <div className="p1-split">
+        <p className="proj-stagelabel">After</p>
+        <div>
+          <p className="p1-card-title">基于功能和信息优先级，分割卡片，创建信息结构</p>
+          <img className="p1-split__card" src={cardAfter} alt="改版后航班卡片" />
+          <PriStage
+            w={1156}
+            h={360}
+            style={{ marginLeft: '-11.368%', width: '111.368%', marginTop: '32px' }}
+            items={priAfter}
+          />
+        </div>
+      </div>
+      <div className="p1-after-notes">
+        <hr />
+        <dl>
+          <dt>设计策略 1</dt>
+          <dd>按照功能，在水平方向将卡片分区</dd>
+        </dl>
+        <dl>
+          <dt>设计策略 2</dt>
+          <dd>按照信息优先级，在垂直方向将卡片分区</dd>
+        </dl>
+        <hr style={{ marginTop: 32 }} />
+        <dl className="p1-notes-wide">
+          <dt>拓展性展示：</dt>
+          <dd>
+            <img src={cardExpand} alt="航班卡片拓展性展示" />
+          </dd>
+        </dl>
+      </div>
+      <hr className="proj-divider" />
+    </section>
+  )
+}
+
 function Project1() {
   return (
     <>
@@ -607,7 +789,8 @@ function Project1() {
         strategies={['页面框架重构', '航班卡片信息元素分区', '使用容器拓展页面层级']}
       />
       <Strategy1 />
-      {/* TODO: 目标1 其余子屏(1:480 / 1:566) */}
+      <Strategy2 />
+      {/* TODO: 目标1 最后子屏(1:566) */}
       {/* TODO: 目标2(1:628) */}
       {/* TODO: 目标3(1:901) */}
       {/* TODO: 对比&总结(1:1045) */}

@@ -814,3 +814,114 @@
 .p1-after-notes dl:nth-of-type(1) {
   grid-column: 2;
 }
+
+.p1-after-notes .p1-notes-wide {
+  grid-column: 2 / -1;
+}
+
+.p1-after-notes .p1-notes-wide img {
+  display: block;
+  width: 88.63%;
+  margin-top: 8px; /* dd 自带 8px,合计 16px */
+}
+
+/* ---- P1 · 策略02 卡片分区屏 ---- */
+.p1-split {
+  display: grid;
+  grid-template-columns: 330fr 1038fr;
+  gap: 0 24px;
+  padding: 64px 24px 0;
+  align-items: start;
+}
+
+.p1-split__card {
+  display: block;
+  width: 88.63%;
+  border-radius: 8px;
+}
+
+.p1-card-title {
+  margin: 0 0 64px;
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+/* 优先级色块示意(绝对定位舞台,坐标按百分比) */
+.p1-pri-stage {
+  position: relative;
+  margin-top: 64px;
+}
+
+.p1-pri-block {
+  position: absolute;
+}
+
+.p1-pri-block--a20 { background: var(--accent-primary); opacity: 0.2; }
+.p1-pri-block--a50 { background: var(--accent-primary); opacity: 0.5; }
+.p1-pri-block--s20 { background: var(--accent-secondary); opacity: 0.2; }
+.p1-pri-block--s50 { background: var(--accent-secondary); opacity: 0.5; }
+
+.p1-pri-label {
+  position: absolute;
+  font-size: var(--text-body-2);
+  line-height: var(--leading-body-2);
+  letter-spacing: var(--tracking-body-2);
+  font-weight: 500;
+  color: var(--color-body-2);
+  white-space: nowrap;
+}
+
+.p1-pri-label--lit { color: var(--dark-text-body-1); }
+.p1-pri-label--right { transform: translateX(-100%); }
+.p1-pri-label--center { transform: translateX(-50%); }
+
+.p1-pri-title {
+  position: absolute;
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  font-weight: 900;
+  color: var(--accent-primary);
+  white-space: nowrap;
+}
+
+.p1-pri-title--s { color: var(--accent-secondary); }
+
+.p1-pri-desc {
+  position: absolute;
+  color: var(--dark-text-body-1);
+  white-space: nowrap;
+}
+
+.p1-pri-img {
+  position: absolute;
+}
+
+.p1-pri-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.p1-pri-sq {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--accent-primary);
+}
+
+.p1-pri-sq--20 { opacity: 0.2; }
+.p1-pri-sq--50 { opacity: 0.5; }
+
+.p1-pri-vdash {
+  position: absolute;
+  width: 0;
+  border-left: 1px dashed var(--dark-border-dark);
+}
+
+.p1-pri-hdash {
+  position: absolute;
+  height: 0;
+  border-top: 1px dashed var(--dark-border-dark);
+}
