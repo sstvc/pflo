@@ -5,6 +5,7 @@ import bgOldListB from '../../assets/projects/p1/bg-old-list-b.png'
 import introStep1 from '../../assets/projects/p1/intro-step1.png'
 import introStep2 from '../../assets/projects/p1/intro-step2.png'
 import introStep3 from '../../assets/projects/p1/intro-step3.png'
+import problemOldPage from '../../assets/projects/p1/problem-old-page.png'
 
 /**
  * Project 1 — Flight List Page Redesign / 机票列表页改版项目
@@ -203,13 +204,117 @@ function Introduction() {
   )
 }
 
+/* 问题分析(1:268):两组问题清单 + 现状长截图 */
+const problemGroups = [
+  {
+    num: '01',
+    label: '拓展性低',
+    items: [
+      { title: '框架结构不合理', desc: '页面模块层级不清，' },
+      { title: '无法满足特殊场景展示', desc: '在多筛选 / 多运价等场景下，内容展示失衡，体验下降明显' },
+      { title: '卡片容量受限', desc: '航班卡片和运价卡片的展示空间趋于极限，难以容纳更多内容' },
+    ],
+  },
+  {
+    num: '02',
+    label: '可用性弱',
+    items: [
+      { title: '主流程不明晰', desc: '信息展示缺乏层次，低频功能和次要信息的展示影响核心流程' },
+      { title: '关键信息查看路径长', desc: '中转城市等重要信息的查看依赖浮层，查看效率低下' },
+      { title: '关键信息难以定位', desc: '航班优势信息等展示分散，用户感知度低' },
+      { title: '交互方式不明确', desc: '卡片内容的交互逻辑不统一，用户难以形成清晰的操作认知' },
+    ],
+  },
+]
+
+function Problem() {
+  return (
+    <section data-node-id="1:268">
+      <SectionHeading>Existing Problem</SectionHeading>
+      <div className="p1-prob-body">
+        <p className="proj-kicker">问题分析</p>
+        {problemGroups.map((group, gi) => (
+          <div key={group.num} style={{ display: 'contents' }}>
+            <div className={`p1-prob-label${gi > 0 ? ' p1-prob-label--gap' : ''}`}>
+              <strong>{group.num}</strong>
+              <span>{group.label}</span>
+            </div>
+            <ul className={`p1-prob-list${gi > 0 ? ' p1-prob-list--gap' : ''}`}>
+              {group.items.map((item) => (
+                <li key={item.title}>
+                  <h4>{item.title}</h4>
+                  <p>{item.desc}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+        <div className="proj-figure p1-prob-img">
+          <img src={problemOldPage} alt="现状机票列表页整页截图" />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* 设计目标(1:308):三列目标卡(描边大序号) */
+const objectives = [
+  {
+    num: '01',
+    sub: '提升拓展性',
+    title: '优化信息展示结构',
+    items: ['页面框架重构', '航班卡片信息元素分区', '使用容器拓展页面层级'],
+  },
+  {
+    num: '02',
+    sub: '提升可用性',
+    title: '交互链路提效',
+    items: ['页面核心流程强化', '关键信息减轻查看依赖', '卡片交互方式规范化'],
+  },
+  {
+    num: '03',
+    sub: '提升可用性',
+    title: '强化关键信息感知',
+    items: ['航班优势信息强化', '多运价信息对比效率提升'],
+    tailRule: true,
+  },
+]
+
+function Objectives() {
+  return (
+    <section data-node-id="1:308">
+      <SectionHeading>Design Objectives</SectionHeading>
+      <div className="p1-obj-grid">
+        <div className="p1-obj-side">
+          <p className="proj-kicker">设计目标</p>
+          <div className="p1-obj-bar" />
+        </div>
+        {objectives.map((obj) => (
+          <div className="p1-obj-card" key={obj.num}>
+            <div className="p1-obj-num">{obj.num}</div>
+            <p className="p1-obj-sub">{obj.sub}</p>
+            <p className="p1-obj-title">{obj.title}</p>
+            <ul>
+              {obj.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            {obj.tailRule && <hr className="p1-obj-tail" />}
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 function Project1() {
   return (
     <>
       <Hero />
       <Background />
       <Introduction />
-      {/* TODO: 问题&目标(1:267) */}
+      <Problem />
+      <Objectives />
       {/* TODO: 目标1(1:343) */}
       {/* TODO: 目标2(1:628) */}
       {/* TODO: 目标3(1:901) */}

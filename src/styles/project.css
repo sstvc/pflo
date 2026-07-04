@@ -358,3 +358,148 @@
 .p1-intro-col--hl .p1-flow__node span {
   color: var(--dark-text-body-1);
 }
+
+/* ---- P1 · Existing Problem(1:268) ---- */
+.p1-prob-body {
+  display: grid;
+  grid-template-columns: 330fr 448fr 566fr;
+  gap: 0 24px;
+  padding: 64px 24px 104px;
+  align-items: start;
+}
+
+.p1-prob-body .proj-kicker {
+  grid-column: 1;
+  margin-bottom: 32px;
+}
+
+/* 组标签:小序号 + 大标题 */
+.p1-prob-label {
+  grid-column: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.p1-prob-label strong {
+  margin-top: 4px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  color: var(--accent-primary);
+}
+
+.p1-prob-label span {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-h2);
+  line-height: var(--leading-h2);
+  letter-spacing: var(--tracking-h2);
+  color: var(--color-heading);
+}
+
+.p1-prob-list {
+  grid-column: 2;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.p1-prob-list li {
+  border-top: 1px solid var(--dark-border-dark);
+  padding: 32px 0;
+}
+
+.p1-prob-list h4 {
+  margin: 0;
+  font-size: var(--text-h4);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-h4);
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+.p1-prob-list li p {
+  margin-top: 8px;
+  color: var(--color-body-2);
+}
+
+/* 第二组与第一组的间距 */
+.p1-prob-label--gap,
+.p1-prob-list--gap {
+  margin-top: 120px;
+}
+
+.p1-prob-img {
+  grid-column: 3;
+  grid-row: 1 / span 5;
+  aspect-ratio: 566 / 1124;
+}
+
+/* ---- P1 · Design Objectives(1:308) ---- */
+.p1-obj-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0 24px;
+  padding: 40px 24px 104px;
+  align-items: start;
+}
+
+.p1-obj-side .proj-kicker {
+  margin-top: 16px;
+}
+
+.p1-obj-side .p1-obj-bar {
+  width: 40px;
+  height: 72px;
+  margin-top: 32px;
+  background: var(--accent-primary);
+}
+
+/* 180px 描边空心序号(同区块标题的防乱线处理) */
+.p1-obj-num {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 180px;
+  line-height: 180px;
+  letter-spacing: -3.6px;
+  color: var(--color-bg-1);
+  -webkit-text-stroke: 2px var(--accent-primary);
+  paint-order: stroke fill;
+}
+
+.p1-obj-sub {
+  font-size: var(--text-h4);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-h4);
+  font-weight: 500;
+  color: var(--dark-text-body-1);
+}
+
+.p1-obj-title {
+  margin-top: 16px;
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+.p1-obj-card ul {
+  list-style: none;
+  margin: 32px 0 0;
+  padding: 0;
+}
+
+.p1-obj-card li {
+  border-top: 1px solid var(--dark-border-dark);
+  padding: 32px 0;
+  color: var(--dark-text-body-1);
+}
+
+/* 第三列末尾的收尾线(设计稿如此) */
+.p1-obj-card .p1-obj-tail {
+  border: 0;
+  border-top: 1px solid var(--dark-border-dark);
+  margin: 0;
+}
