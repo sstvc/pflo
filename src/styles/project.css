@@ -1063,3 +1063,56 @@
   position: absolute;
   max-width: none;
 }
+
+/* ---- P1 · 目标2 策略02 减轻查看依赖屏 ---- */
+/* 全宽绝对定位舞台(暗化条带 + 放大镜面板) */
+.p1-spot {
+  position: relative;
+  overflow: hidden;
+  margin-top: 64px;
+}
+
+/* 放大镜面板:描边圆角容器,内部同源条带全亮 */
+.p1-spot-panel {
+  position: absolute;
+  border: 1px solid var(--light-border);
+  border-radius: 16px;
+  background: rgba(218, 220, 224, 0.2);
+  box-shadow: inset 0 0 12px rgba(218, 220, 224, 0.3);
+  overflow: hidden;
+}
+
+.p1-spot .proj-stagelabel {
+  position: absolute;
+}
+
+.p1-spot-note {
+  margin: 32px 24px 0 calc(41.667% + 14px);
+  color: var(--color-heading);
+}
+
+.p1-spot-rule {
+  border: 0;
+  border-top: 1px solid var(--dark-border-dark);
+  margin: 0 0 0 calc(41.667% + 14px);
+  width: 55.7%;
+}
+
+/* 左列四行说明(舞台内绝对定位) */
+.p1-spot-row-rule {
+  position: absolute;
+  border: 0;
+  border-top: 1px solid var(--dark-border-dark);
+  margin: 0;
+}
+
+.p1-spot-dt {
+  position: absolute;
+  color: var(--color-body-2);
+  white-space: nowrap;
+}
+
+.p1-spot-dd {
+  position: absolute;
+  color: var(--color-heading);
+}

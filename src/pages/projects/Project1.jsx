@@ -22,6 +22,12 @@ import coreFunnel from '../../assets/projects/p1/core-funnel.png'
 import coreBeforeA from '../../assets/projects/p1/core-before-a.png'
 import coreBeforeB from '../../assets/projects/p1/core-before-b.png'
 import coreAfter from '../../assets/projects/p1/core-after.png'
+import depBeforeTop from '../../assets/projects/p1/dep-before-top.png'
+import depBeforeBot from '../../assets/projects/p1/dep-before-bot.png'
+import depStrip1 from '../../assets/projects/p1/dep-strip-1.png'
+import depStrip2 from '../../assets/projects/p1/dep-strip-2.png'
+import depStrip3 from '../../assets/projects/p1/dep-strip-3.png'
+import depStrip4 from '../../assets/projects/p1/dep-strip-4.png'
 
 /**
  * Project 1 — Flight List Page Redesign / 机票列表页改版项目
@@ -994,6 +1000,140 @@ function O2Strategy1() {
   )
 }
 
+/* 目标2 · 策略02 关键信息减轻查看依赖(1:725)*/
+
+/* 暗化条带的同源裁切参数(稿内直译) */
+const depBeforeCropTop = { h: '750%', l: '-14.07%', t: '-390.18%', w: '128.14%' }
+const depBeforeCropBot = { h: '750%', l: '-14.07%', t: '-203.57%', w: '128.14%' }
+
+/* 条带组件:定位容器 + 内部裁切/整图 */
+function Strip({ x, y, w, h, W, H, src, crop, opacity, radius = 8, alt = '' }) {
+  return (
+    <div
+      className="p1-crop"
+      style={{
+        left: pct(x, W),
+        top: pct(y, H),
+        width: pct(w, W),
+        height: pct(h, H),
+        opacity,
+        borderRadius: radius,
+      }}
+    >
+      {crop ? (
+        <img src={src} alt={alt} style={{ height: crop.h, left: crop.l, top: crop.t, width: crop.w }} />
+      ) : (
+        <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'static' }} />
+      )}
+    </div>
+  )
+}
+
+const depAfterRows = [
+  { y: 28, dt: '直飞航班', dd: '使用正向色凸显航班优势' },
+  { y: 168, dt: '一次中转', dd: '展示中转城市 & 时间，便于快速获取重要航班信息' },
+  { y: 308, dt: '多次中转', dd: '优先展示中转次数，便于用户筛选航班' },
+  { y: 448, dt: '包含中转特别提醒', dd: '引导用户打开浮层查看内容' },
+]
+
+const depStrips = [depStrip1, depStrip2, depStrip3, depStrip4]
+
+function O2Strategy2() {
+  /* BEFORE 舞台 1440×330,AFTER 舞台 1440×616 */
+  const BW = 1440
+  const BH = 330
+  const AH = 616
+  return (
+    <section data-node-id="1:725">
+      <div className="proj-strathead">
+        <strong>02</strong>
+        <span>关键信息减轻查看依赖</span>
+      </div>
+
+      {/* BEFORE:暗化旧卡片 + 放大镜面板 */}
+      <div className="p1-spot" style={{ aspectRatio: `${BW} / ${BH}` }}>
+        <p className="proj-stagelabel" style={{ left: pct(24, BW), top: 0 }}>
+          Before
+        </p>
+        <Strip x={614} y={32} w={1180} h={112} W={BW} H={BH} src={depBeforeTop} crop={depBeforeCropTop} opacity={0.4} alt="旧版航班卡片(暗化)" />
+        <Strip x={614} y={154} w={1180} h={112} W={BW} H={BH} src={depBeforeBot} crop={depBeforeCropBot} opacity={0.4} alt="旧版航班卡片(暗化)" />
+        <div
+          className="p1-spot-panel"
+          style={{ left: pct(938, BW), top: 0, width: pct(390, BW), height: pct(298, BH) }}
+        >
+          <Strip x={-325} y={31} w={1180} h={112} W={390} H={298} src={depBeforeTop} crop={depBeforeCropTop} alt="旧版卡片中部放大:外显信息不足" />
+          <Strip x={-325} y={153} w={1180} h={112} W={390} H={298} src={depBeforeBot} crop={depBeforeCropBot} alt="旧版卡片中部放大:依赖浮层查看" />
+        </div>
+      </div>
+      <hr className="p1-spot-rule" />
+      <p className="p1-spot-note">外显信息不足，过分依赖浮层（点击打开）提供必要信息，如中转时间等</p>
+      <hr className="proj-divider" style={{ marginTop: 64 }} />
+
+      {/* AFTER:四类航班的关键信息外显 + 放大镜面板 */}
+      <div className="p1-split" style={{ paddingBottom: 0 }}>
+        <p className="proj-stagelabel">After</p>
+        <p className="p1-card-title" style={{ marginBottom: 0 }}>
+          外显航班关键信息，缩短查看路径
+        </p>
+      </div>
+      <div className="p1-spot" style={{ aspectRatio: `${BW} / ${AH}` }}>
+        {depAfterRows.map((row) => (
+          <div key={row.dt} style={{ display: 'contents' }}>
+            <hr
+              className="p1-spot-row-rule"
+              style={{ left: pct(24, BW), top: pct(row.y, AH), width: pct(566, BW) }}
+            />
+            <span className="p1-spot-dt" style={{ left: pct(24, BW), top: pct(row.y + 32, AH) }}>
+              {row.dt}
+            </span>
+            <span
+              className="p1-spot-dd"
+              style={{ left: pct(378, BW), top: pct(row.y + 32, AH), width: pct(212, BW) }}
+            >
+              {row.dd}
+            </span>
+          </div>
+        ))}
+        {depStrips.map((src, i) => (
+          <Strip
+            key={i}
+            x={614}
+            y={32 + i * 140}
+            w={1180}
+            h={132}
+            W={BW}
+            H={AH}
+            src={src}
+            opacity={0.4}
+            radius={0}
+            alt="新版航班卡片(暗化)"
+          />
+        ))}
+        <div
+          className="p1-spot-panel"
+          style={{ left: pct(622, BW), top: 0, width: pct(440, BW), height: pct(616, AH) }}
+        >
+          {depStrips.map((src, i) => (
+            <Strip
+              key={i}
+              x={-9}
+              y={31 + i * 140}
+              w={1180}
+              h={132}
+              W={440}
+              H={616}
+              src={src}
+              radius={0}
+              alt="新版航班卡片左侧放大:关键信息外显"
+            />
+          ))}
+        </div>
+      </div>
+      <hr className="proj-divider" style={{ marginTop: 104 }} />
+    </section>
+  )
+}
+
 function Project1() {
   return (
     <>
@@ -1022,7 +1162,8 @@ function Project1() {
         strategies={['页面核心流程强化', '关键信息减轻查看依赖', '卡片交互方式规范化']}
       />
       <O2Strategy1 />
-      {/* TODO: 目标2 内容屏(1:725 / 1:764) */}
+      <O2Strategy2 />
+      {/* TODO: 目标2 最后内容屏(1:764) */}
       {/* TODO: 目标3(1:901) */}
       {/* TODO: 对比&总结(1:1045) */}
     </>
