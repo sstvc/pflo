@@ -503,3 +503,314 @@
   border-top: 1px solid var(--dark-border-dark);
   margin: 0;
 }
+
+/* ---- 通用 · Objective 章节开屏(主色横幅) ---- */
+.proj-objopen {
+  display: grid;
+  grid-template-columns: 920fr 448fr;
+  gap: 0 24px;
+  padding: 64px 24px;
+  margin-bottom: 40px;
+  background: var(--accent-primary);
+}
+
+.proj-objopen__goal {
+  display: flex;
+  gap: 8px;
+  font-size: var(--text-h4);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-h4);
+  font-weight: 500;
+  color: var(--dark-text-body-1);
+}
+
+.proj-objopen__goal strong {
+  font-weight: 500;
+  color: var(--dark-text-heading);
+}
+
+.proj-objopen__title {
+  margin: 8px 0 0;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: var(--text-h1);
+  line-height: var(--leading-h1);
+  letter-spacing: var(--tracking-h1);
+  color: var(--dark-text-heading);
+}
+
+.proj-objopen__sub {
+  margin-top: 8px;
+  max-width: 302px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  text-transform: uppercase;
+  color: var(--dark-text-body-1);
+}
+
+.proj-objopen__right ul {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+}
+
+.proj-objopen__right li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 32px 0;
+}
+
+.proj-objopen__right li:first-child {
+  padding-top: 0;
+}
+
+.proj-objopen__right li:last-child {
+  padding-bottom: 0;
+}
+
+.proj-objopen__right li + li {
+  border-top: 1px solid var(--dark-border-light);
+}
+
+.proj-objopen__right li strong {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-h2);
+  line-height: var(--leading-h2);
+  letter-spacing: var(--tracking-h2);
+  color: var(--dark-text-body-1);
+}
+
+.proj-objopen__right li span {
+  font-size: var(--text-h4);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-h4);
+  font-weight: 500;
+  color: var(--dark-text-heading);
+}
+
+/* ---- 通用 · 策略小节标题(小序号 + 大标题) ---- */
+.proj-strathead {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 24px 24px 0;
+}
+
+.proj-strathead strong {
+  margin-top: 4px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  color: var(--accent-primary);
+}
+
+.proj-strathead span {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-h2);
+  line-height: var(--leading-h2);
+  letter-spacing: var(--tracking-h2);
+  color: var(--color-heading);
+}
+
+/* BEFORE / DESIGN / AFTER 行标签 */
+.proj-stagelabel {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-h4);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-h4);
+  text-transform: uppercase;
+  color: var(--dark-text-body-1);
+}
+
+/* ---- 通用 · 线框示意图(CSS 方块,坐标按舞台百分比) ---- */
+.wf-stage {
+  position: relative;
+  width: 100%;
+}
+
+.wf {
+  position: absolute;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.wf--light {
+  background: rgba(218, 220, 224, 0.2);
+  border: 1px solid var(--light-border);
+}
+
+.wf--accent {
+  background: var(--accent-primary);
+  border: 1px solid var(--light-border);
+}
+
+.wf--frame {
+  border: 1px solid var(--dark-border-dark);
+}
+
+/* 截图标注框(半透明主色) */
+.wf--ghost {
+  background: color-mix(in srgb, var(--accent-primary) 20%, transparent);
+  border: 1px solid var(--accent-primary);
+  border-radius: 8px;
+}
+
+.wf-chip {
+  position: absolute;
+  padding: 0 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+  font-weight: 900;
+  font-size: var(--text-body-2);
+  line-height: var(--leading-body-2);
+  letter-spacing: var(--tracking-body-2);
+  color: var(--accent-primary);
+  white-space: nowrap;
+}
+
+/* 叠在截图上的标注层(672/684 偏移) */
+.wf-stage--overlay {
+  position: absolute;
+  left: 0.88%;
+  top: 0;
+  width: 98.25%;
+}
+
+/* ---- P1 · 策略屏(BEFORE/DESIGN/AFTER) ---- */
+.p1-frame-grid {
+  display: grid;
+  grid-template-columns: 330fr 684fr 330fr;
+  gap: 0 24px;
+  padding: 64px 24px;
+  align-items: start;
+}
+
+.p1-frame-shot {
+  position: relative;
+}
+
+.p1-frame-shot .proj-figure {
+  aspect-ratio: 684 / 360;
+}
+
+.p1-frame-side .wf-stage {
+  margin-top: 0;
+}
+
+.p1-frame-side p {
+  margin-top: 32px;
+  color: var(--color-heading);
+}
+
+/* 概念对比行(1 标签列 + 3 内容列) */
+.p1-concept-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0 24px;
+  padding: 64px 24px;
+  align-items: start;
+}
+
+.p1-concept__kicker {
+  font-weight: 500;
+  color: var(--color-body-2);
+}
+
+.p1-concept__title {
+  display: flex;
+  gap: 8px;
+  margin-top: 0;
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  font-weight: 500;
+  color: var(--color-heading);
+  white-space: nowrap;
+}
+
+.p1-concept__title strong {
+  font-weight: 900;
+  color: var(--accent-primary);
+}
+
+.p1-concept .wf-stage {
+  margin-top: 32px;
+}
+
+.p1-concept dl {
+  margin: 0;
+}
+
+.p1-concept dt {
+  margin-top: 32px;
+  color: var(--color-body-2);
+}
+
+.p1-concept dd + dt {
+  margin-top: 8px;
+}
+
+.p1-concept dd {
+  margin: 8px 0 0;
+  min-height: 48px;
+  color: var(--color-heading);
+}
+
+/* 无「劣势」块的列,用高 dd 对齐三列收尾线 */
+.p1-concept dd.p1-concept__dd--tall {
+  min-height: 136px;
+}
+
+.p1-concept hr {
+  border: 0;
+  border-top: 1px solid var(--dark-border-dark);
+  margin: 8px 0 0;
+}
+
+.p1-concept__verdict {
+  margin-top: 32px;
+  color: var(--color-body-2);
+}
+
+.p1-concept__verdict--adopted {
+  color: var(--color-heading);
+}
+
+/* AFTER 底部三列注释(带只跨内容列的分割线) */
+.p1-after-notes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0 24px;
+  padding: 0 24px 64px;
+}
+
+.p1-after-notes hr {
+  grid-column: 2 / -1;
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--dark-border-dark);
+  margin: 0;
+}
+
+.p1-after-notes dl {
+  margin: 32px 0 0;
+}
+
+.p1-after-notes dt {
+  color: var(--color-body-2);
+}
+
+.p1-after-notes dd {
+  margin: 8px 0 0;
+  color: var(--color-heading);
+}
+
+.p1-after-notes dl:nth-of-type(1) {
+  grid-column: 2;
+}

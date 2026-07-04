@@ -6,6 +6,7 @@ import introStep1 from '../../assets/projects/p1/intro-step1.png'
 import introStep2 from '../../assets/projects/p1/intro-step2.png'
 import introStep3 from '../../assets/projects/p1/intro-step3.png'
 import problemOldPage from '../../assets/projects/p1/problem-old-page.png'
+import frameAfter from '../../assets/projects/p1/frame-after.png'
 
 /**
  * Project 1 — Flight List Page Redesign / 机票列表页改版项目
@@ -40,6 +41,57 @@ function FlowNode({ shape, label }) {
       <div className={shape === 'circle' ? 'p1-flow__circle' : 'p1-flow__square'} />
       <span>{label}</span>
     </div>
+  )
+}
+
+/* 线框示意图:坐标以舞台尺寸的百分比渲染,随布局缩放 */
+const pct = (v, base) => `${((v / base) * 100).toFixed(3)}%`
+
+function WfStage({ w, h, boxes = [], chips = [], className = '' }) {
+  return (
+    <div className={`wf-stage ${className}`.trim()} style={{ aspectRatio: `${w} / ${h}` }}>
+      {boxes.map((b, i) => (
+        <div
+          key={i}
+          className={`wf wf--${b.v}`}
+          style={{ left: pct(b.l, w), top: pct(b.t, h), width: pct(b.w, w), height: pct(b.h, h) }}
+        />
+      ))}
+      {chips.map((c, i) => (
+        <span key={i} className="wf-chip" style={{ left: pct(c.l, w), top: pct(c.t, h) }}>
+          {c.text}
+        </span>
+      ))}
+    </div>
+  )
+}
+
+/* 通用 · Objective 章节开屏(主色横幅) */
+function ObjectiveOpener({ heading, goal, cnTitle, enSub, strategies, nodeId }) {
+  return (
+    <section data-node-id={nodeId}>
+      <SectionHeading>{heading}</SectionHeading>
+      <div className="proj-objopen">
+        <div className="proj-objopen__left">
+          <p className="proj-objopen__goal">
+            设计目标 <strong>{goal}</strong>
+          </p>
+          <h3 className="proj-objopen__title">{cnTitle}</h3>
+          <p className="proj-objopen__sub">{enSub}</p>
+        </div>
+        <div className="proj-objopen__right">
+          <p className="proj-kicker">设计策略</p>
+          <ul>
+            {strategies.map((s, i) => (
+              <li key={s}>
+                <strong>{String(i + 1).padStart(2, '0')}</strong>
+                <span>{s}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -307,6 +359,237 @@ function Objectives() {
   )
 }
 
+/* 目标1 · 策略01 页面框架重构(1:364)—— BEFORE / DESIGN / AFTER */
+
+/* 截图标注层(672×351):搜索模块/筛选栏/航班卡片/运价卡片 */
+const annoBefore = {
+  w: 672,
+  h: 351,
+  boxes: [
+    { v: 'ghost', t: 6, l: 1, w: 670, h: 16 },
+    { v: 'ghost', t: 28, l: 1, w: 670, h: 24 },
+    { v: 'ghost', t: 58, l: 73, w: 526, h: 48 },
+    { v: 'ghost', t: 112, l: 73, w: 526, h: 48 },
+    { v: 'ghost', t: 188, l: 73, w: 526, h: 36 },
+    { v: 'ghost', t: 230, l: 73, w: 526, h: 36 },
+    { v: 'ghost', t: 272, l: 73, w: 526, h: 36 },
+    { v: 'ghost', t: 314, l: 73, w: 526, h: 36 },
+  ],
+  chips: [
+    { text: '搜索模块', t: 0, l: 302 },
+    { text: '筛选栏', t: 30, l: 309 },
+    { text: '航班卡片', t: 96, l: 302 },
+    { text: '运价卡片', t: 259, l: 304 },
+  ],
+}
+
+const annoAfter = {
+  w: 672,
+  h: 351,
+  boxes: [
+    { v: 'ghost', t: 6, l: 1, w: 670, h: 16 },
+    { v: 'ghost', t: 46, l: 56, w: 560, h: 28 },
+    { v: 'ghost', t: 86, l: 56, w: 560, h: 62 },
+    { v: 'ghost', t: 160, l: 63, w: 132, h: 168 },
+    { v: 'ghost', t: 160, l: 201, w: 132, h: 168 },
+    { v: 'ghost', t: 160, l: 339, w: 132, h: 168 },
+    { v: 'ghost', t: 160, l: 477, w: 132, h: 168 },
+  ],
+  chips: [
+    { text: '搜索模块', t: 4, l: 302 },
+    { text: '筛选栏', t: 50, l: 309 },
+    { text: '航班卡片', t: 107, l: 302 },
+    { text: '运价卡片', t: 234, l: 304 },
+  ],
+}
+
+/* 右侧页面结构示意(330×182) */
+const schemaBefore = {
+  w: 330,
+  h: 182,
+  boxes: [
+    { v: 'light', t: 0, l: 0, w: 330, h: 8 },
+    { v: 'light', t: 14, l: 0, w: 330, h: 14 },
+    { v: 'frame', t: 34, l: 0, w: 330, h: 148 },
+    { v: 'light', t: 40, l: 38, w: 254, h: 40 },
+    { v: 'light', t: 86, l: 38, w: 254, h: 24 },
+    { v: 'light', t: 116, l: 38, w: 254, h: 24 },
+    { v: 'light', t: 146, l: 38, w: 254, h: 24 },
+  ],
+}
+
+const schemaAfter = {
+  w: 330,
+  h: 182,
+  boxes: [
+    { v: 'light', t: 0, l: 0, w: 330, h: 8 },
+    { v: 'light', t: 14, l: 0, w: 330, h: 14 },
+    { v: 'frame', t: 34, l: 0, w: 330, h: 148 },
+    { v: 'light', t: 40, l: 38, w: 254, h: 44 },
+    { v: 'light', t: 90, l: 38, w: 59, h: 80 },
+    { v: 'light', t: 90, l: 103, w: 59, h: 80 },
+    { v: 'light', t: 90, l: 168, w: 59, h: 80 },
+    { v: 'light', t: 90, l: 233, w: 59, h: 80 },
+  ],
+}
+
+/* 三个设计构想 */
+const frameConcepts = [
+  {
+    kicker: '设计构想 1',
+    em: '搜索模块',
+    rest: '默认展开',
+    stage: {
+      w: 330,
+      h: 182,
+      boxes: [
+        { v: 'accent', t: 0, l: 0, w: 330, h: 68 },
+        { v: 'light', t: 74, l: 0, w: 330, h: 14 },
+        { v: 'frame', t: 94, l: 0, w: 330, h: 88 },
+        { v: 'light', t: 100, l: 38, w: 254, h: 40 },
+        { v: 'light', t: 146, l: 38, w: 254, h: 24 },
+      ],
+    },
+    adv: '提升可见性；减少页面跳出；降低学习成本',
+    dis: '低频功能占用首屏空间；影响信息聚焦',
+    adopted: false,
+  },
+  {
+    kicker: '设计构想 2',
+    em: '筛选栏',
+    rest: '侧边栏展示',
+    stage: {
+      w: 330,
+      h: 182,
+      boxes: [
+        { v: 'light', t: 0, l: 0, w: 330, h: 8 },
+        { v: 'frame', t: 14, l: 0, w: 330, h: 168 },
+        { v: 'accent', t: 20, l: 38, w: 66, h: 150 },
+        { v: 'light', t: 20, l: 112, w: 180, h: 60 },
+        { v: 'light', t: 86, l: 112, w: 180, h: 24 },
+        { v: 'light', t: 116, l: 112, w: 180, h: 24 },
+        { v: 'light', t: 146, l: 112, w: 180, h: 24 },
+      ],
+    },
+    adv: '提高筛选信息拓展性；利于筛选项回显',
+    dis: '挤压航班卡片展示宽度；影响页面加载',
+    adopted: false,
+  },
+  {
+    kicker: '设计构想 3',
+    em: '运价卡片',
+    rest: '水平排列',
+    stage: {
+      w: 330,
+      h: 182,
+      boxes: [
+        { v: 'light', t: 0, l: 0, w: 330, h: 8 },
+        { v: 'light', t: 14, l: 0, w: 330, h: 14 },
+        { v: 'frame', t: 34, l: 0, w: 330, h: 148 },
+        { v: 'light', t: 40, l: 38, w: 254, h: 44 },
+        { v: 'accent', t: 90, l: 38, w: 59, h: 80 },
+        { v: 'accent', t: 90, l: 103, w: 59, h: 80 },
+        { v: 'accent', t: 90, l: 168, w: 59, h: 80 },
+        { v: 'accent', t: 90, l: 233, w: 59, h: 80 },
+      ],
+    },
+    adv: '与航班卡片形成对比，明确层级关系；卡片内容集中更利于阅读',
+    dis: null,
+    adopted: true,
+  },
+]
+
+function Strategy1() {
+  return (
+    <section data-node-id="1:364">
+      <div className="proj-strathead">
+        <strong>01</strong>
+        <span>页面框架重构</span>
+      </div>
+
+      {/* BEFORE */}
+      <div className="p1-frame-grid">
+        <p className="proj-stagelabel">Before</p>
+        <div className="p1-frame-shot">
+          <div className="proj-figure">
+            <img src={introStep2} alt="改版前机票列表页截图" />
+            <span
+              className="proj-figure__patch"
+              style={{ left: '92.7%', top: '77.2%', width: '6.1%', height: '23.6%' }}
+            />
+          </div>
+          <WfStage className="wf-stage--overlay" {...annoBefore} />
+        </div>
+        <div className="p1-frame-side">
+          <WfStage {...schemaBefore} />
+          <p>各主要部分展示形式雷同，页面占比不合理，导致页面结构缺乏拓展性</p>
+        </div>
+      </div>
+      <hr className="proj-divider" />
+
+      {/* DESIGN */}
+      <div className="p1-concept-grid">
+        <p className="proj-stagelabel">Design</p>
+        {frameConcepts.map((c) => (
+          <div className="p1-concept" key={c.kicker}>
+            <p className="p1-concept__kicker">{c.kicker}</p>
+            <p className="p1-concept__title">
+              <strong>{c.em}</strong>
+              {c.rest}
+            </p>
+            <WfStage {...c.stage} />
+            <dl>
+              <dt>优势：</dt>
+              <dd className={c.dis ? undefined : 'p1-concept__dd--tall'}>{c.adv}</dd>
+              {c.dis && (
+                <>
+                  <dt>劣势：</dt>
+                  <dd>{c.dis}</dd>
+                </>
+              )}
+            </dl>
+            <hr />
+            <p className={`p1-concept__verdict${c.adopted ? ' p1-concept__verdict--adopted' : ''}`}>
+              {c.adopted ? '★ 采用此构想' : '未采用此构想'}
+            </p>
+          </div>
+        ))}
+      </div>
+      <hr className="proj-divider" />
+
+      {/* AFTER */}
+      <div className="p1-frame-grid">
+        <p className="proj-stagelabel">After</p>
+        <div className="p1-frame-shot">
+          <div className="proj-figure">
+            <img src={frameAfter} alt="改版后机票列表页截图" />
+          </div>
+          <WfStage className="wf-stage--overlay" {...annoAfter} />
+        </div>
+        <div className="p1-frame-side">
+          <WfStage {...schemaAfter} />
+        </div>
+      </div>
+      <div className="p1-after-notes">
+        <hr />
+        <dl>
+          <dt>搜索模块</dt>
+          <dd>在不提高页面占比的前提下，优化各业务场景信息展示</dd>
+        </dl>
+        <dl>
+          <dt>筛选栏</dt>
+          <dd>调整展示位置，提高筛选项与筛选结果（航班卡片）的关联度</dd>
+        </dl>
+        <dl>
+          <dt>运价卡片</dt>
+          <dd>采用卡片形式提高拓展性，强化航班卡片和运价卡片的从属关系</dd>
+        </dl>
+      </div>
+      <hr className="proj-divider" />
+    </section>
+  )
+}
+
 function Project1() {
   return (
     <>
@@ -315,7 +598,16 @@ function Project1() {
       <Introduction />
       <Problem />
       <Objectives />
-      {/* TODO: 目标1(1:343) */}
+      <ObjectiveOpener
+        nodeId="1:344"
+        heading="Objective No.1"
+        goal="提升拓展性"
+        cnTitle="优化信息展示结构"
+        enSub="Scalable Structure"
+        strategies={['页面框架重构', '航班卡片信息元素分区', '使用容器拓展页面层级']}
+      />
+      <Strategy1 />
+      {/* TODO: 目标1 其余子屏(1:480 / 1:566) */}
       {/* TODO: 目标2(1:628) */}
       {/* TODO: 目标3(1:901) */}
       {/* TODO: 对比&总结(1:1045) */}
