@@ -955,7 +955,8 @@
   position: relative;
 }
 
-.p1-ctn-composite > img {
+/* 合成图底图(明确用类名,避免压过手型等叠加元素的宽度) */
+.p1-ctn-composite .p1-ctn-base {
   display: block;
   width: 100%;
   height: auto;
@@ -978,6 +979,7 @@
 .p1-ctn-hand {
   position: absolute;
   width: 3.2%;
+  aspect-ratio: 22 / 26; /* SVG 无固有尺寸,显式锁比例 */
 }
 
 /* AFTER 区:标准四列网格,内容占 2/3/4 列(第 1 列留给行标签的节奏) */

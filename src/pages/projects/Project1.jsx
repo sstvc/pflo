@@ -806,7 +806,7 @@ function Strategy3() {
           <li>大量运价在页面平铺展开，大幅增加页面长度，影响航班列表展示</li>
         </ul>
         <div className="p1-ctn-composite">
-          <img src={ctnBefore} alt="改版前:筛选栏与运价卡片的用户诉求标注" />
+          <img className="p1-ctn-base" src={ctnBefore} alt="改版前:筛选栏与运价卡片的用户诉求标注" />
         </div>
       </div>
       <hr className="proj-divider" />
@@ -823,7 +823,7 @@ function Strategy3() {
           <img className="p1-ctn-img" src={ctnFilters} alt="筛选弹窗层叠展示" />
         </div>
         <div className="col-34 p1-ctn-composite">
-          <img src={ctnAfter} alt="改版后:核心筛选项与推荐运价展示" />
+          <img className="p1-ctn-base" src={ctnAfter} alt="改版后:核心筛选项与推荐运价展示" />
           <img
             className="p1-ctn-hand"
             src={handCursor}
