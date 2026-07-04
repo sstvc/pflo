@@ -40,6 +40,10 @@ import icMealGreen from '../../assets/projects/p1/ic-meal-green.svg'
 import icWifiGreen from '../../assets/projects/p1/ic-wifi-green.svg'
 import icWifi2Green from '../../assets/projects/p1/ic-wifi2-green.svg'
 import icChargeGreen from '../../assets/projects/p1/ic-charge-green.svg'
+import fareCard1 from '../../assets/projects/p1/fare-card-1.png'
+import fareCard2 from '../../assets/projects/p1/fare-card-2.png'
+import fareCard3 from '../../assets/projects/p1/fare-card-3.png'
+import fareCard4 from '../../assets/projects/p1/fare-card-4.png'
 
 /**
  * Project 1 — Flight List Page Redesign / 机票列表页改版项目
@@ -1378,6 +1382,96 @@ function O3Strategy1() {
   )
 }
 
+/* 目标3 · 策略02 多运价信息对比效率提升(1:1009)*/
+const fareRows = [
+  { rule: 6, dt: '标题', dtY: 38, dds: [{ y: 38, text: '舱位等级' }] },
+  {
+    rule: 94,
+    dt: '内容',
+    dtY: 126,
+    dds: [
+      { y: 126, text: '退改签信息' },
+      { y: 158, text: '行李额' },
+      { y: 190, text: '附加服务' },
+      { y: 222, text: '舒适度' },
+    ],
+  },
+  {
+    rule: 294,
+    dt: '价格',
+    dtY: 326,
+    dds: [
+      { y: 326, text: '运价标签' },
+      { y: 358, text: '运价' },
+    ],
+  },
+  { rule: 414, dt: 'CTA', dtY: 446, dds: [{ y: 446, text: '预订按钮' }] },
+]
+
+function O3Strategy2() {
+  const W = 1440
+  const H = 500
+  const cards = [fareCard1, fareCard2, fareCard3, fareCard4]
+  return (
+    <section data-node-id="1:1009">
+      <div className="proj-strathead">
+        <strong>02</strong>
+        <span>多运价信息对比效率提升</span>
+      </div>
+      <div style={{ padding: '64px 24px 0' }}>
+        <p className="p1-card-title" style={{ marginBottom: 0 }}>
+          自适应高度卡片使同类信息在同一高度展示，方便用户对比，快速决策
+        </p>
+      </div>
+      <div className="p1-spot" style={{ aspectRatio: `${W} / ${H}` }}>
+        {fareRows.map((row) => (
+          <div key={row.dt} style={{ display: 'contents' }}>
+            <hr
+              className="p1-spot-row-rule"
+              style={{ left: pct(24, W), top: pct(row.rule, H), width: pct(448, W) }}
+            />
+            <span className="p1-spot-dt" style={{ left: pct(24, W), top: pct(row.dtY, H) }}>
+              {row.dt}
+            </span>
+            {row.dds.map((dd) => (
+              <span key={dd.text} className="p1-spot-dd" style={{ left: pct(378, W), top: pct(dd.y, H) }}>
+                {dd.text}
+              </span>
+            ))}
+          </div>
+        ))}
+        {cards.map((src, i) => (
+          <Strip
+            key={i}
+            x={496 + i * 405.9}
+            y={0}
+            w={394.663}
+            h={500}
+            W={W}
+            H={H}
+            src={src}
+            radius={0}
+            alt={`自适应高度运价卡片 ${i + 1}`}
+          />
+        ))}
+        {[94, 294, 414].map((y) => (
+          <hr
+            key={y}
+            className="p1-spot-row-rule"
+            style={{
+              left: pct(520, W),
+              top: pct(y, H),
+              width: pct(896, W),
+              borderTop: '2px solid var(--light-border)',
+            }}
+          />
+        ))}
+      </div>
+      <div style={{ height: 104 }} />
+    </section>
+  )
+}
+
 function Project1() {
   return (
     <>
@@ -1417,8 +1511,8 @@ function Project1() {
         strategies={['航班优势信息强化', '多运价信息对比效率提升']}
       />
       <O3Strategy1 />
-      {/* TODO: 目标3 最后内容屏(1:1009) */}
-      {/* TODO: 目标3(1:901) */}
+      <O3Strategy2 />
+      {/* 目标3(1:901)完成 */}
       {/* TODO: 对比&总结(1:1045) */}
     </>
   )
