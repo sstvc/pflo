@@ -1020,3 +1020,46 @@
 .p1-ctn-popup {
   margin-top: 56px;
 }
+
+/* ---- P1 · 目标2 策略01 核心流程屏 ---- */
+/* 截图行下的右对齐小注(如 *通过黑白处理观察视觉重心) */
+.p1-note-right {
+  grid-column: 3;
+  margin-top: 16px;
+  text-align: right;
+  font-size: var(--text-body-2);
+  line-height: var(--leading-body-2);
+  letter-spacing: var(--tracking-body-2);
+  font-weight: 500;
+  color: var(--color-body-2);
+}
+
+/* 全宽漏斗分层图 */
+.p1-flow-band {
+  padding: 0 24px;
+  margin-top: 64px;
+}
+
+.p1-flow-band img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 功能分区爆炸图舞台(标签复用 .p1-pri-label) */
+.p1-xstage {
+  position: relative;
+  margin: 64px 24px 0 calc(24.583% + 24px);
+}
+
+/* 同源截图裁片:容器隐藏溢出,内部 img 按百分比裁切 */
+.p1-crop {
+  position: absolute;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.p1-crop > img {
+  position: absolute;
+  max-width: none;
+}

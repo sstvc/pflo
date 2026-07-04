@@ -18,6 +18,10 @@ import ctnFilters from '../../assets/projects/p1/ctn-filters.png'
 import ctnPopupFilters from '../../assets/projects/p1/ctn-popup-filters.png'
 import ctnPopupFares from '../../assets/projects/p1/ctn-popup-fares.png'
 import handCursor from '../../assets/projects/p1/hand-cursor.svg'
+import coreFunnel from '../../assets/projects/p1/core-funnel.png'
+import coreBeforeA from '../../assets/projects/p1/core-before-a.png'
+import coreBeforeB from '../../assets/projects/p1/core-before-b.png'
+import coreAfter from '../../assets/projects/p1/core-after.png'
 
 /**
  * Project 1 — Flight List Page Redesign / 机票列表页改版项目
@@ -842,6 +846,154 @@ function Strategy3() {
   )
 }
 
+/* 目标2 · 策略01 页面核心流程强化(1:649)*/
+
+/* 功能分区爆炸图:同源截图裁片(crop = 稿内百分比参数直译) */
+const coreFrags = [
+  /* 右侧暗化底图 */
+  { x: 531, y: 0, w: 507, h: 290, op: 0.2, r: 8, crop: { h: '109.31%', l: '-0.02%', t: '0', w: '100.04%' } },
+  { x: 797, y: 2, w: 24, h: 14, op: 0.2, crop: { h: '2264.28%', l: '-1108.75%', t: '-14.29%', w: '2113.33%' } },
+  { x: 920, y: 35, w: 76, h: 16, op: 0.4, crop: { h: '1981.25%', l: '-511.97%', t: '-218.75%', w: '667.37%' } },
+  { x: 800, y: 35, w: 47, h: 16, op: 0.2, crop: { h: '1981.25%', l: '-572.55%', t: '-218.75%', w: '1079.15%' } },
+  { x: 886, y: 2, w: 110, h: 14, op: 0.2, crop: { h: '2264.29%', l: '-322.82%', t: '-14.29%', w: '461.09%' } },
+  { x: 938, y: 69, w: 58, h: 84, op: 1, crop: { h: '377.38%', l: '-701.9%', t: '-82.14%', w: '874.48%' } },
+  { x: 573, y: 252, w: 423, h: 28, op: 1, crop: { h: '1132.14%', l: '-9.95%', t: '-900%', w: '119.91%' } },
+  { x: 573, y: 157, w: 423, h: 80, op: 0.4, crop: { h: '396.25%', l: '-9.95%', t: '-196.25%', w: '119.91%' } },
+  { x: 573, y: 53, w: 327, h: 100, op: 0.4, crop: { h: '317%', l: '-12.87%', t: '-53%', w: '155.11%' } },
+  { x: 573, y: 35, w: 227, h: 16, op: 0.4, crop: { h: '1981.25%', l: '-18.55%', t: '-218.75%', w: '223.44%' } },
+  { x: 573, y: 2, w: 220, h: 14, op: 0.4, crop: { h: '2264.29%', l: '-19.14%', t: '-14.29%', w: '230.55%' } },
+]
+
+const coreFragLabels = [
+  { text: '基本功能', x: 750, y: 111 },
+  { text: '进阶功能', x: 882, y: 9 },
+  { text: '核心流程', x: 808, y: 280 },
+  { text: '核心流程', x: 1056, y: 101 },
+]
+
+function O2Strategy1() {
+  const XW = 1038
+  const XH = 300
+  return (
+    <section data-node-id="1:649">
+      <div className="proj-strathead">
+        <strong>01</strong>
+        <span>页面核心流程强化</span>
+      </div>
+
+      {/* BEFORE:黑白处理的现状截图 ×2 */}
+      <div className="p1-bg-grid">
+        <p className="proj-stagelabel">Before</p>
+        <div className="proj-figure">
+          <img
+            src={coreBeforeA}
+            alt="黑白处理的旧版列表页(视觉重心分析)"
+            style={{ objectPosition: 'bottom' }}
+          />
+          <span
+            className="proj-figure__patch"
+            style={{ left: '91.7%', top: '86.8%', width: '7.3%', height: '10.7%', background: '#f9f9f9' }}
+          />
+        </div>
+        <div className="proj-figure">
+          <img
+            src={coreBeforeB}
+            alt="黑白处理的旧版运价展开页(视觉重心分析)"
+            style={{ objectPosition: 'bottom' }}
+          />
+          <span
+            className="proj-figure__patch"
+            style={{ left: '92.7%', top: '77.9%', width: '7.3%', height: '22.1%' }}
+          />
+        </div>
+        <p className="p1-note-right">*通过黑白处理观察视觉重心</p>
+      </div>
+      <div className="p1-after-notes">
+        <hr />
+        <dl>
+          <dt>问题 1</dt>
+          <dd>视觉重心分散，信息传达效率低</dd>
+        </dl>
+        <dl>
+          <dt>问题 2</dt>
+          <dd>核心操作缺乏指引，导致用户误操作率高</dd>
+        </dl>
+        <dl>
+          <dt>问题 3</dt>
+          <dd>低频功能缺少管理，占据页面重要位置展示</dd>
+        </dl>
+      </div>
+      <hr className="proj-divider" />
+
+      {/* AFTER:功能分级漏斗 + 分区爆炸图 */}
+      <div className="p1-split" style={{ paddingBottom: 0 }}>
+        <p className="proj-stagelabel">After</p>
+        <p className="p1-card-title" style={{ marginBottom: 0 }}>
+          建立页面功能分级模型，确保核心功能优先
+        </p>
+      </div>
+      <div className="p1-flow-band">
+        <img src={coreFunnel} alt="功能分级模型:核心流程 / 基本功能 / 进阶功能" />
+      </div>
+      <div className="p1-xstage" style={{ aspectRatio: `${XW} / ${XH}` }}>
+        {/* 左:新版页面截图(全彩) */}
+        <div
+          className="p1-crop"
+          style={{ left: 0, top: 0, width: pct(507, XW), height: pct(290, XH), borderRadius: 8 }}
+        >
+          <img
+            src={coreAfter}
+            alt="新版机票列表页"
+            style={{ height: '109.31%', left: '-0.02%', top: 0, width: '100.04%' }}
+          />
+        </div>
+        {/* 右:按功能分级拆分的裁片 */}
+        {coreFrags.map((f, i) => (
+          <div
+            key={i}
+            className="p1-crop"
+            style={{
+              left: pct(f.x, XW),
+              top: pct(f.y, XH),
+              width: pct(f.w, XW),
+              height: pct(f.h, XH),
+              opacity: f.op,
+              ...(f.r && { borderRadius: f.r }),
+            }}
+          >
+            <img src={coreAfter} alt="" style={{ height: f.crop.h, left: f.crop.l, top: f.crop.t, width: f.crop.w }} />
+          </div>
+        ))}
+        {coreFragLabels.map((l) => (
+          <span
+            key={`${l.text}-${l.x}`}
+            className="p1-pri-label p1-pri-label--lit p1-pri-label--right"
+            style={{ left: pct(l.x, XW), top: pct(l.y, XH) }}
+          >
+            {l.text}
+          </span>
+        ))}
+      </div>
+      <div className="p1-after-notes" style={{ marginTop: 22, paddingBottom: 104 }}>
+        <hr />
+        <dl>
+          <dt>核心流程</dt>
+          <dd>使用按钮提高操作引导性和用户决策确定性</dd>
+        </dl>
+        <dl>
+          <dt>基本功能</dt>
+          <dd>作为页面内容主体部分在不同模块清晰展示</dd>
+        </dl>
+        <dl>
+          <dt>进阶功能</dt>
+          <dd>仅在页面保留入口，并控制页面展示比重</dd>
+        </dl>
+      </div>
+      <hr className="proj-divider" />
+    </section>
+  )
+}
+
 function Project1() {
   return (
     <>
@@ -861,8 +1013,16 @@ function Project1() {
       <Strategy1 />
       <Strategy2 />
       <Strategy3 />
-      {/* 目标1(1:343)完成 */}
-      {/* TODO: 目标2(1:628) */}
+      <ObjectiveOpener
+        nodeId="1:629"
+        heading="Objective No.2"
+        goal="提升可用性"
+        cnTitle="交互链路提效"
+        enSub="Interaction Flow"
+        strategies={['页面核心流程强化', '关键信息减轻查看依赖', '卡片交互方式规范化']}
+      />
+      <O2Strategy1 />
+      {/* TODO: 目标2 内容屏(1:725 / 1:764) */}
       {/* TODO: 目标3(1:901) */}
       {/* TODO: 对比&总结(1:1045) */}
     </>
