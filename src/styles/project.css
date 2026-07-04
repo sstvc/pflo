@@ -1116,3 +1116,48 @@
   position: absolute;
   color: var(--color-heading);
 }
+
+/* ---- P1 · 目标2 策略03 交互规范屏 ---- */
+.p1-pri-sq--sec {
+  background: var(--accent-secondary);
+}
+
+.p1-pri-sq--40 {
+  opacity: 0.4;
+}
+
+.p1-int-title {
+  position: absolute;
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  font-weight: 500;
+  color: var(--color-heading);
+  white-space: nowrap;
+}
+
+/* 带彩色重点词的说明句 */
+.p1-int-note {
+  position: absolute;
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+.p1-int-note strong {
+  font-weight: 900;
+}
+
+.p1-int-note strong.em-s {
+  color: var(--accent-secondary);
+}
+
+.p1-int-note strong.em-a {
+  color: var(--accent-primary);
+}
+
+/* 行内缩进分割线(1038/1440) */
+.p1-inset-rule {
+  border: 0;
+  border-top: 1px solid var(--dark-border-dark);
+  margin: 0 0 0 26.25%;
+  width: 72.083%;
+}

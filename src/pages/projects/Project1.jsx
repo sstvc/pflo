@@ -28,6 +28,7 @@ import depStrip1 from '../../assets/projects/p1/dep-strip-1.png'
 import depStrip2 from '../../assets/projects/p1/dep-strip-2.png'
 import depStrip3 from '../../assets/projects/p1/dep-strip-3.png'
 import depStrip4 from '../../assets/projects/p1/dep-strip-4.png'
+import interactScreen from '../../assets/projects/p1/interact-screen.png'
 
 /**
  * Project 1 — Flight List Page Redesign / 机票列表页改版项目
@@ -1134,6 +1135,125 @@ function O2Strategy2() {
   )
 }
 
+/* 目标2 · 策略03 卡片交互方式规范化(1:764)
+   交互区标注合成图 = 整屏导出后 CSS 切片;文字/图例/分割线保持真实元素 */
+
+/* 整屏切片:(x,y) 为舞台内摆放位置,(sx,sy) 为 1440×1738 全图内的裁切原点 */
+function IntSlice({ x, y, w, h, W, H, sx, sy }) {
+  return (
+    <div
+      className="p1-crop"
+      style={{ left: pct(x, W), top: pct(y, H), width: pct(w, W), height: pct(h, H), borderRadius: 0 }}
+    >
+      <img
+        src={interactScreen}
+        alt="卡片交互区标注"
+        style={{ width: pct(1440, w), left: pct(-sx, w), top: pct(-sy, h) }}
+      />
+    </div>
+  )
+}
+
+function O2Strategy3() {
+  const W = 1440
+  return (
+    <section data-node-id="1:764">
+      <div className="proj-strathead">
+        <strong>03</strong>
+        <span>卡片交互方式规范化</span>
+      </div>
+
+      {/* BEFORE:问题清单 + 交互区标注(切片) */}
+      <div className="p1-spot" style={{ aspectRatio: `${W} / 444` }}>
+        <p className="proj-stagelabel" style={{ left: pct(24, W), top: 0 }}>
+          Before
+        </p>
+        {[
+          { y: 0, text: '点击入口分散且存在功能重叠，干扰用户决策' },
+          { y: 88, text: '可交互（点击/悬停）区域和层级不清' },
+          { y: 176, text: '缺少交互提示，难以形成用户预期' },
+        ].map((row) => (
+          <div key={row.y} style={{ display: 'contents' }}>
+            <hr
+              className="p1-spot-row-rule"
+              style={{ left: pct(378, W), top: pct(row.y, 444), width: pct(330, W) }}
+            />
+            <span
+              className="p1-spot-dd"
+              style={{ left: pct(378, W), top: pct(row.y + 32, 444), width: pct(330, W) }}
+            >
+              {row.text}
+            </span>
+          </div>
+        ))}
+        <span className="p1-pri-sq p1-pri-sq--sec p1-pri-sq--40" style={{ left: pct(659, W), top: pct(318, 444) }} />
+        <span className="p1-pri-label" style={{ left: pct(679, W), top: pct(316, 444) }}>点击</span>
+        <span className="p1-pri-sq p1-pri-sq--40" style={{ left: pct(659, W), top: pct(362, 444) }} />
+        <span className="p1-pri-label" style={{ left: pct(679, W), top: pct(360, 444) }}>悬停</span>
+        <IntSlice x={708} y={0} w={708} h={400} W={W} H={444} sx={708} sy={160} />
+      </div>
+      <hr className="proj-divider" />
+
+      {/* AFTER:规则说明 + 交互区标注(切片) */}
+      <div className="p1-spot" style={{ aspectRatio: `${W} / 520` }}>
+        <p className="proj-stagelabel" style={{ left: pct(24, W), top: 0 }}>
+          After
+        </p>
+        <p className="p1-int-title" style={{ left: pct(378, W), top: 0 }}>
+          明确卡片交互区域和规则，强化体验一致性
+        </p>
+        {[
+          { y: 108, text: '归纳功能，精简点击入口数量' },
+          { y: 196, text: '明确点击和悬停交互的层级' },
+        ].map((row) => (
+          <div key={row.y} style={{ display: 'contents' }}>
+            <hr
+              className="p1-spot-row-rule"
+              style={{ left: pct(378, W), top: pct(row.y, 520), width: pct(330, W) }}
+            />
+            <span
+              className="p1-spot-dd"
+              style={{ left: pct(378, W), top: pct(row.y + 32, 520), width: pct(274, W) }}
+            >
+              {row.text}
+            </span>
+          </div>
+        ))}
+        <span className="p1-spot-dt" style={{ left: pct(378, W), top: pct(284, 520) }}>
+          点击：主流程操作，页面跳转 / 弹窗打开
+        </span>
+        <span className="p1-spot-dt" style={{ left: pct(378, W), top: pct(324, 520) }}>
+          悬停：页面内辅助信息展示
+        </span>
+        <span className="p1-pri-sq p1-pri-sq--sec p1-pri-sq--40" style={{ left: pct(659, W), top: pct(426, 520) }} />
+        <span className="p1-pri-label" style={{ left: pct(679, W), top: pct(424, 520) }}>点击</span>
+        <span className="p1-pri-sq p1-pri-sq--40" style={{ left: pct(659, W), top: pct(470, 520) }} />
+        <span className="p1-pri-label" style={{ left: pct(679, W), top: pct(468, 520) }}>悬停</span>
+        <IntSlice x={708} y={108} w={708} h={380} W={W} H={520} sx={708} sy={776} />
+      </div>
+      <hr className="p1-inset-rule" />
+
+      {/* 点击入口指向性文案 */}
+      <div className="p1-spot" style={{ aspectRatio: `${W} / 152`, marginTop: 0 }}>
+        <p className="p1-int-note" style={{ left: pct(378, W), top: pct(32, 152), width: pct(274, W) }}>
+          全部<strong className="em-s">点击</strong>入口具备清晰的指向性文案
+        </p>
+        <IntSlice x={724} y={24} w={696} h={104} W={W} H={152} sx={724} sy={1212} />
+      </div>
+      <hr className="p1-inset-rule" />
+
+      {/* 统一悬浮提示浮层 */}
+      <div className="p1-spot" style={{ aspectRatio: `${W} / 302`, marginTop: 0 }}>
+        <p className="p1-int-note" style={{ left: pct(378, W), top: pct(32, 302), width: pct(274, W) }}>
+          统一<strong className="em-a">悬浮</strong>提示浮层，保持交互一致性
+        </p>
+        <IntSlice x={724} y={24} w={696} h={278} W={W} H={302} sx={724} sy={1364} />
+      </div>
+      <div style={{ height: 96 }} />
+    </section>
+  )
+}
+
 function Project1() {
   return (
     <>
@@ -1163,7 +1283,8 @@ function Project1() {
       />
       <O2Strategy1 />
       <O2Strategy2 />
-      {/* TODO: 目标2 最后内容屏(1:764) */}
+      <O2Strategy3 />
+      {/* 目标2(1:628)完成 */}
       {/* TODO: 目标3(1:901) */}
       {/* TODO: 对比&总结(1:1045) */}
     </>
