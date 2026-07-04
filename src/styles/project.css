@@ -925,3 +925,98 @@
   height: 0;
   border-top: 1px dashed var(--dark-border-dark);
 }
+
+/* ---- P1 · 策略03 容器拓展屏 ---- */
+.p1-ctn-before {
+  display: grid;
+  grid-template-columns: 330fr 330fr 684fr;
+  gap: 0 24px;
+  padding: 64px 24px;
+  align-items: start;
+}
+
+.p1-ctn-issues {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.p1-ctn-issues li {
+  border-top: 1px solid var(--dark-border-dark);
+  padding: 32px 0 96px;
+  color: var(--color-heading);
+}
+
+.p1-ctn-issues li:last-child {
+  padding-bottom: 0;
+}
+
+.p1-ctn-composite {
+  position: relative;
+}
+
+.p1-ctn-composite > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.p1-ctn-overlay {
+  position: absolute;
+  font-size: var(--text-body-2);
+  line-height: var(--leading-body-2);
+  letter-spacing: var(--tracking-body-2);
+  font-weight: 500;
+  color: var(--dark-text-heading);
+  white-space: nowrap;
+}
+
+.p1-ctn-overlay--right {
+  transform: translateX(-100%);
+}
+
+.p1-ctn-hand {
+  position: absolute;
+  width: 3.2%;
+}
+
+/* AFTER 区:标准四列网格,内容占 2/3/4 列(第 1 列留给行标签的节奏) */
+.p1-ctn-after {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0 24px;
+  padding: 0 24px 104px;
+  align-items: start;
+}
+
+.p1-ctn-after > .col-2 {
+  grid-column: 2;
+}
+
+.p1-ctn-after > .col-34 {
+  grid-column: 3 / -1;
+}
+
+.p1-ctn-after .p1-ctn-collage {
+  align-self: center;
+}
+
+.p1-ctn-after img.p1-ctn-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.p1-ctn-caption {
+  margin-top: 64px;
+  color: var(--color-heading);
+}
+
+.p1-ctn-desc {
+  margin-top: 8px;
+  color: var(--color-body-2);
+}
+
+.p1-ctn-popup {
+  margin-top: 56px;
+}

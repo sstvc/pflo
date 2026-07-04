@@ -12,6 +12,12 @@ import cardBeforeMask from '../../assets/projects/p1/card-before-mask.png'
 import cardAfter from '../../assets/projects/p1/card-after.png'
 import cardAfterMask from '../../assets/projects/p1/card-after-mask.png'
 import cardExpand from '../../assets/projects/p1/card-expand.png'
+import ctnBefore from '../../assets/projects/p1/ctn-before.png'
+import ctnAfter from '../../assets/projects/p1/ctn-after.png'
+import ctnFilters from '../../assets/projects/p1/ctn-filters.png'
+import ctnPopupFilters from '../../assets/projects/p1/ctn-popup-filters.png'
+import ctnPopupFares from '../../assets/projects/p1/ctn-popup-fares.png'
+import handCursor from '../../assets/projects/p1/hand-cursor.svg'
 
 /**
  * Project 1 — Flight List Page Redesign / 机票列表页改版项目
@@ -772,6 +778,70 @@ function Strategy2() {
   )
 }
 
+/* 目标1 · 策略03 使用容器拓展页面层级(1:566)*/
+function Strategy3() {
+  return (
+    <section data-node-id="1:566">
+      <div className="proj-strathead">
+        <strong>03</strong>
+        <span>使用容器拓展页面层级</span>
+      </div>
+
+      {/* BEFORE:问题清单 + 用户诉求拼贴 */}
+      <div className="p1-ctn-before">
+        <p className="proj-stagelabel">Before</p>
+        <ul className="p1-ctn-issues">
+          <li>多个筛选项回显需要左右翻页查看</li>
+          <li>大量运价在页面平铺展开，大幅增加页面长度，影响航班列表展示</li>
+        </ul>
+        <div className="p1-ctn-composite">
+          <img src={ctnBefore} alt="改版前:筛选栏与运价卡片的用户诉求标注" />
+        </div>
+      </div>
+      <hr className="proj-divider" />
+
+      {/* AFTER */}
+      <div className="p1-split">
+        <p className="proj-stagelabel">After</p>
+        <p className="p1-card-title" style={{ marginBottom: 0 }}>
+          页面展示核心筛选项和运价，弹窗展示拓展内容为页面减负
+        </p>
+      </div>
+      <div className="p1-ctn-after">
+        <div className="col-2 p1-ctn-collage">
+          <img className="p1-ctn-img" src={ctnFilters} alt="筛选弹窗层叠展示" />
+        </div>
+        <div className="col-34 p1-ctn-composite">
+          <img src={ctnAfter} alt="改版后:核心筛选项与推荐运价展示" />
+          <img
+            className="p1-ctn-hand"
+            src={handCursor}
+            alt=""
+            style={{ left: '58.3%', top: '15.8%' }}
+          />
+          <span className="p1-ctn-overlay p1-ctn-overlay--right" style={{ left: '90.1%', top: '33.7%' }}>
+            ★ 推荐运价*4
+          </span>
+        </div>
+        <p className="col-2 p1-ctn-caption">核心筛选项 + 其他</p>
+        <p className="col-34 p1-ctn-caption">推荐运价 + 其他</p>
+        <p className="col-2 p1-ctn-desc">
+          根据用户调研和热力图分析，确立点击率最高的核心筛选项在页面展示；低频筛选项统一展示在弹窗内
+        </p>
+        <p className="col-34 p1-ctn-desc" style={{ maxWidth: 448 }}>
+          在航班卡片下展示推荐逻辑下优先级最高的运价，在弹窗内展示其他更多运价，满足用户特别需求
+        </p>
+        <div className="col-2 p1-ctn-popup">
+          <img className="p1-ctn-img" src={ctnPopupFilters} alt="More Filters 筛选弹窗" />
+        </div>
+        <div className="col-34 p1-ctn-popup">
+          <img className="p1-ctn-img" style={{ width: '65.5%' }} src={ctnPopupFares} alt="Select fare 运价弹窗" />
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Project1() {
   return (
     <>
@@ -790,7 +860,8 @@ function Project1() {
       />
       <Strategy1 />
       <Strategy2 />
-      {/* TODO: 目标1 最后子屏(1:566) */}
+      <Strategy3 />
+      {/* 目标1(1:343)完成 */}
       {/* TODO: 目标2(1:628) */}
       {/* TODO: 目标3(1:901) */}
       {/* TODO: 对比&总结(1:1045) */}
