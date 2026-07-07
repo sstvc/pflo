@@ -1243,3 +1243,75 @@
 .p1-outro {
   padding: 104px 24px;
 }
+
+/* Product Impact 纯文字舞台 */
+.p1-impact {
+  position: relative;
+}
+
+.p1-impact > * {
+  position: absolute;
+}
+
+.p1-impact-kicker {
+  font-size: var(--text-h4);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-h4);
+  font-weight: 500;
+  color: var(--dark-text-body-1);
+  white-space: nowrap;
+}
+
+.p1-impact-num {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-h1);
+  line-height: var(--leading-h1);
+  letter-spacing: var(--tracking-h1);
+  color: var(--color-heading);
+}
+
+.p1-impact-title {
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  font-weight: 500;
+  color: var(--color-heading);
+  white-space: nowrap;
+}
+
+.p1-impact-body {
+  color: var(--color-body-2);
+}
+
+.p1-impact-quote {
+  font-size: var(--text-h4);
+  line-height: 36px;
+  letter-spacing: var(--tracking-h4);
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+.p1-impact-mark {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-h1);
+  line-height: var(--leading-h1);
+  color: var(--accent-primary);
+}
+
+.p1-impact-src {
+  font-size: var(--text-body-2);
+  line-height: var(--leading-body-2);
+  letter-spacing: var(--tracking-body-2);
+  font-weight: 500;
+  color: var(--color-body-2);
+  text-align: right;
+  transform: translateX(-100%);
+  white-space: nowrap;
+}
+
+.p1-impact-rule {
+  border: 0;
+  border-top: 1px solid var(--dark-border-dark);
+  margin: 0;
+}

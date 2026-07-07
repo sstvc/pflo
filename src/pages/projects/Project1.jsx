@@ -1555,6 +1555,60 @@ function Comparison() {
   )
 }
 
+/* 对比&总结 · Product Impact 项目成果 + 团队反馈(1:1092)*/
+function ProductImpact() {
+  const W = 1440
+  const H = 1088
+  const at = (x, y, w) => ({ left: pct(x, W), top: pct(y, H), ...(w != null && { width: pct(w, W) }) })
+  return (
+    <section data-node-id="1:1092">
+      <SectionHeading>Product Impact</SectionHeading>
+      <div className="p1-impact" style={{ aspectRatio: `${W} / ${H}` }}>
+        <span className="p1-impact-kicker" style={at(24, 160)}>项目成果总结</span>
+
+        {/* 01 页面拓展性提升 */}
+        <span className="p1-impact-num" style={at(24, 228)}>01</span>
+        <span className="p1-impact-title" style={at(24, 312)}>页面拓展性提升</span>
+        <p className="p1-impact-body" style={at(24, 388, 448)}>
+          全新改版的页面一次性解决了全部过去因拓展性问题而无法满足的业务信息展示诉求
+        </p>
+        <p className="p1-impact-body" style={at(24, 468, 448)}>
+          经过测试表明，新版方案在各种边际场景均可保证页面信息清晰有条理地展示
+        </p>
+
+        {/* 02 页面使用体验提升 */}
+        <span className="p1-impact-num" style={at(594, 228)}>02</span>
+        <span className="p1-impact-title" style={at(594, 312)}>页面使用体验提升</span>
+        <p className="p1-impact-body" style={at(594, 388, 448)}>
+          前期设计走查和用户测试中收集的体验问题均在新版方案中得到解决
+        </p>
+        <p className="p1-impact-body" style={at(594, 468, 448)}>
+          新版方案在产研团队内部和跨团队（业务部门）的评审会中均获得了广泛认同
+        </p>
+
+        <hr className="p1-impact-rule" style={{ ...at(24, 580, 1392) }} />
+
+        {/* 团队反馈 */}
+        <span className="p1-impact-kicker" style={at(24, 644)}>团队反馈</span>
+
+        <span className="p1-impact-mark" style={at(558, 622)}>“</span>
+        <p className="p1-impact-quote" style={at(594, 644, 684)}>终于能把需要新加的信息都好好展示出来了！</p>
+        <p className="p1-impact-quote" style={at(594, 712, 684)}>
+          我觉得这个结构很清晰了，后边其他页面改版页可以参考
+        </p>
+        <span className="p1-impact-src" style={at(1416, 780)}>来自产研团队内部同事反馈</span>
+        <hr className="p1-impact-rule" style={{ ...at(594, 832, 802) }} />
+
+        <span className="p1-impact-mark" style={at(558, 874)}>“</span>
+        <p className="p1-impact-quote" style={at(594, 896, 684)}>
+          需要的功能和信息都可以看到，页面也不会很乱，我觉得很好
+        </p>
+        <span className="p1-impact-src" style={at(1416, 964)}>来自海外站点当地业务同事反馈</span>
+      </div>
+    </section>
+  )
+}
+
 function Project1() {
   return (
     <>
@@ -1596,7 +1650,8 @@ function Project1() {
       <O3Strategy1 />
       <O3Strategy2 />
       <Comparison />
-      {/* TODO: 对比&总结 剩余屏(1:1092 / 1:1116) */}
+      <ProductImpact />
+      {/* TODO: 对比&总结 收尾屏(1:1116) */}
     </>
   )
 }
