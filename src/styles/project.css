@@ -1196,3 +1196,50 @@
   width: 14.1px;
   height: 14.1px;
 }
+
+/* ---- P1 · 对比&总结 ---- */
+/* before/after 三列节点对比(标签列 + 两截图列) */
+.p1-cmp-grid {
+  display: grid;
+  grid-template-columns: 330fr 507fr 506fr;
+  gap: 32px 24px;
+  padding: 64px 24px 0;
+  align-items: start;
+}
+
+.p1-cmp-stagelabel {
+  grid-column: 2;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-h4);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-h4);
+  text-transform: uppercase;
+  color: var(--dark-text-body-1);
+}
+
+/* 每一行:标签(含顶部分割线) + 两张截图 */
+.p1-cmp-label {
+  grid-column: 1;
+  border-top: 1px solid var(--dark-border-dark);
+  padding-top: 32px;
+  color: var(--color-heading);
+}
+
+.p1-cmp-shot {
+  aspect-ratio: 507 / 280;
+}
+
+.p1-cmp-shot--before {
+  grid-column: 2;
+  opacity: 0.8;
+}
+
+.p1-cmp-shot--after {
+  grid-column: 3;
+}
+
+/* 收尾/总结通用 */
+.p1-outro {
+  padding: 104px 24px;
+}

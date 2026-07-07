@@ -44,6 +44,17 @@ import fareCard1 from '../../assets/projects/p1/fare-card-1.png'
 import fareCard2 from '../../assets/projects/p1/fare-card-2.png'
 import fareCard3 from '../../assets/projects/p1/fare-card-3.png'
 import fareCard4 from '../../assets/projects/p1/fare-card-4.png'
+import cmpBefore1 from '../../assets/projects/p1/cmp-before-1.png'
+import cmpBefore2 from '../../assets/projects/p1/cmp-before-2.png'
+import cmpBefore3 from '../../assets/projects/p1/cmp-before-3.png'
+import cmpBefore4 from '../../assets/projects/p1/cmp-before-4.png'
+import cmpBefore5 from '../../assets/projects/p1/cmp-before-5.png'
+import cmpAfter1 from '../../assets/projects/p1/cmp-after-1.png'
+import cmpAfter2 from '../../assets/projects/p1/cmp-after-2.png'
+import cmpAfter3 from '../../assets/projects/p1/cmp-after-3.png'
+import cmpAfter5 from '../../assets/projects/p1/cmp-after-5.png'
+import cmpTooltip from '../../assets/projects/p1/cmp-tooltip.png'
+import cmpCursor from '../../assets/projects/p1/cmp-cursor.svg'
 
 /**
  * Project 1 — Flight List Page Redesign / 机票列表页改版项目
@@ -1472,6 +1483,78 @@ function O3Strategy2() {
   )
 }
 
+/* 对比&总结 · 页面主要节点对比(1:1046)
+   卡片 507×280;光标/浮层坐标按卡片百分比 */
+const cmpRows = [
+  { label: '初始状态', before: cmpBefore1, after: cmpAfter1 },
+  { label: '选中一程', before: cmpBefore2, after: cmpAfter2 },
+  { label: '查看中转信息', before: cmpBefore3, after: cmpAfter3, beforeCursor: { left: '45.5%', top: '67.1%' } },
+  {
+    label: '查看航班行程详情',
+    before: cmpBefore4,
+    after: cmpAfter3,
+    tooltip: { left: '6.7%', top: '35.2%', width: '35.4%' },
+    afterCursor: { left: '29.9%', top: '63.9%' },
+  },
+  { label: '展开运价', before: cmpBefore5, after: cmpAfter5 },
+]
+
+function Cursor({ left, top }) {
+  return (
+    <img
+      className="p1-ctn-hand"
+      src={cmpCursor}
+      alt=""
+      style={{ left, top, width: '1.34%', height: 'auto', aspectRatio: '7 / 9' }}
+    />
+  )
+}
+
+function Comparison() {
+  return (
+    <section data-node-id="1:1046">
+      <SectionHeading>Redesign Comparison</SectionHeading>
+      <div className="p1-split" style={{ paddingBottom: 0 }}>
+        <p className="proj-kicker" style={{ gridColumn: 1 }}>
+          页面主要节点对比
+        </p>
+      </div>
+      <div className="p1-cmp-grid">
+        <p className="p1-cmp-stagelabel">Before</p>
+        <p className="p1-cmp-stagelabel" style={{ gridColumn: 3 }}>
+          After
+        </p>
+        {cmpRows.map((row) => (
+          <div key={row.label} style={{ display: 'contents' }}>
+            <p className="p1-cmp-label">{row.label}</p>
+            <div className="proj-figure p1-cmp-shot p1-cmp-shot--before">
+              <img src={row.before} alt={`改版前 · ${row.label}`} />
+              {row.beforeCursor && <Cursor {...row.beforeCursor} />}
+            </div>
+            <div className="proj-figure p1-cmp-shot p1-cmp-shot--after">
+              <img src={row.after} alt={`改版后 · ${row.label}`} />
+              {row.tooltip && (
+                <img
+                  src={cmpTooltip}
+                  alt=""
+                  style={{
+                    position: 'absolute',
+                    left: row.tooltip.left,
+                    top: row.tooltip.top,
+                    width: row.tooltip.width,
+                    height: 'auto',
+                  }}
+                />
+              )}
+              {row.afterCursor && <Cursor {...row.afterCursor} />}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 function Project1() {
   return (
     <>
@@ -1512,8 +1595,8 @@ function Project1() {
       />
       <O3Strategy1 />
       <O3Strategy2 />
-      {/* 目标3(1:901)完成 */}
-      {/* TODO: 对比&总结(1:1045) */}
+      <Comparison />
+      {/* TODO: 对比&总结 剩余屏(1:1092 / 1:1116) */}
     </>
   )
 }
