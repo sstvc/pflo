@@ -55,6 +55,7 @@ import cmpAfter3 from '../../assets/projects/p1/cmp-after-3.png'
 import cmpAfter5 from '../../assets/projects/p1/cmp-after-5.png'
 import cmpTooltip from '../../assets/projects/p1/cmp-tooltip.png'
 import cmpCursor from '../../assets/projects/p1/cmp-cursor.svg'
+import endTitle from '../../assets/projects/p1/end-title.svg'
 
 /**
  * Project 1 — Flight List Page Redesign / 机票列表页改版项目
@@ -1651,7 +1652,13 @@ function Project1() {
       <O3Strategy2 />
       <Comparison />
       <ProductImpact />
-      {/* TODO: 对比&总结 收尾屏(1:1116) */}
+      <section data-node-id="1:1116" style={{ padding: '40px 0 0' }}>
+        <img
+          src={endTitle}
+          alt="Flight List Page Redesign"
+          style={{ display: 'block', width: '100%', height: 'auto', aspectRatio: '1440 / 666' }}
+        />
+      </section>
     </>
   )
 }
