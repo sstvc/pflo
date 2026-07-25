@@ -1203,7 +1203,8 @@
   display: grid;
   grid-template-columns: 330fr 507fr 506fr;
   gap: 32px 24px;
-  padding: 64px 24px 0;
+  /* 底部 104px:稿中 Desktop-59 末排卡片底边 1856 → 帧高 1960 */
+  padding: 64px 24px 104px;
   align-items: start;
 }
 

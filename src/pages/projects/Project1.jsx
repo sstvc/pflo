@@ -1560,11 +1560,15 @@ function Comparison() {
 function ProductImpact() {
   const W = 1440
   const H = 1088
-  const at = (x, y, w) => ({ left: pct(x, W), top: pct(y, H), ...(w != null && { width: pct(w, W) }) })
+  /* 稿中 Desktop-58 顶部 0–98 是区块标题区(标题块 74 + 其 24 外边距),
+     标题在此单独渲染,故舞台只覆盖 98–1088;坐标仍写设计绝对值 */
+  const HEAD = 98
+  const SH = H - HEAD
+  const at = (x, y, w) => ({ left: pct(x, W), top: pct(y - HEAD, SH), ...(w != null && { width: pct(w, W) }) })
   return (
     <section data-node-id="1:1092">
       <SectionHeading>Product Impact</SectionHeading>
-      <div className="p1-impact" style={{ aspectRatio: `${W} / ${H}` }}>
+      <div className="p1-impact" style={{ aspectRatio: `${W} / ${SH}` }}>
         <span className="p1-impact-kicker" style={at(24, 160)}>项目成果总结</span>
 
         {/* 01 页面拓展性提升 */}
@@ -1652,7 +1656,8 @@ function Project1() {
       <O3Strategy2 />
       <Comparison />
       <ProductImpact />
-      <section data-node-id="1:1116" style={{ padding: '40px 0 0' }}>
+      {/* 收尾屏:稿中 '2025' 帧紧贴 Desktop-58,自带背景与顶部分割线,无外边距 */}
+      <section data-node-id="1:1116">
         <img
           src={endTitle}
           alt="Flight List Page Redesign"
