@@ -1077,11 +1077,22 @@
 /* 放大镜面板:描边圆角容器,内部同源条带全亮 */
 .p1-spot-panel {
   position: absolute;
+  box-sizing: border-box;
   border: 1px solid var(--light-border);
   border-radius: 16px;
   background: rgba(218, 220, 224, 0.2);
-  box-shadow: inset 0 0 12px rgba(218, 220, 224, 0.3);
   overflow: hidden;
+}
+
+/* 内发光:稿中是面板的最后一个子元素,须盖在截图之上。
+   写成面板自身的 inset box-shadow 会与背景一起画在子元素下面,被不透明截图遮住。 */
+.p1-spot-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 12px rgba(218, 220, 224, 0.3);
+  pointer-events: none;
 }
 
 .p1-spot .proj-stagelabel {
