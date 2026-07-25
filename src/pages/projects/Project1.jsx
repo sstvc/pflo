@@ -1360,10 +1360,16 @@ function O3Strategy1() {
         <hr className="p1-spot-row-rule" style={{ left: pct(496, W), top: pct(400, AH), width: pct(920, W) }} />
         <span className="p1-int-title" style={{ left: pct(496, W), top: pct(432, AH) }}>集中展示区域</span>
         <span className="p1-int-title" style={{ left: pct(968, W), top: pct(432, AH) }}>统一展示方式</span>
-        <span className="p1-spot-dt" style={{ left: pct(496, W), top: pct(508, AH), width: pct(330, W) }}>
+        <span
+          className="p1-spot-dt p1-spot-dt--wrap"
+          style={{ left: pct(496, W), top: pct(508, AH), width: pct(330, W) }}
+        >
           形成视觉聚焦，方便用户对比航班的优势信息，快速决策
         </span>
-        <span className="p1-spot-dt" style={{ left: pct(968, W), top: pct(508, AH), width: pct(330, W) }}>
+        <span
+          className="p1-spot-dt p1-spot-dt--wrap"
+          style={{ left: pct(968, W), top: pct(508, AH), width: pct(330, W) }}
+        >
           仅使用颜色提示优势信息，确保用户认知的一致性，放大航班优势
         </span>
         <span className="p1-adv-chip p1-adv-chip--gray" style={{ left: pct(968, W), top: pct(588, AH), width: pct(94, W) }}>

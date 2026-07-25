@@ -30,15 +30,21 @@ npm run lint     # 提交前必跑
 - 增删项目**只改 `src/data/projects.js`**,首页/索引都从它读
 - 新项目页放 `src/pages/projects/`,并在 `Project.jsx` 的 `pages` 映射表登记(懒加载)
 
-**Figma 资产**
+**Figma(两个文件,别混)**
+- 页面稿 `portfolio-2025-coding` = `04uhBuDFENw94d8ERcsCs2`;设计规范 `SSPFO Design System` = `PhnhrgTFhQMM49sWWMuXaU`
+- **节点 id 会随作者编辑整体偏移**,不要写死当长期引用 —— 每次按画板名重新定位
 - 资产 URL **7 天过期** —— 读完一屏立刻 curl 下载到 `src/assets/projects/pN/`
 - 整个 project 画板 2 万+ 像素高,**必须分子屏读**,一次读会超限
 - 截图上的白色遮挡块(`.proj-figure__patch`)是**故意遮敏感信息的,不要删**
 
+**字体细节(踩过)**
+- 字间距只有两处非零:区块标题 `--tracking-section-heading`、英文主标题 `--tracking-project-title`。**其余一律不加**
+- 大小写看源文字:区块标题源文字就是大写;英文副标题是 Title Case,**不转大写**
+- 有宽度约束的说明文字**不要加 `nowrap`**(稿中是换行的)
+
 **不要碰**
 - 不配置 Cloudflare(除明确要求)—— 作者在网页面板手动管
-- `cover&resume&content` / `105` 画板仅用于文件导出,**不是站点页面**
-- 两个未命名 Frame(`1:2034`/`1:2531`)是旧草稿,忽略
+- `cover&resume&content` 画板仅用于文件导出,**不是站点页面**
 
 ## 验证
 

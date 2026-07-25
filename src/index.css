@@ -12,21 +12,22 @@
   --font-heading: 'Montserrat Variable', 'Noto Sans SC Variable', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
   --font-body: 'Inter Variable', 'Noto Sans SC Variable', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
 
-  /* ---- Type scale (desktop @1440) ---- */
-  /* Display: Montserrat 800 / 思源 Heavy */
-  --text-display: 144px; --leading-display: 160px; --tracking-display: -2.88px;
-  /* H1: Montserrat 800 / 思源 Heavy */
-  --text-h1: 72px; --leading-h1: 84px; --tracking-h1: -1.44px;
-  /* H2: Montserrat 700 / 思源 Bold */
-  --text-h2: 60px; --leading-h2: 72px; --tracking-h2: -0.6px;
-  /* H3: Montserrat 600 / 思源 Medium */
+  /* ---- Type scale (desktop @1440) ----
+     字号/行距对应规范的 FontSize/* 与 LineHeight/* 变量 */
+  --text-display-xl: 180px; --leading-display-xl: 180px;
+  --text-display: 144px; --leading-display: 160px;
+  --text-display-lg: 120px; --leading-display-lg: 140px;
+  --text-h1: 72px; --leading-h1: 84px;
+  --text-h2: 60px; --leading-h2: 72px;
   --text-h3: 36px; --leading-h3: 44px;
-  /* H4: Montserrat 600 / 思源 Medium */
-  --text-h4: 24px; --leading-h4: 36px; --tracking-h4: 0.24px;
-  /* Body 1: Inter 400/600 / 思源 Regular/Medium */
+  --text-h4: 24px; --leading-h4: 36px;
   --text-body-1: 16px; --leading-body-1: 24px;
-  /* Body 2 / Caption: Inter 400/500 */
-  --text-body-2: 14px; --leading-body-2: 20px; --tracking-body-2: 0.28px;
+  --text-body-2: 14px; --leading-body-2: 20px;
+
+  /* ---- Letter spacing ----
+     规范中仅两个样式带字间距,其余全部为 0(即 normal),不要另加。 */
+  --tracking-section-heading: 4.8px;  /* EN/H2 Bold      8% × 60px  */
+  --tracking-project-title: -4.8px;   /* EN/Project Title -4% × 120px */
 
   /* ---- Brand ---- */
   --brand-primary: #7f7ebc;

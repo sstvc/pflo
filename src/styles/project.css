@@ -28,7 +28,7 @@
   font-weight: 800;
   font-size: 120px;
   line-height: 120px;
-  letter-spacing: -4.8px;
+  letter-spacing: var(--tracking-project-title);
   color: var(--accent-primary);
 }
 
@@ -38,7 +38,6 @@
   font-weight: 900;
   font-size: var(--text-h1);
   line-height: var(--leading-h1);
-  letter-spacing: var(--tracking-h1);
   color: var(--color-heading);
 }
 
@@ -92,7 +91,7 @@
   font-weight: 700;
   font-size: var(--text-h2);
   line-height: var(--leading-h2);
-  letter-spacing: 4.8px;
+  letter-spacing: var(--tracking-section-heading);
   text-transform: uppercase;
   /* 空心字:填充用页面底色盖住可变字体轮廓自交的乱线,
      paint-order 让描边垫底,只露出干净的外轮廓 */
@@ -105,7 +104,6 @@
 .proj-kicker {
   font-size: var(--text-h4);
   line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-h4);
   font-weight: 500;
   color: var(--dark-text-body-1);
 }
@@ -149,7 +147,6 @@
   font-weight: 800;
   font-size: 120px;
   line-height: 140px;
-  letter-spacing: -2.4px;
   color: var(--accent-primary);
 }
 
@@ -195,7 +192,6 @@
   margin-top: 32px;
   font-size: var(--text-h4);
   line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-h4);
   font-weight: 500;
   color: var(--color-heading);
 }
@@ -254,7 +250,6 @@
   font-weight: 800;
   font-size: var(--text-h1);
   line-height: var(--leading-h1);
-  letter-spacing: var(--tracking-h1);
   color: var(--color-heading);
 }
 
@@ -262,7 +257,6 @@
   margin-top: 16px;
   font-size: var(--text-h4);
   line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-h4);
   font-weight: 500;
   color: var(--dark-text-body-1);
 }
@@ -312,7 +306,6 @@
 .p1-flow__node span {
   font-size: var(--text-body-2);
   line-height: var(--leading-body-2);
-  letter-spacing: var(--tracking-body-2);
   font-weight: 500;
   color: var(--color-body-2);
 }
@@ -395,7 +388,6 @@
   font-weight: 700;
   font-size: var(--text-h2);
   line-height: var(--leading-h2);
-  letter-spacing: var(--tracking-h2);
   color: var(--color-heading);
 }
 
@@ -415,7 +407,6 @@
   margin: 0;
   font-size: var(--text-h4);
   line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-h4);
   font-weight: 500;
   color: var(--color-heading);
 }
@@ -463,7 +454,6 @@
   font-weight: 800;
   font-size: 180px;
   line-height: 180px;
-  letter-spacing: -3.6px;
   color: var(--color-bg-1);
   -webkit-text-stroke: 2px var(--accent-primary);
   paint-order: stroke fill;
@@ -472,7 +462,6 @@
 .p1-obj-sub {
   font-size: var(--text-h4);
   line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-h4);
   font-weight: 500;
   color: var(--dark-text-body-1);
 }
@@ -519,7 +508,6 @@
   gap: 8px;
   font-size: var(--text-h4);
   line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-h4);
   font-weight: 500;
   color: var(--dark-text-body-1);
 }
@@ -535,10 +523,10 @@
   font-weight: 900;
   font-size: var(--text-h1);
   line-height: var(--leading-h1);
-  letter-spacing: var(--tracking-h1);
   color: var(--dark-text-heading);
 }
 
+/* 英文副标题:稿中为 Title Case(Scalable Structure),不转大写 */
 .proj-objopen__sub {
   margin-top: 8px;
   max-width: 302px;
@@ -546,7 +534,6 @@
   font-weight: 700;
   font-size: var(--text-h3);
   line-height: var(--leading-h3);
-  text-transform: uppercase;
   color: var(--dark-text-body-1);
 }
 
@@ -580,14 +567,12 @@
   font-weight: 800;
   font-size: var(--text-h2);
   line-height: var(--leading-h2);
-  letter-spacing: var(--tracking-h2);
   color: var(--dark-text-body-1);
 }
 
 .proj-objopen__right li span {
   font-size: var(--text-h4);
   line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-h4);
   font-weight: 500;
   color: var(--dark-text-heading);
 }
@@ -614,7 +599,6 @@
   font-weight: 700;
   font-size: var(--text-h2);
   line-height: var(--leading-h2);
-  letter-spacing: var(--tracking-h2);
   color: var(--color-heading);
 }
 
@@ -624,7 +608,6 @@
   font-weight: 600;
   font-size: var(--text-h4);
   line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-h4);
   text-transform: uppercase;
   color: var(--dark-text-body-1);
 }
@@ -670,7 +653,6 @@
   font-weight: 900;
   font-size: var(--text-body-2);
   line-height: var(--leading-body-2);
-  letter-spacing: var(--tracking-body-2);
   color: var(--accent-primary);
   white-space: nowrap;
 }
@@ -867,7 +849,6 @@
   position: absolute;
   font-size: var(--text-body-2);
   line-height: var(--leading-body-2);
-  letter-spacing: var(--tracking-body-2);
   font-weight: 500;
   color: var(--color-body-2);
   white-space: nowrap;
@@ -966,7 +947,6 @@
   position: absolute;
   font-size: var(--text-body-2);
   line-height: var(--leading-body-2);
-  letter-spacing: var(--tracking-body-2);
   font-weight: 500;
   color: var(--dark-text-heading);
   white-space: nowrap;
@@ -1031,7 +1011,6 @@
   text-align: right;
   font-size: var(--text-body-2);
   line-height: var(--leading-body-2);
-  letter-spacing: var(--tracking-body-2);
   font-weight: 500;
   color: var(--color-body-2);
 }
@@ -1123,6 +1102,11 @@
   position: absolute;
   color: var(--color-body-2);
   white-space: nowrap;
+}
+
+/* 设定了宽度的说明文字需按稿换行(稿中 w=330 h=48,两行) */
+.p1-spot-dt--wrap {
+  white-space: normal;
 }
 
 .p1-spot-dd {
@@ -1225,7 +1209,6 @@
   font-weight: 600;
   font-size: var(--text-h4);
   line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-h4);
   text-transform: uppercase;
   color: var(--dark-text-body-1);
 }
@@ -1268,7 +1251,6 @@
 .p1-impact-kicker {
   font-size: var(--text-h4);
   line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-h4);
   font-weight: 500;
   color: var(--dark-text-body-1);
   white-space: nowrap;
@@ -1279,7 +1261,6 @@
   font-weight: 800;
   font-size: var(--text-h1);
   line-height: var(--leading-h1);
-  letter-spacing: var(--tracking-h1);
   color: var(--color-heading);
 }
 
@@ -1298,7 +1279,6 @@
 .p1-impact-quote {
   font-size: var(--text-h4);
   line-height: 36px;
-  letter-spacing: var(--tracking-h4);
   font-weight: 500;
   color: var(--color-heading);
 }
@@ -1314,7 +1294,6 @@
 .p1-impact-src {
   font-size: var(--text-body-2);
   line-height: var(--leading-body-2);
-  letter-spacing: var(--tracking-body-2);
   font-weight: 500;
   color: var(--color-body-2);
   text-align: right;

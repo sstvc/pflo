@@ -2,28 +2,32 @@
 
 这份文档记录「把 Figma 稿还原成页面」的完整方法,以及踩过的坑。**开始还原任何新页面前先读这里**,能省掉重复踩坑。
 
-## 设计稿
+## 设计稿(两个文件,别混)
 
-| 项 | 值 |
-|---|---|
-| 文件 | `SSPFO Design System`(曾名 `pflo-for-cc`) |
-| fileKey | `PhnhrgTFhQMM49sWWMuXaU` |
-| 主设计页 | `Page 1` = `0:1`,含 project 1–5 |
-| 变量文档 | `Styles` frame = `194:2` |
-
-**画板对照(已与作者确认):**
-
-| 内容 | 节点 | 尺寸 |
+| 用途 | 文件 | fileKey |
 |---|---|---|
-| project 1 | `1:161` | 1440 × 23513 |
-| project 2 | `1:1128` | 1440 × 23397 |
-| project 3 | `167:501` | 1440 × 27854 |
-| project 4 | `167:998` | 1440 × 14588 |
+| **页面稿** | `portfolio-2025-coding` | `04uhBuDFENw94d8ERcsCs2` |
+| **设计规范** | `SSPFO Design System` | `PhnhrgTFhQMM49sWWMuXaU` |
 
-**必须忽略的画板:**
-- 两个未命名 Frame(`1:2034` / `1:2531`)—— project 3/4 的旧草稿
-- `105` —— 导出用封面,将被正式首页替换
-- `cover&resume&content` —— 仅用于文件导出,**不是站点页面**
+页面稿只有一个页面 `设计稿`(`0:1`),含 5 个顶层画板。规范文件按 `F01 颜色` / `F02 字体` 等分页,每页一个 canvas。
+
+⚠️ **节点 id 会随作者编辑整体偏移**(已见 `1:161` → `1:169` → `4:158` 三轮变动)。**不要把 id 写死当长期引用** —— 每次开工先按画板名重新定位:
+
+```bash
+# 从 get_metadata 的 dump 里按名字找当前 id
+grep -o 'id="[^"]*" name="project 1"' <dump>
+```
+
+**画板尺寸(稳定,可用于校验):**
+
+| 内容 | 尺寸 |
+|---|---|
+| project 1 | 1440 × 23513 |
+| project 2 | 1440 × 23397 |
+| project 3 | 1440 × 27854 |
+| project 4 | 1440 × 14588 |
+
+**必须忽略:** `cover&resume&content` —— 仅用于文件导出,**不是站点页面**。(旧文件里的重复草稿画板和 `105` 封面已在新文件中清理。)
 
 ## 流程
 
@@ -128,7 +132,26 @@ Figma 导出代码若以 `<div className="absolute inset-0 pointer-events-none s
 
 修法:给**填充路径**(带 `--fill-0` 且没有 `mask=` 的那些)加同色 `stroke` + `stroke-width="1"`,让它向 mask 边缘下方多铺 0.5px。不会加粗字形(轮廓环已定义了外形)。
 
-### 7. 截图上的白色遮挡块要保留
+### 7. 字间距只有两处非零
+
+规范里 `letterSpacing` 的单位是**百分比**。全部文字样式中**只有两个**非零:
+
+| 样式 | 规范值 | CSS |
+|---|---|---|
+| `EN/H2 Bold`(区块标题) | `8` = 8% × 60px | `--tracking-section-heading: 4.8px` |
+| `EN/Project Title`(英文主标题) | `-4` = -4% × 120px | `--tracking-project-title: -4.8px` |
+
+**其余一律不加字间距。** 曾按旧稿给 display/h1/h2/h4/body-2 都配了 tracking token,共 26 处引用,与规范不符,已全部移除。
+
+### 8. 大小写:看源文字,不要想当然
+
+区块标题在稿中的**源文字本身就是大写**(`BACKGROUND`、`DESIGN OBJECTIVES`),节点上另有 `uppercase`。但英文副标题(`Scalable Structure` / `Interaction Flow` / `Information Visibility`)是 **Title Case,不转大写**。核对方法:从 metadata dump 里取 text 节点的 `name`(即其文字内容),必要时 `get_screenshot` 该节点看渲染。
+
+### 9. `white-space: nowrap` 别加在有宽度约束的说明文字上
+
+设定了宽度的文字在稿中是**换行**的(如 w=330 / h=48 即两行)。给这类元素加 nowrap 会导致单行溢出。判断依据:稿中该 text 节点的 `height` ÷ 行高 > 1 就是多行。
+
+### 10. 截图上的白色遮挡块要保留
 
 原始截图上有白色小方块用于遮挡敏感信息(`.proj-figure__patch`)。**这是有意的,不要当成瑕疵删掉。**
 
