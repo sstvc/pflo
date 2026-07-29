@@ -53,7 +53,7 @@ grep -o 'id="[^"]*" name="project 1"' <dump>
 
 ## 复用图形基元
 
-⚠️ **当前这些函数都定义在 `src/pages/projects/Project1.jsx` 内部(1671 行)。project 2 开工前应先抽到共享模块(如 `src/components/figma/`),否则会复制粘贴。**
+基元已抽到 **`src/components/figma/`**,从 `index.js` 统一导入。基元只输出 `.proj-*` 类名(跨项目共享);`.pN-*` 是各项目专属版式。
 
 | 基元 | 用途 |
 |---|---|
@@ -69,7 +69,7 @@ grep -o 'id="[^"]*" name="project 1"' <dump>
 
 共享版式在 `src/styles/project.css`,类名前缀 `.proj-*`(跨项目通用)和 `.p1-*`(project 1 专属)。
 
-**放大镜模式**(`.p1-spot-panel`)是本项目最常用的手法:底层放暗化的完整截图,上面盖一个描边圆角面板,面板内用同源图全亮显示局部 —— 全 CSS,无需额外资产。
+**放大镜模式**(`.proj-spot-panel`)是本项目最常用的手法:底层放暗化的完整截图,上面盖一个描边圆角面板,面板内用同源图全亮显示局部 —— 全 CSS,无需额外资产。
 
 ## 验证方法
 

@@ -288,13 +288,13 @@
 }
 
 /* 用户↔平台流程图 */
-.p1-flow {
+.proj-flow {
   display: flex;
   align-items: flex-start;
   gap: 4px;
 }
 
-.p1-flow__node {
+.proj-flow__node {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -303,14 +303,14 @@
   flex: none;
 }
 
-.p1-flow__node span {
+.proj-flow__node span {
   font-size: var(--text-body-2);
   line-height: var(--leading-body-2);
   font-weight: 500;
   color: var(--color-body-2);
 }
 
-.p1-flow__circle {
+.proj-flow__circle {
   width: 92px;
   height: 92px;
   border-radius: 50%;
@@ -319,7 +319,7 @@
   box-sizing: border-box;
 }
 
-.p1-flow__square {
+.proj-flow__square {
   width: 86px;
   height: 86px;
   margin: 4px;
@@ -329,7 +329,7 @@
   box-sizing: border-box;
 }
 
-.p1-flow__arrow {
+.proj-flow__arrow {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -339,7 +339,7 @@
   color: var(--color-heading);
 }
 
-.p1-flow__arrow svg {
+.proj-flow__arrow svg {
   display: block;
 }
 
@@ -348,7 +348,7 @@
   border-color: var(--dark-border-light);
 }
 
-.p1-intro-col--hl .p1-flow__node span {
+.p1-intro-col--hl .proj-flow__node span {
   color: var(--dark-text-body-1);
 }
 
@@ -822,21 +822,21 @@
 }
 
 /* 优先级色块示意(绝对定位舞台,坐标按百分比) */
-.p1-pri-stage {
+.proj-pri-stage {
   position: relative;
   margin-top: 64px;
 }
 
-.p1-pri-block {
+.proj-pri-block {
   position: absolute;
 }
 
-.p1-pri-block--a20 { background: var(--accent-primary); opacity: 0.2; }
-.p1-pri-block--a50 { background: var(--accent-primary); opacity: 0.5; }
-.p1-pri-block--s20 { background: var(--accent-secondary); opacity: 0.2; }
-.p1-pri-block--s50 { background: var(--accent-secondary); opacity: 0.5; }
+.proj-pri-block--a20 { background: var(--accent-primary); opacity: 0.2; }
+.proj-pri-block--a50 { background: var(--accent-primary); opacity: 0.5; }
+.proj-pri-block--s20 { background: var(--accent-secondary); opacity: 0.2; }
+.proj-pri-block--s50 { background: var(--accent-secondary); opacity: 0.5; }
 
-.p1-pri-label {
+.proj-pri-label {
   position: absolute;
   font-size: var(--text-body-2);
   line-height: var(--leading-body-2);
@@ -845,11 +845,11 @@
   white-space: nowrap;
 }
 
-.p1-pri-label--lit { color: var(--dark-text-body-1); }
-.p1-pri-label--right { transform: translateX(-100%); }
-.p1-pri-label--center { transform: translateX(-50%); }
+.proj-pri-label--lit { color: var(--dark-text-body-1); }
+.proj-pri-label--right { transform: translateX(-100%); }
+.proj-pri-label--center { transform: translateX(-50%); }
 
-.p1-pri-title {
+.proj-pri-title {
   position: absolute;
   font-size: var(--text-h3);
   line-height: var(--leading-h3);
@@ -858,41 +858,41 @@
   white-space: nowrap;
 }
 
-.p1-pri-title--s { color: var(--accent-secondary); }
+.proj-pri-title--s { color: var(--accent-secondary); }
 
-.p1-pri-desc {
+.proj-pri-desc {
   position: absolute;
   color: var(--dark-text-body-1);
   white-space: nowrap;
 }
 
-.p1-pri-img {
+.proj-pri-img {
   position: absolute;
 }
 
-.p1-pri-img img {
+.proj-pri-img img {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.p1-pri-sq {
+.proj-pri-sq {
   position: absolute;
   width: 16px;
   height: 16px;
   background: var(--accent-primary);
 }
 
-.p1-pri-sq--20 { opacity: 0.2; }
-.p1-pri-sq--50 { opacity: 0.5; }
+.proj-pri-sq--20 { opacity: 0.2; }
+.proj-pri-sq--50 { opacity: 0.5; }
 
-.p1-pri-vdash {
+.proj-pri-vdash {
   position: absolute;
   width: 0;
   border-left: 1px dashed var(--dark-border-dark);
 }
 
-.p1-pri-hdash {
+.proj-pri-hdash {
   position: absolute;
   height: 0;
   border-top: 1px dashed var(--dark-border-dark);
@@ -954,7 +954,7 @@
   transform: translateX(-100%);
 }
 
-.p1-ctn-hand {
+.proj-cursor {
   position: absolute;
   width: 3.2%;
   aspect-ratio: 22 / 26; /* SVG 无固有尺寸,显式锁比例 */
@@ -1027,20 +1027,20 @@
   height: auto;
 }
 
-/* 功能分区爆炸图舞台(标签复用 .p1-pri-label) */
+/* 功能分区爆炸图舞台(标签复用 .proj-pri-label) */
 .p1-xstage {
   position: relative;
   margin: 64px 24px 0 calc(24.583% + 24px);
 }
 
 /* 同源截图裁片:容器隐藏溢出,内部 img 按百分比裁切 */
-.p1-crop {
+.proj-crop {
   position: absolute;
   border-radius: 4px;
   overflow: hidden;
 }
 
-.p1-crop > img {
+.proj-crop > img {
   position: absolute;
   max-width: none;
 }
@@ -1054,7 +1054,7 @@
 }
 
 /* 放大镜面板:描边圆角容器,内部同源条带全亮 */
-.p1-spot-panel {
+.proj-spot-panel {
   position: absolute;
   box-sizing: border-box;
   border: 1px solid var(--light-border);
@@ -1065,7 +1065,7 @@
 
 /* 内发光:稿中是面板的最后一个子元素,须盖在截图之上。
    写成面板自身的 inset box-shadow 会与背景一起画在子元素下面,被不透明截图遮住。 */
-.p1-spot-panel::after {
+.proj-spot-panel::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -1115,11 +1115,11 @@
 }
 
 /* ---- P1 · 目标2 策略03 交互规范屏 ---- */
-.p1-pri-sq--sec {
+.proj-pri-sq--sec {
   background: var(--accent-secondary);
 }
 
-.p1-pri-sq--40 {
+.proj-pri-sq--40 {
   opacity: 0.4;
 }
 

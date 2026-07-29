@@ -57,108 +57,26 @@ import cmpTooltip from '../../assets/projects/p1/cmp-tooltip.png'
 import cmpCursor from '../../assets/projects/p1/cmp-cursor.svg'
 import endTitle from '../../assets/projects/p1/end-title.svg'
 
+import {
+  pct,
+  SectionHeading,
+  ObjectiveOpener,
+  WfStage,
+  PriStage,
+  Strip,
+  IntSlice,
+  AdvPill,
+  FlowArrow,
+  FlowNode,
+  Cursor as FigmaCursor,
+} from '../../components/figma/index.js'
+
 /**
  * Project 1 — Flight List Page Redesign / 机票列表页改版项目
  * Figma: Page 1 → project 1 (1:161), 1440×23513
  * 区块:104 头图(1:162)/ 背景&介绍(1:181)/ 问题&目标(1:267)
  *      / 目标1(1:343)/ 目标2(1:628)/ 目标3(1:901)/ 对比&总结(1:1045)
  */
-
-/* 区块大标题:描边空心字 + 上下分割线 */
-function SectionHeading({ children }) {
-  return (
-    <div className="proj-heading">
-      <h2>{children}</h2>
-    </div>
-  )
-}
-
-/* 流程图箭头(Figma 导出为线条 SVG,直接内联) */
-function FlowArrow() {
-  return (
-    <svg width="138" height="36" viewBox="0 0 138 36" fill="none" aria-hidden="true">
-      <path d="M130 5L137 18.0001L130 31" stroke="var(--light-border)" />
-      <path d="M137 18H0" stroke="var(--light-border)" />
-    </svg>
-  )
-}
-
-/* 用户↔平台流程图节点 */
-function FlowNode({ shape, label }) {
-  return (
-    <div className="p1-flow__node">
-      <div className={shape === 'circle' ? 'p1-flow__circle' : 'p1-flow__square'} />
-      <span>{label}</span>
-    </div>
-  )
-}
-
-/* 线框示意图:坐标以舞台尺寸的百分比渲染,随布局缩放 */
-const pct = (v, base) => `${((v / base) * 100).toFixed(3)}%`
-
-function WfStage({ w, h, boxes = [], chips = [], className = '' }) {
-  return (
-    <div className={`wf-stage ${className}`.trim()} style={{ aspectRatio: `${w} / ${h}` }}>
-      {boxes.map((b, i) => (
-        <div
-          key={i}
-          className={`wf wf--${b.v}`}
-          style={{ left: pct(b.l, w), top: pct(b.t, h), width: pct(b.w, w), height: pct(b.h, h) }}
-        />
-      ))}
-      {chips.map((c, i) => (
-        <span key={i} className="wf-chip" style={{ left: pct(c.l, w), top: pct(c.t, h) }}>
-          {c.text}
-        </span>
-      ))}
-    </div>
-  )
-}
-
-/* 通用 · Objective 章节开屏(主色横幅)
-   主色带固定 1440×532;坐标为带内相对值(稿中绝对 y 减去带顶 96)。
-   策略条目 y = 124 + i×136,分割线 y = 228 + (i−1)×136。 */
-function ObjectiveOpener({ heading, goal, cnTitle, enSub, strategies, nodeId }) {
-  const W = 1440
-  const H = 532
-  const at = (x, y, w) => ({
-    left: pct(x, W),
-    top: pct(y, H),
-    ...(w != null && { width: pct(w, W) }),
-  })
-  return (
-    <section data-node-id={nodeId}>
-      <SectionHeading>{heading}</SectionHeading>
-      <div className="proj-objopen">
-        <p className="proj-objopen__goal" style={at(24, 64)}>
-          设计目标 <strong>{goal}</strong>
-        </p>
-        <h3 className="proj-objopen__title" style={at(24, 108)}>
-          {cnTitle}
-        </h3>
-        <p className="proj-objopen__sub" style={at(24, 200, 302)}>
-          {enSub}
-        </p>
-        <p className="proj-kicker" style={at(968, 64)}>
-          设计策略
-        </p>
-        {strategies.map((s, i) => (
-          <strong className="proj-objopen__num" key={`n${s}`} style={at(968, 124 + i * 136)}>
-            {String(i + 1).padStart(2, '0')}
-          </strong>
-        ))}
-        {strategies.map((s, i) => (
-          <span className="proj-objopen__item" key={`t${s}`} style={at(1048, 132 + i * 136, 368)}>
-            {s}
-          </span>
-        ))}
-        {strategies.slice(1).map((s, i) => (
-          <hr className="proj-objopen__rule" key={`r${s}`} style={at(968, 228 + i * 136, 448)} />
-        ))}
-      </div>
-    </section>
-  )
-}
 
 /* 104 · 头图(1:162) */
 function Hero() {
@@ -305,9 +223,9 @@ function Introduction() {
                   <p key={line}>{line}</p>
                 ))}
               </div>
-              <div className="p1-flow">
+              <div className="proj-flow">
                 <FlowNode shape={step.flow.from[0]} label={step.flow.from[1]} />
-                <div className="p1-flow__arrow">
+                <div className="proj-flow__arrow">
                   <span>{step.flow.arrowLabel}</span>
                   <FlowArrow />
                 </div>
@@ -656,58 +574,6 @@ function Strategy1() {
   )
 }
 
-/* 优先级色块示意舞台:块/标签/图/虚线全部按百分比绝对定位 */
-function PriStage({ w, h, style, items }) {
-  const S = (x, y, ww, hh) => ({
-    left: pct(x, w),
-    top: pct(y, h),
-    ...(ww != null && { width: pct(ww, w) }),
-    ...(hh != null && { height: pct(hh, h) }),
-  })
-  return (
-    <div className="p1-pri-stage" style={{ aspectRatio: `${w} / ${h}`, ...style }}>
-      {items.map((it, i) => {
-        if (it.k === 'block')
-          return <div key={i} className={`p1-pri-block p1-pri-block--${it.v}`} style={S(it.x, it.y, it.w, it.h)} />
-        if (it.k === 'img')
-          return (
-            <div key={i} className="p1-pri-img" style={S(it.x, it.y, it.w)}>
-              <img src={it.src} alt={it.alt} />
-            </div>
-          )
-        if (it.k === 'label')
-          return (
-            <span
-              key={i}
-              className={`p1-pri-label${it.lit ? ' p1-pri-label--lit' : ''}${it.align ? ` p1-pri-label--${it.align}` : ''}`}
-              style={S(it.x, it.y)}
-            >
-              {it.text}
-            </span>
-          )
-        if (it.k === 'title')
-          return (
-            <span key={i} className={`p1-pri-title${it.s ? ' p1-pri-title--s' : ''}`} style={S(it.x, it.y)}>
-              {it.text}
-            </span>
-          )
-        if (it.k === 'desc')
-          return (
-            <span key={i} className="p1-pri-desc" style={S(it.x, it.y)}>
-              {it.text}
-            </span>
-          )
-        if (it.k === 'sq') return <span key={i} className={`p1-pri-sq p1-pri-sq--${it.o}`} style={S(it.x, it.y)} />
-        if (it.k === 'vdash')
-          return <div key={i} className="p1-pri-vdash" style={{ ...S(it.x, it.y), height: pct(it.h, h) }} />
-        if (it.k === 'hdash')
-          return <div key={i} className="p1-pri-hdash" style={{ ...S(it.x, it.y), width: pct(it.w, w) }} />
-        return null
-      })}
-    </div>
-  )
-}
-
 /* 目标1 · 策略02 航班卡片信息元素分区(1:480)*/
 
 /* BEFORE:卡片元素按优先级拆解(舞台 1062×208,较内容列左溢 24px) */
@@ -873,7 +739,7 @@ function Strategy3() {
         <div className="col-34 p1-ctn-composite">
           <img className="p1-ctn-base" src={ctnAfter} alt="改版后:核心筛选项与推荐运价展示" />
           <img
-            className="p1-ctn-hand"
+            className="proj-cursor"
             src={handCursor}
             alt=""
             style={{ left: '58.3%', top: '15.8%' }}
@@ -993,7 +859,7 @@ function O2Strategy1() {
       <div className="p1-xstage" style={{ aspectRatio: `${XW} / ${XH}` }}>
         {/* 左:新版页面截图(全彩) */}
         <div
-          className="p1-crop"
+          className="proj-crop"
           style={{ left: 0, top: 0, width: pct(507, XW), height: pct(290, XH), borderRadius: 8 }}
         >
           <img
@@ -1006,7 +872,7 @@ function O2Strategy1() {
         {coreFrags.map((f, i) => (
           <div
             key={i}
-            className="p1-crop"
+            className="proj-crop"
             style={{
               left: pct(f.x, XW),
               top: pct(f.y, XH),
@@ -1022,7 +888,7 @@ function O2Strategy1() {
         {coreFragLabels.map((l) => (
           <span
             key={`${l.text}-${l.x}`}
-            className="p1-pri-label p1-pri-label--lit p1-pri-label--right"
+            className="proj-pri-label proj-pri-label--lit proj-pri-label--right"
             style={{ left: pct(l.x, XW), top: pct(l.y, XH) }}
           >
             {l.text}
@@ -1056,29 +922,6 @@ function O2Strategy1() {
 const depBeforeCropTop = { h: '750%', l: '-14.07%', t: '-390.18%', w: '128.14%' }
 const depBeforeCropBot = { h: '750%', l: '-14.07%', t: '-203.57%', w: '128.14%' }
 
-/* 条带组件:定位容器 + 内部裁切/整图 */
-function Strip({ x, y, w, h, W, H, src, crop, opacity, radius = 8, alt = '' }) {
-  return (
-    <div
-      className="p1-crop"
-      style={{
-        left: pct(x, W),
-        top: pct(y, H),
-        width: pct(w, W),
-        height: pct(h, H),
-        opacity,
-        borderRadius: radius,
-      }}
-    >
-      {crop ? (
-        <img src={src} alt={alt} style={{ height: crop.h, left: crop.l, top: crop.t, width: crop.w }} />
-      ) : (
-        <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'static' }} />
-      )}
-    </div>
-  )
-}
-
 const depAfterRows = [
   { y: 28, dt: '直飞航班', dd: '使用正向色凸显航班优势' },
   { y: 168, dt: '一次中转', dd: '展示中转城市 & 时间，便于快速获取重要航班信息' },
@@ -1108,7 +951,7 @@ function O2Strategy2() {
         <Strip x={614} y={32} w={1180} h={112} W={BW} H={BH} src={depBeforeTop} crop={depBeforeCropTop} opacity={0.4} alt="旧版航班卡片(暗化)" />
         <Strip x={614} y={154} w={1180} h={112} W={BW} H={BH} src={depBeforeBot} crop={depBeforeCropBot} opacity={0.4} alt="旧版航班卡片(暗化)" />
         <div
-          className="p1-spot-panel"
+          className="proj-spot-panel"
           style={{ left: pct(938, BW), top: 0, width: pct(390, BW), height: pct(298, BH) }}
         >
           <Strip x={-325} y={31} w={1180} h={112} W={390} H={298} src={depBeforeTop} crop={depBeforeCropTop} alt="旧版卡片中部放大:外显信息不足" />
@@ -1160,7 +1003,7 @@ function O2Strategy2() {
           />
         ))}
         <div
-          className="p1-spot-panel"
+          className="proj-spot-panel"
           style={{ left: pct(622, BW), top: 0, width: pct(440, BW), height: pct(616, AH) }}
         >
           {depStrips.map((src, i) => (
@@ -1187,22 +1030,6 @@ function O2Strategy2() {
 
 /* 目标2 · 策略03 卡片交互方式规范化(1:764)
    交互区标注合成图 = 整屏导出后 CSS 切片;文字/图例/分割线保持真实元素 */
-
-/* 整屏切片:(x,y) 为舞台内摆放位置,(sx,sy) 为 1440×1738 全图内的裁切原点 */
-function IntSlice({ x, y, w, h, W, H, sx, sy }) {
-  return (
-    <div
-      className="p1-crop"
-      style={{ left: pct(x, W), top: pct(y, H), width: pct(w, W), height: pct(h, H), borderRadius: 0 }}
-    >
-      <img
-        src={interactScreen}
-        alt="卡片交互区标注"
-        style={{ width: pct(1440, w), left: pct(-sx, w), top: pct(-sy, h) }}
-      />
-    </div>
-  )
-}
 
 function O2Strategy3() {
   const W = 1440
@@ -1236,11 +1063,11 @@ function O2Strategy3() {
             </span>
           </div>
         ))}
-        <span className="p1-pri-sq p1-pri-sq--sec p1-pri-sq--40" style={{ left: pct(659, W), top: pct(318, 444) }} />
-        <span className="p1-pri-label" style={{ left: pct(679, W), top: pct(316, 444) }}>点击</span>
-        <span className="p1-pri-sq p1-pri-sq--40" style={{ left: pct(659, W), top: pct(362, 444) }} />
-        <span className="p1-pri-label" style={{ left: pct(679, W), top: pct(360, 444) }}>悬停</span>
-        <IntSlice x={708} y={0} w={708} h={400} W={W} H={444} sx={708} sy={160} />
+        <span className="proj-pri-sq proj-pri-sq--sec proj-pri-sq--40" style={{ left: pct(659, W), top: pct(318, 444) }} />
+        <span className="proj-pri-label" style={{ left: pct(679, W), top: pct(316, 444) }}>点击</span>
+        <span className="proj-pri-sq proj-pri-sq--40" style={{ left: pct(659, W), top: pct(362, 444) }} />
+        <span className="proj-pri-label" style={{ left: pct(679, W), top: pct(360, 444) }}>悬停</span>
+        <IntSlice src={interactScreen} alt="卡片交互区标注" x={708} y={0} w={708} h={400} W={W} H={444} sx={708} sy={160} />
       </div>
       <hr className="proj-divider" />
 
@@ -1275,11 +1102,11 @@ function O2Strategy3() {
         <span className="p1-spot-dt" style={{ left: pct(378, W), top: pct(324, 520) }}>
           悬停：页面内辅助信息展示
         </span>
-        <span className="p1-pri-sq p1-pri-sq--sec p1-pri-sq--40" style={{ left: pct(659, W), top: pct(426, 520) }} />
-        <span className="p1-pri-label" style={{ left: pct(679, W), top: pct(424, 520) }}>点击</span>
-        <span className="p1-pri-sq p1-pri-sq--40" style={{ left: pct(659, W), top: pct(470, 520) }} />
-        <span className="p1-pri-label" style={{ left: pct(679, W), top: pct(468, 520) }}>悬停</span>
-        <IntSlice x={708} y={108} w={708} h={380} W={W} H={520} sx={708} sy={776} />
+        <span className="proj-pri-sq proj-pri-sq--sec proj-pri-sq--40" style={{ left: pct(659, W), top: pct(426, 520) }} />
+        <span className="proj-pri-label" style={{ left: pct(679, W), top: pct(424, 520) }}>点击</span>
+        <span className="proj-pri-sq proj-pri-sq--40" style={{ left: pct(659, W), top: pct(470, 520) }} />
+        <span className="proj-pri-label" style={{ left: pct(679, W), top: pct(468, 520) }}>悬停</span>
+        <IntSlice src={interactScreen} alt="卡片交互区标注" x={708} y={108} w={708} h={380} W={W} H={520} sx={708} sy={776} />
       </div>
       <hr className="p1-inset-rule" />
 
@@ -1288,7 +1115,7 @@ function O2Strategy3() {
         <p className="p1-int-note" style={{ left: pct(378, W), top: pct(32, 152), width: pct(274, W) }}>
           全部<strong className="em-s">点击</strong>入口具备清晰的指向性文案
         </p>
-        <IntSlice x={724} y={24} w={696} h={104} W={W} H={152} sx={724} sy={1212} />
+        <IntSlice src={interactScreen} alt="卡片交互区标注" x={724} y={24} w={696} h={104} W={W} H={152} sx={724} sy={1212} />
       </div>
       <hr className="p1-inset-rule" />
 
@@ -1297,7 +1124,7 @@ function O2Strategy3() {
         <p className="p1-int-note" style={{ left: pct(378, W), top: pct(32, 302), width: pct(274, W) }}>
           统一<strong className="em-a">悬浮</strong>提示浮层，保持交互一致性
         </p>
-        <IntSlice x={724} y={24} w={696} h={278} W={W} H={302} sx={724} sy={1364} />
+        <IntSlice src={interactScreen} alt="卡片交互区标注" x={724} y={24} w={696} h={278} W={W} H={302} sx={724} sy={1364} />
       </div>
       <div style={{ height: 96 }} />
     </section>
@@ -1309,28 +1136,6 @@ function O2Strategy3() {
 /* 旧卡片截图的两种裁切(同源) */
 const advCropTop = { h: '750%', l: '-14.07%', t: '-203.57%', w: '128.14%' }
 const advCropBot = { h: '750%', l: '-14.07%', t: '-307.14%', w: '128.14%' }
-
-/* 小药丸放大镜:内部两条同源条带 */
-function AdvPill({ x, y, w, h, W, H, innerX, innerTops, crops, imgs }) {
-  return (
-    <div className="p1-spot-panel" style={{ left: pct(x, W), top: pct(y, H), width: pct(w, W), height: pct(h, H) }}>
-      {innerTops.map((t, i) => (
-        <Strip
-          key={i}
-          x={innerX}
-          y={t}
-          w={1180}
-          h={crops ? 112 : 132}
-          W={w}
-          H={h}
-          src={imgs ? imgs[i] : advSrc}
-          crop={crops ? crops[i] : undefined}
-          radius={crops ? 8 : 0}
-        />
-      ))}
-    </div>
-  )
-}
 
 const advChipIcons = {
   gray: [icMealGray, icWifiGray, icWifi2Gray, icChargeGray],
@@ -1356,10 +1161,10 @@ function O3Strategy1() {
         </p>
         <Strip x={496} y={0} w={1180} h={112} W={W} H={BH} src={advSrc} crop={advCropTop} opacity={0.4} alt="旧版航班卡片(暗化)" />
         <Strip x={496} y={120} w={1180} h={112} W={W} H={BH} src={advSrc} crop={advCropBot} opacity={0.4} alt="旧版航班卡片(暗化)" />
-        <AdvPill x={598} y={76} w={110} h={32} W={W} H={BH} innerX={-103} innerTops={[-77, 43]} crops={[advCropTop, advCropBot]} />
-        <AdvPill x={598} y={198} w={110} h={32} W={W} H={BH} innerX={-103} innerTops={[-199, -79]} crops={[advCropTop, advCropBot]} />
-        <AdvPill x={1206} y={64} w={120} h={32} W={W} H={BH} innerX={-711} innerTops={[-65, 55]} crops={[advCropTop, advCropBot]} />
-        <AdvPill x={1206} y={184} w={120} h={32} W={W} H={BH} innerX={-711} innerTops={[-185, -65]} crops={[advCropTop, advCropBot]} />
+        <AdvPill src={advSrc} x={598} y={76} w={110} h={32} W={W} H={BH} innerX={-103} innerTops={[-77, 43]} crops={[advCropTop, advCropBot]} />
+        <AdvPill src={advSrc} x={598} y={198} w={110} h={32} W={W} H={BH} innerX={-103} innerTops={[-199, -79]} crops={[advCropTop, advCropBot]} />
+        <AdvPill src={advSrc} x={1206} y={64} w={120} h={32} W={W} H={BH} innerX={-711} innerTops={[-65, 55]} crops={[advCropTop, advCropBot]} />
+        <AdvPill src={advSrc} x={1206} y={184} w={120} h={32} W={W} H={BH} innerX={-711} innerTops={[-185, -65]} crops={[advCropTop, advCropBot]} />
         <hr className="p1-spot-row-rule" style={{ left: pct(496, W), top: pct(264, BH), width: pct(920, W) }} />
         <span className="p1-spot-dt" style={{ left: pct(496, W), top: pct(296, BH) }}>航班舒适度信息</span>
         <span className="p1-spot-dt" style={{ left: pct(968, W), top: pct(296, BH) }}>碳排放信息</span>
@@ -1529,16 +1334,8 @@ const cmpRows = [
   { label: '展开运价', before: cmpBefore5, after: cmpAfter5 },
 ]
 
-function Cursor({ left, top }) {
-  return (
-    <img
-      className="p1-ctn-hand"
-      src={cmpCursor}
-      alt=""
-      style={{ left, top, width: '1.34%', height: 'auto', aspectRatio: '7 / 9' }}
-    />
-  )
-}
+/* 本页的手型光标(绑定 p1 的光标资产) */
+const Cursor = (props) => <FigmaCursor src={cmpCursor} {...props} />
 
 function Comparison() {
   return (

@@ -99,21 +99,38 @@ const at = (x, y, w) => ({
 
 ## 4. 复用基元
 
-⚠️ **目前全部定义在 `src/pages/projects/Project1.jsx` 内部(1600+ 行)。开工 project 2 前先抽到共享模块**(如 `src/components/figma/`),否则会复制粘贴。
+全部在 **`src/components/figma/`**,统一从 `index.js` 导入:
 
-| 基元 | 用途 |
-|---|---|
-| `SectionHeading` | 区块大标题(描边空心字 + 上下分割线) |
-| `ObjectiveOpener` | 章节开屏(固定 532px 主色带),传参复用 |
-| `WfStage` | 线框示意图(百分比方块 + 标签) |
-| `PriStage` | 优先级色块图(主/辅色,20%/50% 透明度,虚线轴) |
-| `Strip` | 条带:整图或同源裁切,支持透明度/圆角 |
-| `AdvPill` | 药丸形放大镜面板 |
-| `IntSlice` | 整屏导出图的 CSS 切片 |
-| `FlowNode` / `FlowArrow` | 用户↔平台流程图 |
-| `Cursor` | 手型光标叠加 |
+```jsx
+import { makeAt, SectionHeading, ObjectiveOpener, WfStage, PriStage,
+         Strip, IntSlice, AdvPill, FlowNode, FlowArrow, Cursor }
+  from '../../components/figma/index.js'
+```
 
-共享版式在 `src/styles/project.css`:`.proj-*` 跨项目通用(`proj-heading` / `proj-kicker` / `proj-figure` / `proj-divider` / `proj-stagelabel` / `proj-strathead` / `proj-objopen` / `proj-stats` / `proj-hero`),`.pN-*` 为该项目专属。
+| 基元 | 用途 | 需传项目资产 |
+|---|---|---|
+| `SectionHeading` | 区块大标题(描边空心字 + 上下分割线) | — |
+| `ObjectiveOpener` | 章节开屏(**固定 532px 主色带**),传参复用 | — |
+| `WfStage` | 线框示意图(百分比方块 + 标签) | — |
+| `PriStage` | 优先级色块图(主/辅色,20%/50% 透明度,虚线轴) | 可选 `img` 项 |
+| `Strip` | 条带:整图或同源裁切,支持透明度/圆角 | `src` |
+| `AdvPill` | 药丸形放大镜面板 | `src` 或 `imgs` |
+| `IntSlice` | 整屏导出图的 CSS 切片 | `src`(+ `imgW`) |
+| `FlowNode` / `FlowArrow` | 用户↔平台流程图 | — |
+| `Cursor` | 手型光标叠加 | `src` |
+| `makeAt(W, H)` / `pct` | 舞台坐标换算 | — |
+
+> 需要项目资产的基元,建议在页面文件顶部包一层薄封装绑定资产,调用点就不必重复传:
+> ```jsx
+> const Cursor = (props) => <FigmaCursor src={cmpCursor} {...props} />
+> ```
+
+**样式命名约定**(`src/styles/project.css`):
+
+- `.proj-*` = **跨项目共享**,基元只输出这类类名。包括 `proj-heading` / `proj-kicker` / `proj-figure` / `proj-divider` / `proj-stagelabel` / `proj-strathead` / `proj-objopen` / `proj-stats` / `proj-hero` / `proj-crop` / `proj-pri-*` / `proj-spot-panel` / `proj-flow*` / `proj-cursor`
+- `.pN-*` = 该项目专属版式,只出现在对应页面文件里
+
+改 `.proj-*` 会影响所有项目页 —— 属**模式级改动**,按第 8 节的节奏立即修、并回归其他页。
 
 **放大镜模式**(`.p1-spot-panel`)是最常用手法:底层放暗化的完整截图,上面盖描边圆角面板,面板内用同源图全亮显示局部 —— 全 CSS,不需额外资产。
 

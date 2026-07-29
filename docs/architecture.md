@@ -91,7 +91,6 @@ Montserrat(西文标题)/ Inter(西文正文)/ 思源黑体(中文)。字号阶�
 ## 已知待办
 
 - **首页和 resume 页是临时/缺失的** —— 等设计稿产出后替换
-- **图形基元还锁在 `Project1.jsx` 里**(见 [figma-restoration.md](figma-restoration.md#复用图形基元))。project 2 开工前应抽到共享模块
 - 移动端适配未做
 - favicon 仍是 Vite 默认;各页 title/description 未分别设置
 - `src/assets/projects/p1/` 已 11MB(全是 PNG 截图),项目变多后需考虑压缩
