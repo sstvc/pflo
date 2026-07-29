@@ -936,6 +936,13 @@
   position: relative;
 }
 
+/* BEFORE 合成图:导出的 PNG 是 684×439,画板是 684×436 —— 锁定画板比例,
+   多出的 3px 裁掉,否则会把下方分割线整体顶低 */
+.p1-ctn-before .p1-ctn-composite {
+  aspect-ratio: 684 / 436;
+  overflow: hidden;
+}
+
 /* 合成图底图(明确用类名,避免压过手型等叠加元素的宽度) */
 .p1-ctn-composite .p1-ctn-base {
   display: block;
@@ -962,12 +969,13 @@
   aspect-ratio: 22 / 26; /* SVG 无固有尺寸,显式锁比例 */
 }
 
-/* AFTER 区:标准四列网格,内容占 2/3/4 列(第 1 列留给行标签的节奏) */
+/* AFTER 区:标准四列网格,内容占 2/3/4 列(第 1 列留给行标签的节奏)
+   顶部 64px:稿中标题底边 768 → 合成图顶 832 */
 .p1-ctn-after {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0 24px;
-  padding: 0 24px 104px;
+  padding: 64px 24px 104px;
   align-items: start;
 }
 
@@ -999,8 +1007,9 @@
   color: var(--color-body-2);
 }
 
+/* 32px:稿中说明底边 1380 → 弹窗图顶 1412 */
 .p1-ctn-popup {
-  margin-top: 56px;
+  margin-top: 32px;
 }
 
 /* ---- P1 · 目标2 策略01 核心流程屏 ---- */
