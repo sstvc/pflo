@@ -486,21 +486,33 @@
   color: var(--dark-text-body-1);
 }
 
-/* 第三列末尾的收尾线(设计稿如此) */
+/* 稿中分割线只在条目上方;末条文字之后直接是帧的 104px 留白 */
+.p1-obj-card li:last-child {
+  padding-bottom: 0;
+}
+
+/* 第三列末尾的收尾线(设计稿如此),距末条文字 32px */
 .p1-obj-card .p1-obj-tail {
   border: 0;
   border-top: 1px solid var(--dark-border-dark);
-  margin: 0;
+  margin: 32px 0 0;
 }
 
-/* ---- 通用 · Objective 章节开屏(主色横幅) ---- */
+/* ---- 通用 · Objective 章节开屏(主色横幅) ----
+   稿中主色带是**固定** 1440×532(策略条目钉在固定 y,间距 136),
+   不随策略条数伸缩 —— 目标3 只有 2 条策略,band 高度不变。
+   因此这里用定位舞台,不能做成内容撑高的流式布局。 */
 .proj-objopen {
-  display: grid;
-  grid-template-columns: 920fr 448fr;
-  gap: 0 24px;
-  padding: 64px 24px;
+  position: relative;
+  /* 用比例而非固定 px:页内其余舞台都按宽度缩放,固定 px 在有滚动条时会对不上 */
+  aspect-ratio: 1440 / 532;
   margin-bottom: 40px;
   background: var(--accent-primary);
+}
+
+.proj-objopen > * {
+  position: absolute;
+  margin: 0;
 }
 
 .proj-objopen__goal {
@@ -510,6 +522,7 @@
   line-height: var(--leading-h4);
   font-weight: 500;
   color: var(--dark-text-body-1);
+  white-space: nowrap;
 }
 
 .proj-objopen__goal strong {
@@ -518,18 +531,16 @@
 }
 
 .proj-objopen__title {
-  margin: 8px 0 0;
   font-family: var(--font-heading);
   font-weight: 900;
   font-size: var(--text-h1);
   line-height: var(--leading-h1);
   color: var(--dark-text-heading);
+  white-space: nowrap;
 }
 
 /* 英文副标题:稿中为 Title Case(Scalable Structure),不转大写 */
 .proj-objopen__sub {
-  margin-top: 8px;
-  max-width: 302px;
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: var(--text-h3);
@@ -537,32 +548,7 @@
   color: var(--dark-text-body-1);
 }
 
-.proj-objopen__right ul {
-  list-style: none;
-  margin: 24px 0 0;
-  padding: 0;
-}
-
-.proj-objopen__right li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 32px 0;
-}
-
-.proj-objopen__right li:first-child {
-  padding-top: 0;
-}
-
-.proj-objopen__right li:last-child {
-  padding-bottom: 0;
-}
-
-.proj-objopen__right li + li {
-  border-top: 1px solid var(--dark-border-light);
-}
-
-.proj-objopen__right li strong {
+.proj-objopen__num {
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: var(--text-h2);
@@ -570,11 +556,16 @@
   color: var(--dark-text-body-1);
 }
 
-.proj-objopen__right li span {
+.proj-objopen__item {
   font-size: var(--text-h4);
   line-height: var(--leading-h4);
   font-weight: 500;
   color: var(--dark-text-heading);
+}
+
+.proj-objopen__rule {
+  border: 0;
+  border-top: 1px solid var(--dark-border-light);
 }
 
 /* ---- 通用 · 策略小节标题(小序号 + 大标题) ---- */

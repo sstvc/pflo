@@ -115,30 +115,46 @@ function WfStage({ w, h, boxes = [], chips = [], className = '' }) {
   )
 }
 
-/* 通用 · Objective 章节开屏(主色横幅) */
+/* 通用 · Objective 章节开屏(主色横幅)
+   主色带固定 1440×532;坐标为带内相对值(稿中绝对 y 减去带顶 96)。
+   策略条目 y = 124 + i×136,分割线 y = 228 + (i−1)×136。 */
 function ObjectiveOpener({ heading, goal, cnTitle, enSub, strategies, nodeId }) {
+  const W = 1440
+  const H = 532
+  const at = (x, y, w) => ({
+    left: pct(x, W),
+    top: pct(y, H),
+    ...(w != null && { width: pct(w, W) }),
+  })
   return (
     <section data-node-id={nodeId}>
       <SectionHeading>{heading}</SectionHeading>
       <div className="proj-objopen">
-        <div className="proj-objopen__left">
-          <p className="proj-objopen__goal">
-            设计目标 <strong>{goal}</strong>
-          </p>
-          <h3 className="proj-objopen__title">{cnTitle}</h3>
-          <p className="proj-objopen__sub">{enSub}</p>
-        </div>
-        <div className="proj-objopen__right">
-          <p className="proj-kicker">设计策略</p>
-          <ul>
-            {strategies.map((s, i) => (
-              <li key={s}>
-                <strong>{String(i + 1).padStart(2, '0')}</strong>
-                <span>{s}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <p className="proj-objopen__goal" style={at(24, 64)}>
+          设计目标 <strong>{goal}</strong>
+        </p>
+        <h3 className="proj-objopen__title" style={at(24, 108)}>
+          {cnTitle}
+        </h3>
+        <p className="proj-objopen__sub" style={at(24, 200, 302)}>
+          {enSub}
+        </p>
+        <p className="proj-kicker" style={at(968, 64)}>
+          设计策略
+        </p>
+        {strategies.map((s, i) => (
+          <strong className="proj-objopen__num" key={`n${s}`} style={at(968, 124 + i * 136)}>
+            {String(i + 1).padStart(2, '0')}
+          </strong>
+        ))}
+        {strategies.map((s, i) => (
+          <span className="proj-objopen__item" key={`t${s}`} style={at(1048, 132 + i * 136, 368)}>
+            {s}
+          </span>
+        ))}
+        {strategies.slice(1).map((s, i) => (
+          <hr className="proj-objopen__rule" key={`r${s}`} style={at(968, 228 + i * 136, 448)} />
+        ))}
       </div>
     </section>
   )
@@ -635,6 +651,7 @@ function Strategy1() {
         </dl>
       </div>
       <hr className="proj-divider" />
+      <div style={{ height: 40 }} />
     </section>
   )
 }
@@ -762,7 +779,8 @@ function Strategy2() {
           />
         </div>
       </div>
-      <div className="p1-after-notes">
+      {/* 32px:稿中 BEFORE 色块图底边 536 → Line 47 位于 568 */}
+      <div className="p1-after-notes" style={{ marginTop: 32 }}>
         <hr />
         <dl>
           <dt>问题 1</dt>
@@ -793,7 +811,9 @@ function Strategy2() {
           />
         </div>
       </div>
-      <div className="p1-after-notes">
+      {/* 32px:稿中 AFTER 色块图底边 1386 → Line 48 位于 1418
+          尾部 103px:稿中末图底边 1712.9 → Line 56 位于 1816 */}
+      <div className="p1-after-notes" style={{ marginTop: 32, paddingBottom: 103 }}>
         <hr />
         <dl>
           <dt>设计策略 1</dt>
@@ -812,6 +832,7 @@ function Strategy2() {
         </dl>
       </div>
       <hr className="proj-divider" />
+      <div style={{ height: 40 }} />
     </section>
   )
 }
@@ -1024,6 +1045,7 @@ function O2Strategy1() {
         </dl>
       </div>
       <hr className="proj-divider" />
+      <div style={{ height: 40 }} />
     </section>
   )
 }
@@ -1158,6 +1180,7 @@ function O2Strategy2() {
         </div>
       </div>
       <hr className="proj-divider" style={{ marginTop: 104 }} />
+      <div style={{ height: 40 }} />
     </section>
   )
 }
