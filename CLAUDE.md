@@ -70,6 +70,6 @@ const D = (px) => Math.round(px / scale);
 
 | 文档 | 内容 |
 |---|---|
-| **[.claude/skills/figma-page-restore](.claude/skills/figma-page-restore/SKILL.md)** | **还原新 project 页面前先读这个** —— 完整流程、坐标舞台技术、12 类已知坑、验证脚本 |
+| **[.claude/skills/figma-page-restore](.claude/skills/figma-page-restore/SKILL.md)** | **还原新 project 页面的操作手册** —— 流程、坐标舞台技术、基元用法、12 类已知坑、验证脚本、完成标准 |
 | [docs/architecture.md](docs/architecture.md) | 路由、令牌与主题机制、字体策略、部署 |
-| [docs/figma-restoration.md](docs/figma-restoration.md) | 设计稿画板对照、还原背景说明 |
+| [docs/figma-restoration.md](docs/figma-restoration.md) | 背景速查:设计稿 fileKey、画板对照、代码位置 |

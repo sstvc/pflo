@@ -132,7 +132,7 @@ import { makeAt, SectionHeading, ObjectiveOpener, WfStage, PriStage,
 
 改 `.proj-*` 会影响所有项目页 —— 属**模式级改动**,按第 8 节的节奏立即修、并回归其他页。
 
-**放大镜模式**(`.p1-spot-panel`)是最常用手法:底层放暗化的完整截图,上面盖描边圆角面板,面板内用同源图全亮显示局部 —— 全 CSS,不需额外资产。
+**放大镜模式**(`AdvPill` + `.proj-spot-panel`)是最常用手法:底层放暗化的完整截图,上面盖描边圆角面板,面板内用同源图全亮显示局部 —— 全 CSS,不需额外资产。
 
 ---
 

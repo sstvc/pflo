@@ -54,5 +54,6 @@ src/
 ## 文档
 
 - [docs/architecture.md](docs/architecture.md) —— 架构:路由、设计令牌与主题机制、字体策略、部署细节
-- [docs/figma-restoration.md](docs/figma-restoration.md) —— Figma 还原工作流、复用图形基元、已知坑
+- [docs/figma-restoration.md](docs/figma-restoration.md) —— 背景速查:设计稿 fileKey、画板对照、代码位置
+- [.claude/skills/figma-page-restore](.claude/skills/figma-page-restore/SKILL.md) —— **还原新页面的操作手册**(流程、坐标舞台技术、复用基元、已知坑、验证脚本)
 - [CLAUDE.md](CLAUDE.md) —— 给 AI 协作者的项目约定
