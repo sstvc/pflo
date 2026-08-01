@@ -6,6 +6,7 @@ import NotFound from './NotFound.jsx'
 /* slug → 页面组件;还原完成一个就在这里挂一个(按路由代码分割) */
 const pages = {
   'project-1': lazy(() => import('./projects/Project1.jsx')),
+  'project-2': lazy(() => import('./projects/Project2.jsx')),
 }
 
 /**

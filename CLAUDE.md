@@ -51,7 +51,8 @@ npm run lint     # 提交前必跑
 **不靠肉眼估**,用 DOM 实测比对设计稿坐标:
 
 ```js
-const scale = document.documentElement.scrollWidth / 1440;  // 1440 视口下约 0.9896
+// 基准用容器实测宽,不要用 scrollWidth(悬浮滚动条会让它漂移)
+const scale = document.querySelector('main.page--project').getBoundingClientRect().width / 1440;
 const D = (px) => Math.round(px / scale);
 ```
 

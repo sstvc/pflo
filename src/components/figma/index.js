@@ -5,6 +5,7 @@
  * 配套样式在 src/styles/project.css 的 .proj-* 段。
  */
 export { pct, makeAt, stageStyle } from './coords.js'
+export { default as ProjectHero } from './ProjectHero.jsx'
 export { default as SectionHeading } from './SectionHeading.jsx'
 export { default as ObjectiveOpener } from './ObjectiveOpener.jsx'
 export { default as WfStage } from './WfStage.jsx'

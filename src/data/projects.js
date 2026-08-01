@@ -13,7 +13,13 @@ export const projects = [
     accent: 1,
     figmaNodeId: '1:161',
   },
-  { slug: 'project-2', title: 'Project 2', accent: 2, figmaNodeId: '1:1128' },
+  {
+    slug: 'project-2',
+    title: 'Travel Request Launch for Overseas Site',
+    titleZh: '出差申请单功能海外站落地',
+    accent: 2,
+    figmaNodeId: '4:1125',
+  },
   { slug: 'project-3', title: 'Project 3', accent: 3, figmaNodeId: '167:501' },
   { slug: 'project-4', title: 'Project 4', accent: 4, figmaNodeId: '167:998' },
 ]

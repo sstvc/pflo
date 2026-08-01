@@ -23,7 +23,8 @@
 }
 
 .proj-hero__title-en {
-  margin: 64px 24px 0;
+  /* 79px:稿中顶栏底边 57 → 英文主标题顶 136 */
+  margin: 79px 24px 0;
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 120px;

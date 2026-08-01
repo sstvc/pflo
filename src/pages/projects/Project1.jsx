@@ -59,6 +59,7 @@ import endTitle from '../../assets/projects/p1/end-title.svg'
 
 import {
   pct,
+  ProjectHero,
   SectionHeading,
   ObjectiveOpener,
   WfStage,
@@ -79,37 +80,20 @@ import {
  */
 
 /* 104 · 头图(1:162) */
-function Hero() {
-  return (
-    <section className="proj-hero" data-node-id="1:162">
-      <header className="proj-hero__top">
-        <span>Project 1</span>
-      </header>
-      <h1 className="proj-hero__title-en">Flight List Page Redesign</h1>
-      <p className="proj-hero__title-cn">机票列表页改版项目</p>
-      <div className="proj-hero__band">
-        <dl className="proj-hero__meta">
-          <div>
-            <dt>Timeline</dt>
-            <dd>2025.01 - 2025.06</dd>
-          </div>
-          <div>
-            <dt>Platform</dt>
-            <dd>PC</dd>
-          </div>
-          <div>
-            <dt>Category</dt>
-            <dd>C端页面改版</dd>
-          </div>
-          <div>
-            <dt>Tool</dt>
-            <dd>Sketch</dd>
-          </div>
-        </dl>
-      </div>
-    </section>
-  )
-}
+const Hero = () => (
+  <ProjectHero
+    nodeId="1:162"
+    label="Project 1"
+    enTitle="Flight List Page Redesign"
+    cnTitle="机票列表页改版项目"
+    meta={[
+      ['Timeline', '2025.01 - 2025.06'],
+      ['Platform', 'PC'],
+      ['Category', 'C端页面改版'],
+      ['Tool', 'Sketch'],
+    ]}
+  />
+)
 
 /* 背景(1:182):项目背景 + 现状截图 + 三项统计 */
 function Background() {

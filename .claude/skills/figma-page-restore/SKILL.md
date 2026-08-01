@@ -184,9 +184,13 @@ import { makeAt, SectionHeading, ObjectiveOpener, WfStage, PriStage,
 ### 6.1 通用换算
 
 ```js
-const scale = document.documentElement.scrollWidth / 1440;  // 带滚动条时约 0.9896
+// 基准取「页面容器实测宽 / 1440」—— 不要用 scrollWidth:
+// macOS 悬浮滚动条下它时而 1440 时而 1425,基准一漂,全部误差跟着错判。
+const scale = document.querySelector('main.page--project').getBoundingClientRect().width / 1440;
 const D = px => Math.round((px / scale) * 10) / 10;          // 渲染 px → 设计 px
 ```
+
+> 量之前先 `await document.fonts.ready` 并等一帧 —— 字体未就绪时行高不准,曾据此读到头图 692(实为 812)。
 
 ### 6.2 竖向节奏体检(收尾必跑)
 
