@@ -1,6 +1,6 @@
 import '../../styles/project.css'
 
-import { ProjectHero } from '../../components/figma/index.js'
+import { ObjectiveOpener, ProjectHero } from '../../components/figma/index.js'
 
 /**
  * Project 2 — Travel Request Launch for Overseas Site / 出差申请单功能海外站落地
@@ -38,10 +38,38 @@ function Project2() {
   return (
     <>
       <Hero />
+
       {/* TODO: Frame 2147237919(4:1144)—— D-72 / D-73 / D-58 / D-71 */}
-      {/* TODO: Frame 2147237922(4:1487)—— 开屏 + D-59 / D-62 / D-61 */}
-      {/* TODO: Frame 2147237918(4:1684)—— 开屏 + D-63 / D-64 */}
-      {/* TODO: Frame 2147237925(4:1883)—— 开屏 + D-66 / D-67 */}
+
+      <ObjectiveOpener
+        nodeId="4:1488"
+        heading="OBJECTIVE NO.1"
+        cnTitle="使用体验优化"
+        enSub="Usability Enhancement"
+        strategies={['拆解表单，简化复杂任务', '新增草稿功能，解决用户痛点', '增加提示，提供即时帮助']}
+      />
+      {/* TODO: D-59(4:1507)/ D-62(4:1585)/ D-61(4:1645) */}
+
+      <ObjectiveOpener
+        nodeId="4:1685"
+        heading="OBJECTIVE NO.2"
+        cnTitle="多语言与本地化适配"
+        enSub="Localization Adaptation"
+        strategies={['按多语言要求调整字段展示', '制定特殊场景字段展示规则']}
+      />
+      {/* TODO: D-63(4:1701)/ D-64(4:1772) */}
+
+      {/* ⚠️ 稿中本屏第 2 条策略比另两屏低 8px(y=364 vs 356),疑似手误;
+             这里按统一节奏渲染,待作者确认 */}
+      <ObjectiveOpener
+        nodeId="4:1884"
+        heading="OBJECTIVE NO.3"
+        cnTitle="高效推进与体验保障"
+        enSub="Sustainable Experience"
+        strategies={['基于固有逻辑，通过前端展示优化体验', 'PC & App 分批上线']}
+      />
+      {/* TODO: D-66(4:1900)/ D-67(4:1963) */}
+
       {/* TODO: Frame 2147237933(4:2000)—— D-77 / 2026 收尾 */}
     </>
   )

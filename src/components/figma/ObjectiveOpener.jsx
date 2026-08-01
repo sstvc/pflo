@@ -19,8 +19,9 @@ export default function ObjectiveOpener({ heading, goal, cnTitle, enSub, strateg
     <section data-node-id={nodeId}>
       <SectionHeading>{heading}</SectionHeading>
       <div className="proj-objopen">
+        {/* goal 可选:project 1 是「设计目标 提升拓展性」,project 2 只有标签 */}
         <p className="proj-objopen__goal" style={at(24, 64)}>
-          设计目标 <strong>{goal}</strong>
+          设计目标{goal && <strong>{goal}</strong>}
         </p>
         <h3 className="proj-objopen__title" style={at(24, 108)}>
           {cnTitle}

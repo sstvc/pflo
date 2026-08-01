@@ -198,11 +198,11 @@ const D = px => Math.round((px / scale) * 10) / 10;          // 渲染 px → �
 
 ```js
 (() => {
-  const scale = document.documentElement.scrollWidth / 1440;
+  const main = document.querySelector('main.page--project');
+  const scale = main.getBoundingClientRect().width / 1440;
   const D = px => Math.round((px / scale) * 10) / 10;
   const designH = [/* 各子屏画板高,按顺序 */];
   const secs = [...document.querySelectorAll('main.page--project section')];
-  const main = document.querySelector('main.page--project');
   const starts = secs.map(s => {
     const lead = s.querySelector(':scope > .proj-heading') ? 24 : 0;  // 塌陷出去的上边距
     return s.getBoundingClientRect().top + scrollY - lead * scale;
