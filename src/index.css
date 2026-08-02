@@ -25,9 +25,13 @@
   --text-body-2: 14px; --leading-body-2: 20px;
 
   /* ---- Letter spacing ----
-     规范中仅两个样式带字间距,其余全部为 0(即 normal),不要另加。 */
-  --tracking-section-heading: 4.8px;  /* EN/H2 Bold      8% × 60px  */
+     规范里 letterSpacing 的单位是百分比。带字间距的样式只有下面这些,
+     其余(Body / H2 / H3 / H4 各档)一律 0 —— 不要另加。 */
+  --tracking-section-heading: 4.8px;  /* EN/H2 Bold        8% × 60px  */
   --tracking-project-title: -4.8px;   /* EN/Project Title -4% × 120px */
+  --tracking-display-xl: -3.6px;      /* EN/Display XL    -2% × 180px */
+  --tracking-h1: -1.44px;             /* CJK/H1 · EN/H1   -2% × 72px  */
+  --tracking-label: 0.28px;           /* CJK/Label(Strong) 2% × 14px  */
 
   /* ---- Brand ---- */
   --brand-primary: #7f7ebc;
@@ -49,6 +53,10 @@
   --dark-text-body-2: #aaaaaa;
   --dark-border-light: #dadce0;   /* 浅分割线 */
   --dark-border-dark: #888a8e;    /* 深分割线 */
+  --dark-white: #ffffff;
+  --dark-white-80: rgb(255 255 255 / 0.8);
+  --dark-text-heading-50: rgb(246 250 253 / 0.5);
+  --dark-border-light-20: rgb(218 220 224 / 0.2);
 
   /* ---- 项目主题色(各项目独立使用,不跨项目混用) ---- */
   --p1-primary: #4a5d8d; --p1-secondary: #8d4a64;

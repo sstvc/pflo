@@ -8,9 +8,9 @@
  * meta 按稿中列序传入(Timeline / Platform / Category / Tool),
  * 不同项目的列名可能不同(project 2 用的是 Tools 复数),照抄源文字。
  */
-export default function ProjectHero({ label, enTitle, cnTitle, meta, nodeId }) {
+export default function ProjectHero({ label, enTitle, cnTitle, meta, nodeId, screen }) {
   return (
-    <section className="proj-hero" data-node-id={nodeId}>
+    <section className="proj-hero" data-node-id={nodeId} data-screen={screen}>
       <header className="proj-hero__top">
         <span>{label}</span>
       </header>

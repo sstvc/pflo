@@ -14,9 +14,9 @@ const at = makeAt(W, H)
  *
  * 坐标为带内相对值(稿中绝对 y 减去带顶 96)。
  */
-export default function ObjectiveOpener({ heading, goal, cnTitle, enSub, strategies, nodeId }) {
+export default function ObjectiveOpener({ heading, goal, cnTitle, enSub, strategies, nodeId, screen }) {
   return (
-    <section data-node-id={nodeId}>
+    <section data-node-id={nodeId} data-screen={screen}>
       <SectionHeading>{heading}</SectionHeading>
       <div className="proj-objopen">
         {/* goal 可选:project 1 是「设计目标 提升拓展性」,project 2 只有标签 */}

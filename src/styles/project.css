@@ -38,6 +38,7 @@
   font-family: var(--font-heading);
   font-weight: 900;
   font-size: var(--text-h1);
+  letter-spacing: var(--tracking-h1);
   line-height: var(--leading-h1);
   color: var(--color-heading);
 }
@@ -250,6 +251,7 @@
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: var(--text-h1);
+  letter-spacing: var(--tracking-h1);
   line-height: var(--leading-h1);
   color: var(--color-heading);
 }
@@ -306,6 +308,7 @@
 
 .proj-flow__node span {
   font-size: var(--text-body-2);
+  letter-spacing: var(--tracking-label);
   line-height: var(--leading-body-2);
   font-weight: 500;
   color: var(--color-body-2);
@@ -454,6 +457,7 @@
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 180px;
+  letter-spacing: var(--tracking-display-xl);
   line-height: 180px;
   color: var(--color-bg-1);
   -webkit-text-stroke: 2px var(--accent-primary);
@@ -535,6 +539,7 @@
   font-family: var(--font-heading);
   font-weight: 900;
   font-size: var(--text-h1);
+  letter-spacing: var(--tracking-h1);
   line-height: var(--leading-h1);
   color: var(--dark-text-heading);
   white-space: nowrap;
@@ -644,6 +649,7 @@
   border-radius: 4px;
   font-weight: 900;
   font-size: var(--text-body-2);
+  letter-spacing: var(--tracking-label);
   line-height: var(--leading-body-2);
   color: var(--accent-primary);
   white-space: nowrap;
@@ -840,6 +846,7 @@
 .proj-pri-label {
   position: absolute;
   font-size: var(--text-body-2);
+  letter-spacing: var(--tracking-label);
   line-height: var(--leading-body-2);
   font-weight: 500;
   color: var(--color-body-2);
@@ -945,6 +952,7 @@
 .p1-ctn-overlay {
   position: absolute;
   font-size: var(--text-body-2);
+  letter-spacing: var(--tracking-label);
   line-height: var(--leading-body-2);
   font-weight: 500;
   color: var(--dark-text-heading);
@@ -1240,6 +1248,52 @@
   padding: 104px 24px;
 }
 
+/* ============================================================
+   Project 2 专属
+   ============================================================ */
+
+/* 定位舞台(区块标题在舞台外,故舞台高 = 画板高 − 标题块) */
+.p2-stage {
+  position: relative;
+}
+
+.p2-stage > * {
+  position: absolute;
+  margin: 0;
+}
+
+/* 正文两档:主文字 / 次要说明 */
+.p2-body {
+  color: var(--color-heading);
+}
+
+.p2-body--dim {
+  color: var(--color-body-2);
+}
+
+/* 标签 chip(白 80% 底 + 项目主色字) */
+.p2-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.p2-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  border-radius: 4px;
+  background: var(--dark-white-80);
+  font-size: var(--text-body-2);
+  line-height: var(--leading-body-2);
+  letter-spacing: var(--tracking-label);
+  font-weight: 900;
+  color: var(--accent-primary);
+  text-align: center;
+  white-space: nowrap;
+}
+
 /* Product Impact 纯文字舞台 */
 .p1-impact {
   position: relative;
@@ -1261,6 +1315,7 @@
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: var(--text-h1);
+  letter-spacing: var(--tracking-h1);
   line-height: var(--leading-h1);
   color: var(--color-heading);
 }
@@ -1288,12 +1343,14 @@
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: var(--text-h1);
+  letter-spacing: var(--tracking-h1);
   line-height: var(--leading-h1);
   color: var(--accent-primary);
 }
 
 .p1-impact-src {
   font-size: var(--text-body-2);
+  letter-spacing: var(--tracking-label);
   line-height: var(--leading-body-2);
   font-weight: 500;
   color: var(--color-body-2);
