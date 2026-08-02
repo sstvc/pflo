@@ -1,6 +1,16 @@
+import { Fragment } from 'react'
+
 import '../../styles/project.css'
 
-import { makeAt, ObjectiveOpener, ProjectHero, SectionHeading } from '../../components/figma/index.js'
+import {
+  IntSlice,
+  makeAt,
+  ObjectiveOpener,
+  ProjectHero,
+  SectionHeading,
+} from '../../components/figma/index.js'
+
+import d73Screen from '../../assets/projects/p2/d73-screen.png'
 
 /**
  * Project 2 — Travel Request Launch for Overseas Site / 出差申请单功能海外站落地
@@ -76,13 +86,114 @@ function Background() {
   )
 }
 
+/* D-73 · INTRODUCTION(高 2250;标题块 96 在舞台外 → 舞台 2154)
+   流程图(y 560–1600)与页面截图行(y 1884–2090)是整屏导出的切片:
+   前者约 40 个碎元素含多个旋转箭头,后者是纯位图;其余全部真实文字。 */
+const introAt = makeAt(1440, 2154)
+const S = (y) => y - 96 // 稿中绝对 y → 舞台内 y
+
+const pageCards = [
+  ['01', '申请页', '填写信息，申请单据', 24],
+  ['02', '列表页', '管理全部出差申请单', 378],
+  ['03', '详情页', '查看出差申请单详情', 732],
+  ['04', '出差申请选择弹窗', '预订时选择出差申请单', 1086],
+]
+
+function Introduction() {
+  return (
+    <section data-screen="D-73">
+      <SectionHeading>INTRODUCTION</SectionHeading>
+      <div className="p2-stage" style={{ aspectRatio: `${1440} / ${2154}` }}>
+        <p className="proj-kicker" style={introAt(24, S(160))}>
+          核心功能价值
+        </p>
+        <p className="p2-statement" style={introAt(614, S(160), 802)}>
+          提前完成审批，省去行程预订流程的审批环节，满足时间敏感性的订单要求
+        </p>
+        <hr className="p2-rule" style={introAt(24, S(312), 1392)} />
+
+        <p className="proj-kicker" style={introAt(24, S(376))}>
+          使用/不使用出差申请单的预订审批流程：
+        </p>
+
+        {/* 流程图列头:用强调色,故保持真实文字 */}
+        <p className="p2-flowhead p2-flowhead--primary" style={introAt(354, S(444))}>
+          出差申请
+        </p>
+        <p className="p2-flowhead" style={introAt(685, S(444))}>
+          审批
+        </p>
+        <p className="p2-flowhead p2-flowhead--secondary" style={introAt(968, S(444))}>
+          行程预订
+        </p>
+        <p className="p2-body p2-body--dim" style={introAt(354, S(524))}>
+          差旅管理者、出行人本人...
+        </p>
+        <p className="p2-body p2-body--dim" style={introAt(685, S(524))}>
+          审批主管、上级领导...
+        </p>
+        <p className="p2-body p2-body--dim" style={introAt(968, S(524))}>
+          差旅预订专员、出行人本人...
+        </p>
+
+        {/* 流程图切片 */}
+        <IntSlice
+          src={d73Screen}
+          alt="使用/不使用出差申请单的预订审批流程图"
+          x={0}
+          y={S(560)}
+          w={1440}
+          h={1040}
+          W={1440}
+          H={2154}
+          sx={0}
+          sy={560}
+        />
+
+        <hr className="p2-rule" style={introAt(24, S(1678), 1392)} />
+        <p className="proj-kicker" style={introAt(24, S(1710))}>
+          主要页面
+        </p>
+
+        {pageCards.map(([num, title, caption, x]) => (
+          <Fragment key={num}>
+            <p className="p2-cardnum" style={introAt(x, S(1786))}>
+              {num}
+            </p>
+            <p className="proj-kicker" style={introAt(x + 65, S(1816))}>
+              {title}
+            </p>
+            <p className="p2-body" style={introAt(x, S(2122), 330)}>
+              {caption}
+            </p>
+          </Fragment>
+        ))}
+        {/* 四张页面截图(纯位图,同源切片) */}
+        <IntSlice
+          src={d73Screen}
+          alt="出差申请单主要页面"
+          x={0}
+          y={S(1884)}
+          w={1440}
+          h={206}
+          W={1440}
+          H={2154}
+          sx={0}
+          sy={1884}
+        />
+      </div>
+    </section>
+  )
+}
+
 function Project2() {
   return (
     <>
       <Hero />
       <Background />
+      <Introduction />
 
-      {/* TODO: D-73 2250 / D-58 1685 / D-71 736 */}
+      {/* TODO: D-58 1685 / D-71 736 */}
 
       <ObjectiveOpener
         screen="D-37"

@@ -1278,6 +1278,47 @@
   gap: 8px;
 }
 
+/* 舞台内的分割线(绝对定位,故不能用 .proj-divider 的 margin 写法) */
+.p2-rule {
+  border: 0;
+  border-top: 1px solid var(--dark-border-dark);
+}
+
+/* 流程图列头(60px 中文,分别用主色/深灰/辅助色) */
+.p2-flowhead {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-h2);
+  line-height: var(--leading-h2);
+  color: var(--dark-border-dark);
+  white-space: nowrap;
+}
+
+.p2-flowhead--primary {
+  color: var(--accent-primary);
+}
+
+.p2-flowhead--secondary {
+  color: var(--accent-secondary);
+}
+
+/* 大号论述句(36px) */
+.p2-statement {
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+/* 页面卡序号(60px Montserrat) */
+.p2-cardnum {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-h2);
+  line-height: var(--leading-h2);
+  color: var(--color-heading);
+}
+
 .p2-tag {
   display: flex;
   align-items: center;
