@@ -1335,6 +1335,137 @@
   white-space: nowrap;
 }
 
+/* 小节内的次级标题(24px Medium,比 .proj-kicker 亮一档) */
+.p2-subhead {
+  font-size: var(--text-h4);
+  line-height: var(--leading-h4);
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+/* 语言 chip:与 .p2-tag 同款,但稿中左右内边距是 4 而非 8,
+   且以中心点定位(稿中带 -translate-x-1/2) */
+.p2-pill {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+  padding: 0 4px;
+  border-radius: 4px;
+  background: var(--dark-white-80);
+  font-size: var(--text-body-2);
+  line-height: var(--leading-body-2);
+  letter-spacing: var(--tracking-label);
+  font-weight: 900;
+  color: var(--accent-primary);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 次要语言(稿中 opacity 70%) */
+.p2-pill--faded {
+  opacity: 0.7;
+}
+
+/* 虚线分组框 */
+.p2-dashbox {
+  box-sizing: border-box;
+  border: 2px dashed var(--accent-primary);
+  border-radius: 8px;
+}
+
+/* ---- 霍夫斯泰德文化维度图(684×168) ---- */
+.p2-hof {
+  position: relative;
+}
+
+.p2-hof > * {
+  position: absolute;
+  margin: 0;
+}
+
+.p2-hof img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.p2-hof-label {
+  font-size: var(--text-body-2);
+  line-height: var(--leading-body-2);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  color: var(--dark-text-body-2);
+  text-align: center;
+}
+
+/* 图例。系列色是图表数据色,只此一处使用,与导出的 SVG 填充一一对应,
+   所以就近声明,不进设计令牌。首项复用项目辅助色。 */
+.p2-legend {
+  --series-jp: #2f7da1;
+  --series-kr: #53a7c5;
+  --series-th: #a7c97a;
+  --series-my: #6b8e5e;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.p2-legend > li {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-body-2);
+  line-height: var(--leading-body-2);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  color: var(--dark-text-body-2);
+  white-space: nowrap;
+}
+
+.p2-legend i {
+  width: 8px;
+  height: 8px;
+  background: var(--series, var(--accent-secondary));
+}
+
+/* ---- 业务熟练度:两个等高容器 + 内部色块 ---- */
+.p2-gauge {
+  box-sizing: border-box;
+  border: 1px solid var(--dark-border-light);
+  border-radius: 8px;
+}
+
+.p2-gauge-fill {
+  background: var(--accent-primary);
+  border-radius: 6px;
+}
+
+/* ---- 使用平台:左右拼接的占比条 ---- */
+.p2-prog {
+  background: var(--accent-primary);
+  border-radius: 8px 0 0 8px;
+}
+
+.p2-prog--sec {
+  background: var(--accent-secondary);
+  border-radius: 0 8px 8px 0;
+}
+
+.p2-pctnum {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  color: var(--color-heading);
+  white-space: nowrap;
+}
+
 /* Product Impact 纯文字舞台 */
 .p1-impact {
   position: relative;

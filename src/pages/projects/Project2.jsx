@@ -6,11 +6,20 @@ import {
   IntSlice,
   makeAt,
   ObjectiveOpener,
+  pct,
   ProjectHero,
   SectionHeading,
 } from '../../components/figma/index.js'
 
 import d73Screen from '../../assets/projects/p2/d73-screen.png'
+import hof1 from '../../assets/projects/p2/d58-hof-1.svg'
+import hof2 from '../../assets/projects/p2/d58-hof-2.svg'
+import hof3 from '../../assets/projects/p2/d58-hof-3.svg'
+import hof4 from '../../assets/projects/p2/d58-hof-4.svg'
+import hof5 from '../../assets/projects/p2/d58-hof-5.svg'
+import hof6 from '../../assets/projects/p2/d58-hof-6.svg'
+import iconPc from '../../assets/projects/p2/d58-icon-pc.svg'
+import iconPhone from '../../assets/projects/p2/d58-icon-phone.svg'
 
 /**
  * Project 2 — Travel Request Launch for Overseas Site / 出差申请单功能海外站落地
@@ -186,14 +195,201 @@ function Introduction() {
   )
 }
 
+/* D-58 · DESIGN PRINCIPLES(高 1685;标题块 96 在舞台外 → 舞台 1589)
+   一屏两段:「差异因素」中国站/海外站三组对照,「共性基础」收在最后。
+   除霍夫斯泰德柱群与两枚设备图标是导出的 SVG,其余全部是真实文字/CSS。 */
+const prAt = makeAt(1440, 1589)
+const P = (y) => y - 96 // 稿中绝对 y → 舞台内 y
+
+/* 文化维度图:6 组柱子(导出 SVG)+ 6 个真实文字标签,自成一个 684×168 小舞台 */
+const hofAt = makeAt(684, 168)
+const hofBars = [
+  [hof1, '权力距离', 0, 0, 94, 140],
+  [hof2, '个人主义', 118, 75.6, 94, 64.4],
+  [hof3, '男性化', 236, 7, 94, 133],
+  [hof4, '不确定性规避', 354, 11.2, 94, 128.8],
+  [hof5, '长期导向', 472, 0, 94, 140],
+  [hof6, '放任主义', 590, 58.8, 94, 79.8],
+]
+const hofLegend = [
+  ['中国', 'var(--accent-secondary)'],
+  ['日本', 'var(--series-jp)'],
+  ['韩国', 'var(--series-kr)'],
+  ['泰国', 'var(--series-th)'],
+  ['马来西亚', 'var(--series-my)'],
+]
+
+/* 语言 chip:[文案, 中心 x, 顶 y, 框宽(null=按内容), 是否 70% 透明] */
+const langPills = [
+  ['简体中文', 720.5, 876, 65, false],
+  ['English', 1209, 848, 62, false],
+  ['Tiếng Việt', 1293, 848, 82, true],
+  ['한국어', 1067, 848, 48, true],
+  ['ภาษาไทย', 1134.5, 848, null, true],
+  ['简体中文', 1229.5, 876, 65, false],
+  ['Deutsch', 1088, 876, 68, true],
+  ['日本語', 1159.5, 876, 51, false],
+  ['Bahasa Melayu', 1333, 876, 118, true],
+  ['Français', 1287, 904, 70, true],
+  ['Nederlands', 1038.5, 904, 93, true],
+  ['Español', 1130, 904, 66, true],
+  ['繁體中文', 1207.5, 904, 65, false],
+]
+
+/* 三组「中国站 / 海外站」对照:分割线 y、小标题 y、标题 */
+const compareRows = [
+  [704, 736, '界面语言'],
+  [980, 1012, '业务熟练度'],
+  [1164, 1196, '使用平台'],
+]
+
+function DesignPrinciples() {
+  return (
+    <section data-screen="D-58">
+      <SectionHeading>DESIGN PRINCIPLES</SectionHeading>
+      <div className="p2-stage" style={{ aspectRatio: `${1440} / ${1589}` }}>
+        <p className="proj-kicker" style={prAt(24, P(160))}>
+          设计要点
+        </p>
+        <p className="p2-body" style={prAt(496, P(160), 448)}>
+          将中国站功能国际化并非简单的文本翻译，亦非重新发明轮子。我从中国站和海外站的“差异因素”与“共性基础”出发明确了设计方向
+        </p>
+        <hr className="p2-rule" style={prAt(24, P(296), 1392)} />
+
+        {/* ---- 差异因素 ---- */}
+        <p className="proj-kicker" style={prAt(24, P(328))}>
+          差异因素
+        </p>
+        <p className="p2-subhead" style={prAt(260, P(328))}>
+          用户背景
+        </p>
+        <p className="p2-body" style={prAt(496, P(328), 448)}>
+          不同文化背景的用户有不同的特点，通过调研挖掘中国用户与海外用户的代表性差异
+        </p>
+        <hr className="p2-rule" style={prAt(496, P(408), 920)} />
+        <p className="p2-body" style={prAt(496, P(440))}>
+          调研案例：霍夫斯泰德文化理论模型
+        </p>
+
+        <div className="p2-hof" style={prAt(496, P(496), 684, 168)}>
+          {hofBars.map(([src, label, x, y, w, h]) => (
+            <Fragment key={label}>
+              <div style={hofAt(x, y, w, h)}>
+                <img src={src} alt="" />
+              </div>
+              <span className="p2-hof-label" style={hofAt(x, 148, w)}>
+                {label}
+              </span>
+            </Fragment>
+          ))}
+        </div>
+        <ul className="p2-legend" style={prAt(1204, P(575), 212)}>
+          {hofLegend.map(([name, color]) => (
+            <li key={name}>
+              <i style={{ '--series': color }} />
+              {name}
+            </li>
+          ))}
+        </ul>
+
+        {compareRows.map(([ruleY, headY, title]) => (
+          <Fragment key={title}>
+            <hr className="p2-rule" style={prAt(260, P(ruleY), 1156)} />
+            <p className="p2-subhead" style={prAt(260, P(headY))}>
+              {title}
+            </p>
+            <p className="p2-body p2-body--dim" style={prAt(496, P(headY))}>
+              中国站
+            </p>
+            <p className="p2-body p2-body--dim" style={prAt(968, P(headY))}>
+              海外站
+            </p>
+          </Fragment>
+        ))}
+
+        {/* 界面语言 */}
+        <p className="p2-body" style={prAt(496, P(768), 330)}>
+          界面语言主要为简体中文
+        </p>
+        <p className="p2-body" style={prAt(968, P(768), 330)}>
+          总计将超过10种语言
+        </p>
+        <div className="p2-dashbox" style={prAt(496, P(824), 448, 124)} />
+        <div className="p2-dashbox" style={prAt(968, P(824), 448, 124)} />
+        {langPills.map(([text, cx, y, w, faded], i) => (
+          <span
+            className={`p2-pill${faded ? ' p2-pill--faded' : ''}`}
+            key={`${text}-${i}`}
+            style={{ ...prAt(cx, P(y), w ?? undefined), height: pct(20, 1589) }}
+          >
+            {text}
+          </span>
+        ))}
+
+        {/* 业务熟练度:两个等高容器,内部色块四周内缩 3 */}
+        <p className="p2-body" style={prAt(496, P(1044), 330)}>
+          长期客户居多，大多已深谙商旅审批流程页面
+        </p>
+        <p className="p2-body" style={prAt(968, P(1044), 330)}>
+          新签海外客户对于携程商旅审批流程并不熟悉
+        </p>
+        <div className="p2-gauge" style={prAt(850, P(1012), 94, 120)} />
+        <div className="p2-gauge" style={prAt(1322, P(1012), 94, 120)} />
+        <div className="p2-gauge-fill" style={prAt(853, P(1032), 88, 97)} />
+        <div className="p2-gauge-fill" style={prAt(1325, P(1092), 88, 37)} />
+
+        {/* 使用平台:App / PC 占比条,合计 448 宽,中间 4 留缝 */}
+        <p className="p2-body" style={prAt(496, P(1228))}>
+          App访问量占绝大多数
+        </p>
+        <p className="p2-body" style={prAt(968, P(1228))}>
+          PC端访问量占据明显优势
+        </p>
+        <div className="p2-prog" style={prAt(496, P(1284), 340, 64)} />
+        <div className="p2-prog p2-prog--sec" style={prAt(840, P(1284), 104, 64)} />
+        <div className="p2-prog" style={prAt(968, P(1284), 68, 64)} />
+        <div className="p2-prog p2-prog--sec" style={prAt(1040, P(1284), 376, 64)} />
+        <img src={iconPhone} alt="" style={prAt(508, P(1296), 28, 40)} />
+        <img src={iconPc} alt="" style={prAt(888, P(1299), 44, 34)} />
+        <img src={iconPhone} alt="" style={prAt(980, P(1296), 28, 40)} />
+        <img src={iconPc} alt="" style={prAt(1360, P(1299), 44, 34)} />
+        <p className="p2-pctnum" style={prAt(552, P(1294))}>
+          &gt;75%
+        </p>
+        {/* 稿中这句是右对齐的(贴在设备图标左侧),故按右边距定位 */}
+        <p
+          className="p2-pctnum"
+          style={{ right: pct(96, 1440), top: pct(P(1294), 1589), textAlign: 'right' }}
+        >
+          &gt;85%
+        </p>
+
+        {/* ---- 共性基础 ---- */}
+        <hr className="p2-rule" style={prAt(24, P(1412), 1392)} />
+        <p className="proj-kicker" style={prAt(24, P(1444))}>
+          共性基础
+        </p>
+        <p className="p2-subhead" style={prAt(260, P(1444))}>
+          底层逻辑
+        </p>
+        <hr className="p2-rule" style={prAt(260, P(1512), 1156)} />
+        <p className="p2-subhead" style={prAt(260, P(1544))}>
+          目标：用户高效、准确的完成出差申请单的申请和使用
+        </p>
+      </div>
+    </section>
+  )
+}
+
 function Project2() {
   return (
     <>
       <Hero />
       <Background />
       <Introduction />
+      <DesignPrinciples />
 
-      {/* TODO: D-58 1685 / D-71 736 */}
+      {/* TODO: D-71 736 */}
 
       <ObjectiveOpener
         screen="D-37"
