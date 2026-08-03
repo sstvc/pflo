@@ -1267,6 +1267,12 @@
   position: relative;
 }
 
+/* 稿中有出血到画板外的内容(D-67 的两条 App 截图带),
+   Figma 的 frame 默认裁切,这里要显式补上,否则整页横向溢出 */
+.p2-stage--clip {
+  overflow: hidden;
+}
+
 .p2-stage > * {
   position: absolute;
   margin: 0;

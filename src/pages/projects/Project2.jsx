@@ -19,7 +19,7 @@ import hof4 from '../../assets/projects/p2/d58-hof-4.svg'
 import hof5 from '../../assets/projects/p2/d58-hof-5.svg'
 import hof6 from '../../assets/projects/p2/d58-hof-6.svg'
 import iconPc from '../../assets/projects/p2/d58-icon-pc.svg'
-import iconPhone from '../../assets/projects/p2/d58-icon-phone.svg'
+import iconPhone from '../../assets/projects/p2/p2-icon-phone.svg'
 import d59Bars from '../../assets/projects/p2/d59-bars.svg'
 import d59Img1 from '../../assets/projects/p2/d59-img1.png'
 import d59Img12 from '../../assets/projects/p2/d59-img12.png'
@@ -45,6 +45,21 @@ import d66TripOs1 from '../../assets/projects/p2/d66-trip-os1.png'
 import d66TripOs2 from '../../assets/projects/p2/d66-trip-os2.png'
 import d66WedgeA from '../../assets/projects/p2/d66-wedge-a.svg'
 import d66WedgeB from '../../assets/projects/p2/d66-wedge-b.svg'
+import d67A1 from '../../assets/projects/p2/d67-a1.png'
+import d67A2 from '../../assets/projects/p2/d67-a2.png'
+import d67A3 from '../../assets/projects/p2/d67-a3.png'
+import d67A4 from '../../assets/projects/p2/d67-a4.png'
+import d67A5 from '../../assets/projects/p2/d67-a5.png'
+import d67A6 from '../../assets/projects/p2/d67-a6.png'
+import d67A7 from '../../assets/projects/p2/d67-a7.png'
+import d67B1 from '../../assets/projects/p2/d67-b1.png'
+import d67B2 from '../../assets/projects/p2/d67-b2.png'
+import d67B3 from '../../assets/projects/p2/d67-b3.png'
+import d67B4 from '../../assets/projects/p2/d67-b4.png'
+import d67B5 from '../../assets/projects/p2/d67-b5.png'
+import d67B6 from '../../assets/projects/p2/d67-b6.png'
+import d67B7 from '../../assets/projects/p2/d67-b7.png'
+import d67IconPc from '../../assets/projects/p2/d67-icon-pc.svg'
 import d59Img2043 from '../../assets/projects/p2/d59-img2043.png'
 import d61Bars from '../../assets/projects/p2/d61-bars.svg'
 import d61Tips from '../../assets/projects/p2/d61-tips.png'
@@ -1683,6 +1698,82 @@ function Sustainable01() {
   )
 }
 
+/* D-67 · 目标3 策略 02「PC & App 分批上线」(高 1576)
+   上半 PROBLEM/DESIGN 是常规两栏,下半是两条 App 截图带:
+   稿中各 1628 宽、分别从 x=-32 / x=-156 起,**出血到画板外**,
+   靠 Figma frame 裁切 —— 这里用 .p2-stage--clip 补上。 */
+const d67At = makeAt(1440, 1576)
+const stripAt = makeAt(1628, 459)
+
+const appStripA = [d67A1, d67A2, d67A3, d67A4, d67A5, d67A6, d67A7]
+const appStripB = [d67B1, d67B2, d67B3, d67B4, d67B5, d67B6, d67B7]
+
+/* 一条截图带:7 张 212×459,间距 24(0/236/472/…) */
+function AppStrip({ shots, x, y, label }) {
+  return (
+    <div style={d67At(x, y, 1628, 459)}>
+      {shots.map((src, i) => (
+        <img
+          className="p2-shot"
+          key={src}
+          src={src}
+          alt={`${label} ${i + 1}`}
+          style={{ position: 'absolute', ...stripAt(i * 236, 0, 212, 459) }}
+        />
+      ))}
+    </div>
+  )
+}
+
+function Sustainable02() {
+  return (
+    <section data-screen="D-67">
+      <div className="p2-stage p2-stage--clip" style={{ aspectRatio: `${1440} / ${1576}` }}>
+        <p className="p2-strat-num" style={d67At(24, 28)}>
+          02
+        </p>
+        <h3 className="p2-strat-title" style={d67At(74, 24)}>
+          PC &amp; App 分批上线
+        </h3>
+
+        {/* ---- PROBLEM ---- */}
+        <p className="p2-eyebrow" style={d67At(24, 160)}>
+          PROBLEM
+        </p>
+        <hr className="p2-rule" style={d67At(378, 160, 566)} />
+        <p className="p2-body" style={d67At(378, 192, 566)}>
+          本项目需快速上线，而开发资源有限，因此需优先PC端页面分批交付
+        </p>
+        {/* 与 D-58 同一根占比条:App 68 / PC 376 */}
+        <div className="p2-prog" style={d67At(968, 160, 68, 64)} />
+        <div className="p2-prog p2-prog--sec" style={d67At(1040, 160, 376, 64)} />
+        <img src={iconPhone} alt="" style={d67At(980, 172, 28, 40)} />
+        <img src={d67IconPc} alt="" style={d67At(1360, 175, 44, 34)} />
+        <p
+          className="p2-pctnum"
+          style={{ right: pct(96, 1440), top: pct(170, 1576), textAlign: 'right' }}
+        >
+          &gt;85%
+        </p>
+        <p className="p2-body p2-body--dim" style={d67At(968, 256, 448)}>
+          当前海外站在PC端使用率超过85%，占据压倒性优势
+        </p>
+        <hr className="p2-rule" style={d67At(24, 344, 1392)} />
+
+        {/* ---- DESIGN ---- */}
+        <p className="p2-eyebrow" style={d67At(24, 408)}>
+          DESIGN
+        </p>
+        <p className="p2-h3" style={d67At(378, 414)}>
+          基于PC端页面，拓展设计App端页面并如期上线
+        </p>
+        <AppStrip shots={appStripA} x={-32} y={522} label="App 端页面" />
+        <AppStrip shots={appStripB} x={-156} y={1013} label="App 端页面" />
+      </div>
+    </section>
+  )
+}
+
 function Project2() {
   return (
     <>
@@ -1723,7 +1814,7 @@ function Project2() {
         strategies={['基于固有逻辑，通过前端展示优化体验', 'PC & App 分批上线']}
       />
       <Sustainable01 />
-      {/* TODO: D-67 1576 */}
+      <Sustainable02 />
 
       {/* TODO: Frame 2147237933—— D-77 / 2026 收尾 */}
     </>
