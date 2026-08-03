@@ -96,9 +96,11 @@
   letter-spacing: var(--tracking-section-heading);
   text-transform: uppercase;
   /* 空心字:填充用页面底色盖住可变字体轮廓自交的乱线,
-     paint-order 让描边垫底,只露出干净的外轮廓 */
+     paint-order 让描边垫底,只露出干净的外轮廓。
+     描边是 #ddd(截图逐像素取样,project 1/2 一致)—— 比上下两条
+     分割线(#888a8e)亮一档,两者不是同一个色 */
   color: var(--color-bg-1);
-  -webkit-text-stroke: 2px var(--dark-border-dark);
+  -webkit-text-stroke: 2px var(--dark-text-body-1);
   paint-order: stroke fill;
 }
 
