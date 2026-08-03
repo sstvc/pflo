@@ -32,6 +32,13 @@ import d63Lang2 from '../../assets/projects/p2/d63-lang2.png'
 import d63Lang3 from '../../assets/projects/p2/d63-lang3.png'
 import d63SchemaCn from '../../assets/projects/p2/d63-schema-cn.svg'
 import d63SchemaOs from '../../assets/projects/p2/d63-schema-os.svg'
+import d64Arrow from '../../assets/projects/p2/d64-arrow.svg'
+import d64Caret from '../../assets/projects/p2/d64-caret.svg'
+import d64Cursor from '../../assets/projects/p2/d64-cursor.svg'
+import d64Hover from '../../assets/projects/p2/d64-hover.png'
+import d64Korean from '../../assets/projects/p2/d64-korean.png'
+import d64Popup from '../../assets/projects/p2/d64-popup.png'
+import d64TableWide from '../../assets/projects/p2/d64-table-wide.png'
 import d59Img2043 from '../../assets/projects/p2/d59-img2043.png'
 import d61Bars from '../../assets/projects/p2/d61-bars.svg'
 import d61Tips from '../../assets/projects/p2/d61-tips.png'
@@ -42,7 +49,8 @@ import d62FlowBack from '../../assets/projects/p2/d62-flow-back.svg'
 import d62FlowLong from '../../assets/projects/p2/d62-flow-long.svg'
 import d62FlowShort from '../../assets/projects/p2/d62-flow-short.svg'
 /* 申请页的两张截图被多个子屏共用(md5 相同),故不带屏号:
-   折叠态 D-59 + D-62,表单上半 D-59 + D-61,表单下半 D-59 + D-63 */
+   折叠态 D-59 + D-62,表单上半 D-59 + D-61,表单下半 D-59 + D-63,
+   单据列表 D-62 + D-64 */
 import p2ApplyCollapsed from '../../assets/projects/p2/p2-apply-collapsed.png'
 import p2ApplyForm from '../../assets/projects/p2/p2-apply-form.png'
 import p2ApplyFormLower from '../../assets/projects/p2/p2-apply-form-lower.png'
@@ -1206,6 +1214,288 @@ function Localization01() {
   )
 }
 
+/* D-64 · 目标2 策略 02「制定特殊场景字段展示规则」(高 2868,本页最大一屏)
+   PROBLEM 弹窗/表格两个受限载体的线框;
+   DESIGN 01 按优先级定三档缩略方案(弹窗截图 + 三处放大细节);
+   DESIGN 02 逐列标注表格列宽规则(六根列宽色条 + 韩语时间字段的举证)。 */
+const d64At = makeAt(1440, 2868)
+
+/* PROBLEM 线框里的浅色占位块。三组四行的规整部分用循环生成,零散的照抄。 */
+const popupChips = [
+  [756, 176, 70, 16],
+  [756, 204, 164, 80],
+  [844, 296, 32, 16],
+  [888, 296, 32, 16],
+]
+const tableChipRows = [176, 212, 248, 284]
+const tableChipCols = [
+  [992, 94],
+  [1092, 224],
+  [1322, 70],
+]
+
+/* DESIGN 01 三档优先级:[分割线 y, 内容 y, 优先级, 字段名, 做法] */
+const priorityRows = [
+  [1006, 1038, '低优先级', '金额备注说明', '将信息缩略至图标，不外显'],
+  [1150, 1182, '中优先级', '出行人', '在一行内展示，内容超出截断'],
+  [1294, 1326, '高优先级', '可选城市', '完整展示信息，长字段折行'],
+]
+
+/* DESIGN 02 表格六列:[x, 宽, 色块高, 是否辅助色] */
+const tableCols = [
+  [60, 168, 250, false],
+  [252, 278, 250, false],
+  [554, 86, 362, false],
+  [664, 168, 306, false],
+  [856, 272, 250, false],
+  [1152, 228, 250, true],
+]
+/* 列底的实心细条:[x, y, 宽, 是否辅助色] */
+const tableUnderlines = [
+  [60, 2168, 168, false],
+  [252, 2168, 278, false],
+  [856, 2168, 272, false],
+  [1152, 2168, 228, true],
+  [664, 2224, 168, false],
+  [554, 2280, 86, false],
+]
+/* 列标注:[x, 字段名 y, 字段名, 规则 y, 规则, 规则宽] */
+const tableNotes = [
+  [60, 2208, '单据号', 2240, '11位数字，宽度固定', null],
+  [252, 2208, '行程时段', 2240, '按照韩语场景确定字段最大长度', null],
+  [664, 2264, '总金额', 2296, '以11位金额（百亿）作为最大宽度', null],
+  [554, 2320, '出行人', 2352, '最多展示3个头像，宽度固定', null],
+  [856, 2208, '申请日期', 2240, '按照韩语场景确定字段最大长度', null],
+  [1152, 2208, '单据状态', 2240, '多种状态字段宽度难以确定，因此提前预留充足空间', 228],
+]
+
+function Localization02() {
+  return (
+    <section data-screen="D-64">
+      <div className="p2-stage" style={{ aspectRatio: `${1440} / ${2868}` }}>
+        <p className="p2-strat-num" style={d64At(24, 28)}>
+          02
+        </p>
+        <h3 className="p2-strat-title" style={d64At(74, 24)}>
+          制定特殊场景字段展示规则
+        </h3>
+
+        {/* ---- PROBLEM ---- */}
+        <p className="p2-eyebrow" style={d64At(24, 160)}>
+          PROBLEM
+        </p>
+        <hr className="p2-rule" style={d64At(378, 160, 330)} />
+        <p className="p2-body" style={d64At(378, 192, 330)}>
+          在弹窗和表格等空间十分受限的载体，多语言字段的适配面临更大的挑战
+        </p>
+        <div className="p2-gauge" style={{ ...d64At(732, 160, 212, 168), borderRadius: '4px' }} />
+        <div className="p2-gauge" style={{ ...d64At(968, 160, 448, 168), borderRadius: '4px' }} />
+        {popupChips.map(([x, y, w, h]) => (
+          <div className="p2-chip" key={`${x}-${y}`} style={d64At(x, y, w, h)} />
+        ))}
+        {tableChipRows.flatMap((y) =>
+          tableChipCols.map(([x, w]) => (
+            <div className="p2-chip" key={`${x}-${y}`} style={d64At(x, y, w, 24)} />
+          )),
+        )}
+        <p className="p2-body p2-body--dim" style={d64At(732, 360)}>
+          弹窗
+        </p>
+        <p className="p2-body" style={d64At(732, 392, 212)}>
+          弹窗应提供简洁和必要的信息帮助用户决策
+        </p>
+        <p className="p2-body p2-body--dim" style={d64At(968, 360)}>
+          表格
+        </p>
+        <p className="p2-body" style={d64At(968, 392, 448)}>
+          表格应尽量在每一栏完整展示信息，便于用户比对和定位，避免信息的折行和不完整展示
+        </p>
+        <hr className="p2-rule" style={d64At(24, 504, 1392)} />
+
+        {/* ---- DESIGN 01 · 优先级缩略方案 ---- */}
+        <p className="p2-eyebrow" style={d64At(24, 568)}>
+          DESIGN
+        </p>
+        <p className="p2-stepnum" style={d64At(378, 558)}>
+          01
+        </p>
+        <p className="p2-h3" style={d64At(462, 568)}>
+          按照信息优先级定义不同的字段缩略方案
+        </p>
+        <hr className="p2-rule" style={d64At(378, 676, 684)} />
+        <p className="p2-body" style={d64At(378, 708)}>
+          案例：
+        </p>
+        <p className="p2-body" style={d64At(430, 708)}>
+          出差申请单选择弹窗
+        </p>
+        <p className="p2-body p2-body--dim" style={d64At(732, 708, 330)}>
+          预订行程前通过此弹窗选择一个出差申请单，选择后可在此单据范围内预订行程
+        </p>
+        <img
+          className="p2-shot"
+          src={d64Popup}
+          alt="出差申请单选择弹窗"
+          style={d64At(1086, 676, 330, 298)}
+        />
+
+        {priorityRows.map(([ruleY, y, level, field, how]) => (
+          <Fragment key={level}>
+            <hr className="p2-rule" style={d64At(24, ruleY, 684)} />
+            <p className="p2-body p2-body--dim" style={d64At(24, y)}>
+              {field}
+            </p>
+            <p className="p2-body" style={d64At(260, y)}>
+              {level}
+            </p>
+            <p className="p2-body" style={d64At(496, y, 212)}>
+              {how}
+            </p>
+          </Fragment>
+        ))}
+        {/* 弹窗底图压到 40%,三处做法各自用同源裁切全亮叠放 */}
+        <Crop
+          src={d64Popup}
+          alt=""
+          box={{ ...d64At(732, 1006, 684, 386), opacity: 0.4 }}
+          radius="8px"
+          img={{ width: '107.14%', height: '171.24%', left: '-3.57%', top: '-46.11%' }}
+        />
+        <Crop
+          src={d64Popup}
+          alt="缩略成图标的金额备注"
+          box={d64At(852, 1086, 50, 50)}
+          radius="4px"
+          img={{ width: '1465.71%', height: '1321.99%', left: '-288.86%', top: '-515.96%' }}
+        />
+        <Crop
+          src={d64Popup}
+          alt="单行截断的出行人"
+          box={d64At(755, 1196, 638, 40)}
+          radius="4px"
+          img={{ width: '114.87%', height: '1652.48%', left: '-7.43%', top: '-919.95%' }}
+        />
+        <Crop
+          src={d64Popup}
+          alt="完整折行展示的可选城市"
+          box={d64At(755, 1255, 520, 66)}
+          radius="4px"
+          img={{ width: '140.93%', height: '1001.51%', left: '-9.12%', top: '-646.94%' }}
+        />
+        <p className="p2-label" style={centered(d64At(877, 1062))}>
+          金额备注说明
+        </p>
+        <p className="p2-label" style={centered(d64At(1073.5, 1172))}>
+          出行人
+        </p>
+        <p className="p2-label" style={centered(d64At(1014.5, 1325))}>
+          可选城市
+        </p>
+        <hr className="p2-rule" style={d64At(24, 1424, 1392)} />
+
+        {/* ---- DESIGN 02 · 表格列宽规则 ---- */}
+        <p className="p2-stepnum" style={d64At(378, 1478)}>
+          02
+        </p>
+        <p className="p2-h3" style={d64At(462, 1488)}>
+          固定字段明确表格列宽，不固定字段强化拓展
+        </p>
+        <hr className="p2-rule" style={d64At(378, 1596, 566)} />
+        <p className="p2-body" style={d64At(378, 1628)}>
+          案例：
+        </p>
+        <p className="p2-body" style={d64At(430, 1628)}>
+          出差申请单列表
+        </p>
+        <p className="p2-body p2-body--dim" style={d64At(732, 1628, 212)}>
+          展示当前账户下全部状态的出差申请单，用户可在此查找和管理
+        </p>
+        <Crop
+          src={p2List}
+          alt="出差申请单列表"
+          box={d64At(968, 1596, 448, 298)}
+          radius="8px"
+          img={{ width: '100.11%', height: '100.34%', left: '-0.06%', top: 0 }}
+        />
+
+        <Crop
+          src={d64TableWide}
+          alt="出差申请单列表表格"
+          box={d64At(24, 1926, 1398.043, 218)}
+          radius="8px"
+          img={{ width: '122.03%', height: '521.74%', left: '-11.02%', top: '-115.22%' }}
+        />
+        {tableCols.map(([x, w, h, isSec]) => (
+          <div
+            className={`p2-bar p2-bar--20${isSec ? ' p2-bar--sec' : ''}`}
+            key={`col-${x}`}
+            style={d64At(x, 1926, w, h)}
+          />
+        ))}
+        <div className="p2-bar p2-bar--20 p2-bar--sec" style={d64At(1152, 2320, 228, 120)} />
+        {tableUnderlines.map(([x, y, w, isSec]) => (
+          <div
+            className={`p2-bar${isSec ? ' p2-bar--sec' : ''}`}
+            key={`ul-${x}-${y}`}
+            style={d64At(x, y, w, 8)}
+          />
+        ))}
+        {tableNotes.map(([x, fy, field, ny, note, nw]) => (
+          <Fragment key={field}>
+            <p className="p2-body p2-body--dim" style={d64At(x, fy)}>
+              {field}
+            </p>
+            <p className="p2-body" style={d64At(x, ny, nw ?? undefined)}>
+              {note}
+            </p>
+          </Fragment>
+        ))}
+        {/* 稿中这枚箭头是 112×36 旋转 90°,按旋转后外框的中心反推放置 */}
+        <img
+          src={d64Arrow}
+          alt=""
+          style={{ ...d64At(368, 2334, 112, 36), transform: 'rotate(90deg)' }}
+        />
+        <p className="p2-label" style={centered(d64At(1266, 2376))}>
+          隐藏式操作按钮
+        </p>
+        <p className="p2-label" style={centered(d64At(1266, 2404))}>
+          解决多语言环境空间不足问题
+        </p>
+
+        {/* 韩语时间字段的举证 */}
+        <hr className="p2-rule" style={d64At(378, 2440, 684)} />
+        <p className="p2-body p2-body--dim" style={d64At(378, 2472, 330)}>
+          为什么按照韩语场景确定时间字段最大宽度？
+        </p>
+        <p className="p2-body" style={d64At(378, 2528, 330)}>
+          根据统计，在Trip.biz常用语言中，韩语的时间字段标准展示最长
+        </p>
+        <Crop
+          src={d64Korean}
+          alt="各语言时间字段长度统计"
+          box={d64At(732, 2472, 330, 292)}
+          radius="8px"
+          img={{ width: '256.95%', height: '188.18%', left: '-51.96%', top: '-51.11%' }}
+        />
+        <div className="p2-card" style={d64At(742, 2661, 308, 30)} />
+        <Crop
+          src={d64Hover}
+          alt="hover 时右侧出现的操作按钮"
+          box={d64At(1140, 2472, 276, 156)}
+          radius="0 8px 8px 0"
+          img={{ width: '615.48%', height: '756.36%', left: '-459.91%', top: '-244.31%' }}
+        />
+        <img src={d64Caret} alt="" style={d64At(1234.5, 2582.44, 14, 19.15)} />
+        <img src={d64Cursor} alt="" style={d64At(1276, 2524, 22, 26)} />
+        <p className="p2-body" style={d64At(1152, 2660, 228)}>
+          光标hover至列表，可用操作按钮在最右侧展示
+        </p>
+      </div>
+    </section>
+  )
+}
+
 function Project2() {
   return (
     <>
@@ -1234,7 +1524,7 @@ function Project2() {
         strategies={['按多语言要求调整字段展示', '制定特殊场景字段展示规则']}
       />
       <Localization01 />
-      {/* TODO: D-64 2868 */}
+      <Localization02 />
 
       {/* ⚠️ 稿中本屏第 2 条策略比另两屏低 8px(y=364 vs 356),疑似手误;
              这里按统一节奏渲染,待作者确认 */}

@@ -1659,6 +1659,11 @@
   background: var(--accent-secondary);
 }
 
+/* 表格列宽示意用的更淡一档 */
+.p2-bar--20 {
+  opacity: 0.2;
+}
+
 /* 主色横幅上的黑体标题 */
 .p2-h3strong {
   font-size: var(--text-h3);
