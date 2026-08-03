@@ -25,7 +25,6 @@ import d59Img1 from '../../assets/projects/p2/d59-img1.png'
 import d59Img12 from '../../assets/projects/p2/d59-img12.png'
 import d59Img2 from '../../assets/projects/p2/d59-img2.png'
 import d63FormOs from '../../assets/projects/p2/d63-form-os.png'
-import d63InfoCn from '../../assets/projects/p2/d63-info-cn.png'
 import d63InfoOs from '../../assets/projects/p2/d63-info-os.png'
 import d63Lang1 from '../../assets/projects/p2/d63-lang1.png'
 import d63Lang2 from '../../assets/projects/p2/d63-lang2.png'
@@ -39,6 +38,13 @@ import d64Hover from '../../assets/projects/p2/d64-hover.png'
 import d64Korean from '../../assets/projects/p2/d64-korean.png'
 import d64Popup from '../../assets/projects/p2/d64-popup.png'
 import d64TableWide from '../../assets/projects/p2/d64-table-wide.png'
+import d66Cursor from '../../assets/projects/p2/d66-cursor.svg'
+import d66SelectOs from '../../assets/projects/p2/d66-select-os.png'
+import d66TripCn from '../../assets/projects/p2/d66-trip-cn.png'
+import d66TripOs1 from '../../assets/projects/p2/d66-trip-os1.png'
+import d66TripOs2 from '../../assets/projects/p2/d66-trip-os2.png'
+import d66WedgeA from '../../assets/projects/p2/d66-wedge-a.svg'
+import d66WedgeB from '../../assets/projects/p2/d66-wedge-b.svg'
 import d59Img2043 from '../../assets/projects/p2/d59-img2043.png'
 import d61Bars from '../../assets/projects/p2/d61-bars.svg'
 import d61Tips from '../../assets/projects/p2/d61-tips.png'
@@ -50,10 +56,11 @@ import d62FlowLong from '../../assets/projects/p2/d62-flow-long.svg'
 import d62FlowShort from '../../assets/projects/p2/d62-flow-short.svg'
 /* 申请页的两张截图被多个子屏共用(md5 相同),故不带屏号:
    折叠态 D-59 + D-62,表单上半 D-59 + D-61,表单下半 D-59 + D-63,
-   单据列表 D-62 + D-64 */
+   单据列表 D-62 + D-64,中国站整页 D-63 + D-66 */
 import p2ApplyCollapsed from '../../assets/projects/p2/p2-apply-collapsed.png'
 import p2ApplyForm from '../../assets/projects/p2/p2-apply-form.png'
 import p2ApplyFormLower from '../../assets/projects/p2/p2-apply-form-lower.png'
+import p2CnPage from '../../assets/projects/p2/p2-cn-page.png'
 import p2List from '../../assets/projects/p2/p2-list.png'
 import d59Rect303 from '../../assets/projects/p2/d59-rect303.svg'
 import d59Rect304 from '../../assets/projects/p2/d59-rect304.svg'
@@ -1168,7 +1175,7 @@ function Localization01() {
           信息展示
         </p>
         <Crop
-          src={d63InfoCn}
+          src={p2CnPage}
           alt="中国站信息展示版式"
           box={{ ...d63At(378, 1654, 507, 188), opacity: 0.8 }}
           radius="8px"
@@ -1496,6 +1503,186 @@ function Localization02() {
   )
 }
 
+/* D-66 · 目标3 策略 01「基于固有逻辑，通过前端展示优化体验」(高 2216)
+   PROBLEM 一句现状 + 中国站/海外站共用底层逻辑的线框;
+   DESIGN 01 母单/子单概念,DESIGN 02 消除「国内/国际」概念。
+   两组都按「固有逻辑 → 问题 → 设计解决」三段铺开。 */
+const d66At = makeAt(1440, 2216)
+
+/* DESIGN 02 里叠在压暗底图上的全亮细节:[src, x, y, w, h, 取景] */
+const tripDetails = [
+  [d66TripCn, 390, 1614, 426, 94, { width: '361.33%', height: '1509.95%', left: '-80.41%', top: '-823.51%' }],
+  [d66TripCn, 390, 1716, 426, 94, { width: '361.33%', height: '1509.95%', left: '-80.41%', top: '-932.02%' }],
+  [d66TripOs1, 866, 1627, 534, 52, { width: '195.77%', height: '2352.55%', left: '-47.88%', top: '-444.91%' }],
+  [d66TripOs1, 866, 1683, 153, 16, { width: '683.26%', height: '7645.77%', left: '-167.12%', top: '-1795.95%' }],
+  [d66TripOs2, 866, 1760, 534, 52, { width: '195.77%', height: '2350%', left: '-47.88%', top: '-444.51%' }],
+  [d66TripOs2, 866, 1816, 534, 68, { width: '195.77%', height: '1797.06%', left: '-47.88%', top: '-422.27%' }],
+]
+
+function Sustainable01() {
+  return (
+    <section data-screen="D-66">
+      <div className="p2-stage" style={{ aspectRatio: `${1440} / ${2216}` }}>
+        <p className="p2-strat-num" style={d66At(24, 28)}>
+          01
+        </p>
+        <h3 className="p2-strat-title" style={d66At(74, 24)}>
+          基于固有逻辑，通过前端展示优化体验
+        </h3>
+
+        {/* ---- PROBLEM ---- */}
+        <p className="p2-eyebrow" style={d66At(24, 160)}>
+          PROBLEM
+        </p>
+        <hr className="p2-rule" style={d66At(378, 160, 330)} />
+        <p className="p2-body" style={d66At(378, 192, 330)}>
+          不可修改的固有逻辑不满足海外用户使用场景
+        </p>
+        {/* 中国站/海外站共用同一套底层逻辑的示意 */}
+        <div className="p2-chip" style={d66At(732, 160, 684, 204)} />
+        <div className="p2-chip" style={d66At(760, 188, 298, 112)} />
+        <div className="p2-chip" style={d66At(1090, 188, 298, 112)} />
+        <p className="p2-label" style={centered(d66At(908.5, 234))}>
+          中国站
+        </p>
+        <p className="p2-label" style={centered(d66At(1238.5, 234))}>
+          海外站
+        </p>
+        <p className="p2-label" style={centered(d66At(1074.5, 328))}>
+          底层逻辑
+        </p>
+        <p className="p2-body p2-body--dim" style={d66At(732, 396, 330)}>
+          海外站页面需基于中国站原有代码逻辑复用，不允许重写核心流程
+        </p>
+        <p className="p2-body p2-body--dim" style={d66At(1086, 396, 330)}>
+          存在不符合海外用户使用场景的固有底层逻辑造成交互体验下降
+        </p>
+        <hr className="p2-rule" style={d66At(24, 508, 1392)} />
+
+        {/* ---- DESIGN 01 · 母单 / 子单 ---- */}
+        <p className="p2-eyebrow" style={d66At(24, 572)}>
+          DESIGN
+        </p>
+        <p className="p2-stepnum" style={d66At(378, 562)}>
+          01
+        </p>
+        <p className="p2-h3" style={d66At(462, 572)}>
+          保持单据在申请流程和选择使用时的展示一致性
+        </p>
+        <p className="p2-subhead" style={d66At(378, 680)}>
+          中国站
+        </p>
+        <p className="p2-subhead" style={d66At(850, 680)}>
+          海外站
+        </p>
+        <Crop
+          src={p2CnPage}
+          alt="中国站申请页"
+          box={d66At(378, 748, 330, 376)}
+          radius="8px"
+          img={{ width: '100.11%', height: '100.27%', left: '-0.05%', top: 0 }}
+        />
+        {/* 稿中这张没有圆角 */}
+        <Crop
+          src={d66SelectOs}
+          alt="海外站单据选择"
+          box={d66At(850, 748, 566, 376)}
+          img={{ width: '100%', height: '136.02%', left: 0, top: '-35.96%' }}
+        />
+        <img src={d66WedgeA} alt="" style={d66At(698, 784, 172, 144)} />
+        <img src={d66WedgeB} alt="" style={d66At(698, 936, 172, 144)} />
+        <div className="p2-card" style={d66At(396, 784, 294, 144)} />
+        <div className="p2-card" style={d66At(396, 936, 294, 144)} />
+        <div className="p2-card" style={d66At(878, 777, 510, 272)} />
+        <p className="p2-label" style={d66At(720, 748, 118)}>
+          多张单据展示为同张单据下的多个“子单”
+        </p>
+        <p className="p2-body p2-body--dim" style={d66At(378, 1156)}>
+          固有逻辑
+        </p>
+        <p className="p2-body" style={d66At(378, 1188, 330)}>
+          申请时添加多个行程在底层逻辑被拆分为多个单据
+        </p>
+        <p className="p2-body p2-body--dim" style={d66At(850, 1156)}>
+          问题
+        </p>
+        <p className="p2-body" style={d66At(850, 1188, 566)}>
+          申请时的一张单据在选择时变成多张，造成用户误解
+        </p>
+        <p className="p2-body p2-body--dim" style={d66At(850, 1244)}>
+          设计解决
+        </p>
+        <p className="p2-body" style={d66At(850, 1276, 566)}>
+          新增“母单/子单”概念，将单次申请后被拆分的全部单据合并展示为同一“母单”下的多张“子单”
+        </p>
+        <hr className="p2-rule" style={d66At(378, 1356, 1038)} />
+
+        {/* ---- DESIGN 02 · 消除「国内 / 国际」 ---- */}
+        <p className="p2-stepnum" style={d66At(378, 1410)}>
+          02
+        </p>
+        <p className="p2-h3" style={d66At(462, 1420)}>
+          消除中国视角的“国内/国际”概念
+        </p>
+        <p className="p2-subhead" style={d66At(378, 1528)}>
+          中国站
+        </p>
+        <p className="p2-subhead" style={d66At(850, 1528)}>
+          海外站
+        </p>
+        {/* 三张压暗底图 */}
+        <Crop
+          src={d66TripCn}
+          alt="中国站行程添加"
+          box={{ ...d66At(378, 1596, 450, 240), opacity: 0.4 }}
+          radius="8px"
+          img={{ width: '342.06%', height: '591.4%', left: '-73.46%', top: '-315.04%' }}
+        />
+        <Crop
+          src={d66TripOs1}
+          alt="海外站行程添加"
+          box={{ ...d66At(850, 1596, 566, 118), opacity: 0.4 }}
+          radius="8px"
+          img={{ width: '184.7%', height: '1036.72%', left: '-42.35%', top: '-169.79%' }}
+        />
+        <Crop
+          src={d66TripOs2}
+          alt="海外站开启中国大陆行程后"
+          box={{ ...d66At(850, 1730, 566, 166), opacity: 0.4 }}
+          radius="8px"
+          img={{ width: '184.7%', height: '736.14%', left: '-42.35%', top: '-121.17%' }}
+        />
+        {tripDetails.map(([src, x, y, w, h, img]) => (
+          <Crop src={src} alt="" key={`${x}-${y}`} box={d66At(x, y, w, h)} radius="4px" img={img} />
+        ))}
+        <img src={d66Cursor} alt="" style={d66At(995, 1691, 22, 26)} />
+        <p className="p2-label p2-label--bright" style={d66At(1023, 1688)}>
+          添加中国大陆行程
+        </p>
+        <p className="p2-body p2-body--dim" style={d66At(378, 1928)}>
+          固有逻辑
+        </p>
+        <p className="p2-body" style={d66At(378, 1960, 448)}>
+          部分配置下国内（中国大陆）行程与国际行程分别仅可添加一组，且地点需要分别落库
+        </p>
+        <p className="p2-body p2-body--dim" style={d66At(852, 1928)}>
+          问题
+        </p>
+        <p className="p2-body" style={d66At(852, 1960, 330)}>
+          “国内/国际”概念在不同国家代表不同含义
+        </p>
+        <p className="p2-body p2-body--dim" style={d66At(850, 2016)}>
+          设计解决
+        </p>
+        <p className="p2-body" style={d66At(850, 2048, 566)}>
+          默认仅保留“国际行程”，中国大陆行程作为可通过开关开启的特殊可选项保留
+        </p>
+        <hr className="p2-rule" style={d66At(24, 2176, 1392)} />
+      </div>
+    </section>
+  )
+}
+
 function Project2() {
   return (
     <>
@@ -1535,7 +1722,8 @@ function Project2() {
         enSub="Sustainable Experience"
         strategies={['基于固有逻辑，通过前端展示优化体验', 'PC & App 分批上线']}
       />
-      {/* TODO: D-66/ D-67 */}
+      <Sustainable01 />
+      {/* TODO: D-67 1576 */}
 
       {/* TODO: Frame 2147237933—— D-77 / 2026 收尾 */}
     </>
