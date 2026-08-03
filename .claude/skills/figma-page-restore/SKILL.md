@@ -1,6 +1,6 @@
 ---
 name: figma-page-restore
-description: 从 Figma 稿还原 pflo 的项目详情页(project 2/3/4 或任何新增 project 页)。当需要"还原设计稿""搭 project N 页面""按 Figma 做页面""对比设计稿自检"时使用。内含分屏读稿流程、坐标舞台技术、复用基元、12 类已知坑与三个必跑验证脚本 —— 全部来自 project 1 的实战与返工。
+description: 从 Figma 稿还原 pflo 的项目详情页(project 2/3/4 或任何新增 project 页)。当需要"还原设计稿""搭 project N 页面""按 Figma 做页面""对比设计稿自检"时使用。内含分屏读稿流程、坐标舞台技术、复用基元、15 类已知坑与三个必跑验证脚本 —— 全部来自 project 1 的实战与返工。
 ---
 
 # 从 Figma 还原项目页面
@@ -136,7 +136,7 @@ import { makeAt, SectionHeading, ObjectiveOpener, WfStage, PriStage,
 
 ---
 
-## 5. 已知坑(12 类,全部踩过)
+## 5. 已知坑(15 类,全部踩过)
 
 ### 布局 / 节奏
 
@@ -156,6 +156,10 @@ import { makeAt, SectionHeading, ObjectiveOpener, WfStage, PriStage,
 
 **⑦ 全局重置用 `:where()` 降特异性**:`:where(.page--project) p { margin: 0 }`,否则压掉组件自己的 margin。
 
+**⑦b `display: contents` 挡住 `> *`。** 舞台靠 `.stage > * { position: absolute }` 定位,而 `display: contents` 的包装器**本身**才是那个直接子元素 —— 真正的内容降了一级,选择器够不着,整组塌回舞台顶部(D-73 的页面卡曾因此从 y=1710 掉到 566)。循环里要包多个元素,用带 key 的 `<Fragment>`,不要用 `<div style={{display:'contents'}}>`。
+
+**⑦c 舞台只重置了 `margin`,没重置 `padding`。** `<ul>/<ol>` 自带 UA 的 `padding-left: 40px`,加上项目**没有全局 `border-box`**,`width: 212px` 实际占 252px → 整页横向溢出。舞台里放列表,自己写 `padding: 0; list-style: none`。
+
 **⑧ 覆盖层要用 `::after`,不能塌进父元素。** Figma 导出若以 `<div className="absolute inset-0 pointer-events-none shadow-[inset_…]" />` 结尾,说明该效果画在**内容之上**。写成父元素自己的 `box-shadow: inset` 是错的 —— CSS 把父元素的背景/边框/内阴影画在**子元素下面**,任何不透明子元素都会盖掉它。**照搬 Figma 的样式值不够,还要照搬子元素顺序。**
 
 ### 尺寸 / 图形
@@ -166,11 +170,14 @@ import { makeAt, SectionHeading, ObjectiveOpener, WfStage, PriStage,
 
 **⑪ 可变字体空心字的内部乱线**:`-webkit-text-stroke` 会把字形内部自交轮廓也描出来。修法:填充设为页面底色 + `paint-order: stroke fill` + 2px 描边(可见 1px)。
 
+**⑪b 空心字的描边色在 design context 里读不到。** Figma 中它的 fill 是 `transparent`,`get_design_context` 只会告诉你 `text-[transparent]` —— **必须从截图逐像素取样**(见 6.5)。曾据此把区块大标题的描边和它上下两条分割线当成同一个色,错了整整两个项目页:描边是 `#ddd`(`--dark-text-body-1`),分割线是 `#888a8e`(`--dark-border-dark`)。
+
 **⑫ Figma SVG 外侧描边的发丝接缝**:填充与描边之间漏出背景。修法:给**填充路径**(带 `--fill-0` 且无 `mask=`)加同色 `stroke` + `stroke-width="1"`。
 
 ### 排版
 
-- **字间距只有两处非零**(单位是**百分比**):`EN/H2 Bold` 8% = 4.8px(区块标题)、`EN/Project Title` -4% = -4.8px(英文主标题)。**其余一律不加。**
+- **字间距的单位是百分比**,而且规范里**会来回改**(见过「只有 2 处非零」→「7 处非零」的往返)。**不要背数值,以 `src/index.css` 的 `--tracking-*` 为准**,那里没列的档位一律 0。`letterSpacing: 8` 意为 8%,乘字号才是 px。
+- **CSS 会在最后一个字符后面也加字间距,Figma 不会。** 负字间距的大号英文(如 -3.6px 的 180px 数字)实测宽度会比稿中小 3.6px —— 左对齐时无视觉影响,**不要为此去调字间距**;但若该元素靠右对齐或居中,就得把这点算进去。
 - **大小写看源文字**:区块标题源文字本身就是大写;英文副标题(`Scalable Structure`)是 Title Case,**不转大写**。核对法:metadata dump 里 text 节点的 `name` 就是文字内容。
 - **有宽度约束的说明文字不要加 `nowrap`**(稿中是换行的)。判据:稿中该 text 节点 `height ÷ 行高 > 1`。
 - 截图上的白色遮挡块(`.proj-figure__patch`)是**故意遮敏感信息的,不要删**。
@@ -238,7 +245,21 @@ const rel = el => { const r = el.getBoundingClientRect();
 })
 ```
 
-> 预览截图工具在页面滚动后可能截出空白。绕法:滚动归零,临时给 `#root` 加 `translateY(-Npx)`;要看细节用 `transform: translate(...) scale(3)`,看完还原。
+> 预览截图工具在页面滚动后可能截出空白(也可能整段会话都只返回空白帧)。绕法:滚动归零,临时给 `#root` 加 `translateY(-Npx)`;要看细节用 `transform: translate(...) scale(3)`,看完还原。**截图挂了不等于没法验证** —— 上面的 DOM 实测才是主手段。
+>
+> ⚠️ 预览器导航后视口可能塌成 0 宽,`scale` 会算成 0,量出来全是 `Infinity/NaN`。**每次 navigate 之后先 `resize_window` 到 1440×900 再量。**
+
+### 6.5 从设计稿截图取色(design context 读不到颜色时)
+
+空心字描边、渐变分割线这类颜色在 `get_design_context` 里是 `transparent` 或一张 `<img>`,只能取样。**Figma 给每个 Line 节点单独生成资产 hash,hash 不同不代表颜色不同** —— 别靠 hash 猜,直接量:
+
+```bash
+# get_screenshot(contentsOnly, maxDimension=画板长边) → curl 下来
+# maxDimension 卡的是**长边**:2250 高的画板要传 2250 才能拿到原生 1440 宽
+python3 -c "…zlib 解 PNG…"   # 对目标区域做颜色直方图,出现最多的非背景色即是
+```
+
+判据:纯色像素占多数的那个值就是真值,和它与背景的 50% 混合值(反锯齿)会一起出现 —— 例如 `#dddddd` 旁边必然伴随 `(123,123,123)`(221 与 26 的中点)。
 
 ---
 
@@ -249,7 +270,7 @@ const rel = el => { const r = el.getBoundingClientRect();
 - [ ] 每个子屏跨度与画板高误差 ≤10px
 - [ ] 无横向溢出、图片 0 破损、控制台 0 报错
 - [ ] `npm run lint` 与 `npm run build` 通过
-- [ ] 字间距只在那两处、大小写与源文字一致
+- [ ] 字间距只用 `--tracking-*` 里有的档位、大小写与源文字一致
 - [ ] 新页面已登记进 `src/data/projects.js` 和 `Project.jsx` 的 `pages` 映射表
 - [ ] 已提交推送(推 `main` 自动部署)
 

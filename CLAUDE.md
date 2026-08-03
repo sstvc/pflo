@@ -25,6 +25,7 @@ npm run lint     # 提交前必跑
 - SVG 叠加元素**必须显式写 `aspect-ratio`**(Figma SVG 无固有尺寸,会失控撑爆)
 - 带 border 的面板显式加 `box-sizing: border-box`(项目无全局 border-box 重置)
 - Figma 导出里结尾的 `absolute inset-0 pointer-events-none` 覆盖层,**用 `::after` 实现**,不能塌成父元素的 `box-shadow: inset`(会被不透明子元素盖住)
+- 坐标舞台里**不要用 `display: contents` 包装器**(`.stage > *` 够不着,内容会塌回顶部);放 `<ul>` 记得自己清 `padding`(项目无全局 `border-box`,UA 的 40px 会撑出横向溢出)
 
 **数据**
 - 增删项目**只改 `src/data/projects.js`**,首页/索引都从它读
@@ -38,7 +39,7 @@ npm run lint     # 提交前必跑
 - 截图上的白色遮挡块(`.proj-figure__patch`)是**故意遮敏感信息的,不要删**
 
 **字体细节(踩过)**
-- 字间距只有两处非零:区块标题 `--tracking-section-heading`、英文主标题 `--tracking-project-title`。**其余一律不加**
+- 字间距**以 `src/index.css` 的 `--tracking-*` 为准**(单位是百分比,规范会来回改),那里没列的档位一律不加
 - 大小写看源文字:区块标题源文字就是大写;英文副标题是 Title Case,**不转大写**
 - 有宽度约束的说明文字**不要加 `nowrap`**(稿中是换行的)
 
