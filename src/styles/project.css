@@ -1483,7 +1483,8 @@
   white-space: nowrap;
 }
 
-.p2-objbar {
+/* 纯主色块(章节序号条、图示里的实心柱) */
+.p2-fill {
   background: var(--accent-primary);
 }
 
@@ -1498,6 +1499,123 @@
 .p2-objitem {
   color: var(--dark-text-body-1);
   white-space: nowrap;
+}
+
+/* ---- 策略详情屏(D-59 起,每条设计策略一屏,无区块大标题) ---- */
+/* 顶部:主色小序号 + 60px 中文策略名 */
+.p2-strat-num {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  color: var(--accent-primary);
+  white-space: nowrap;
+}
+
+.p2-strat-title {
+  font-weight: 700;
+  font-size: var(--text-h2);
+  line-height: var(--leading-h2);
+  color: var(--color-heading);
+  white-space: nowrap;
+}
+
+/* PROBLEM / DESIGN 这类英文眉题 */
+.p2-eyebrow {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-h4);
+  line-height: var(--leading-h4);
+  color: var(--dark-text-body-1);
+  white-space: nowrap;
+}
+
+/* 做法标题(36px 中文) */
+.p2-h3 {
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  font-weight: 500;
+  color: var(--color-heading);
+  white-space: nowrap;
+}
+
+/* 做法序号 01 / 02(60px)与图注序号 1 / 2(36px) */
+.p2-stepnum {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-h2);
+  line-height: var(--leading-h2);
+  color: var(--dark-text-body-1);
+}
+
+.p2-marknum {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  color: var(--dark-text-body-1);
+}
+
+/* 14px 标签三档亮度 */
+.p2-label {
+  font-size: var(--text-body-2);
+  line-height: var(--leading-body-2);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  color: var(--dark-text-body-1);
+}
+
+.p2-label--bright {
+  color: var(--color-heading);
+}
+
+.p2-label--dim {
+  color: var(--dark-text-body-2);
+}
+
+/* 图注(16px Medium,比正文重一档) */
+.p2-caption {
+  font-weight: 500;
+  color: var(--dark-text-body-2);
+  white-space: nowrap;
+}
+
+/* 稿中的强调分割线:2px 辅助色 */
+.p2-rule--accent {
+  border-top: 2px solid var(--accent-secondary);
+}
+
+/* 主色 20% 底 + 主色描边的示意卡 */
+.p2-card {
+  box-sizing: border-box;
+  border: 1px solid var(--accent-primary);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent-primary) 20%, transparent);
+}
+
+/* 截图裁切框:框定尺寸+圆角,内部 <img> 用百分比偏移取景 */
+.p2-crop {
+  overflow: hidden;
+}
+
+.p2-crop > img {
+  position: absolute;
+  display: block;
+  max-width: none;
+}
+
+/* 直接铺满的截图(带投影,稿中两层深浅不同) */
+.p2-shot {
+  display: block;
+  object-fit: cover;
+}
+
+.p2-shot--lift {
+  box-shadow: 0 4px 4px rgb(0 0 0 / 0.25);
+}
+
+.p2-shot--float {
+  box-shadow: 0 4px 20px rgb(0 0 0 / 0.15);
 }
 
 /* Product Impact 纯文字舞台 */

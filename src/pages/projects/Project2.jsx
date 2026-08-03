@@ -20,6 +20,19 @@ import hof5 from '../../assets/projects/p2/d58-hof-5.svg'
 import hof6 from '../../assets/projects/p2/d58-hof-6.svg'
 import iconPc from '../../assets/projects/p2/d58-icon-pc.svg'
 import iconPhone from '../../assets/projects/p2/d58-icon-phone.svg'
+import d59Bars from '../../assets/projects/p2/d59-bars.svg'
+import d59Img1 from '../../assets/projects/p2/d59-img1.png'
+import d59Img12 from '../../assets/projects/p2/d59-img12.png'
+import d59Img2 from '../../assets/projects/p2/d59-img2.png'
+import d59Img2042 from '../../assets/projects/p2/d59-img2042.png'
+import d59Img2043 from '../../assets/projects/p2/d59-img2043.png'
+import d59Img2044 from '../../assets/projects/p2/d59-img2044.png'
+import d59Img5 from '../../assets/projects/p2/d59-img5.png'
+import d59Img6 from '../../assets/projects/p2/d59-img6.png'
+import d59Rect303 from '../../assets/projects/p2/d59-rect303.svg'
+import d59Rect304 from '../../assets/projects/p2/d59-rect304.svg'
+import d59Rect305 from '../../assets/projects/p2/d59-rect305.svg'
+import d59Rect322 from '../../assets/projects/p2/d59-rect322.svg'
 
 /**
  * Project 2 — Travel Request Launch for Overseas Site / 出差申请单功能海外站落地
@@ -406,7 +419,7 @@ function DesignObjectives() {
         <p className="proj-kicker" style={objAt(24, O(160))}>
           设计目标
         </p>
-        <div className="p2-objbar" style={objAt(24, O(228), 40, 72)} />
+        <div className="p2-fill" style={objAt(24, O(228), 40, 72)} />
 
         {objectives.map(([num, x, title, items]) => (
           <Fragment key={num}>
@@ -431,6 +444,266 @@ function DesignObjectives() {
   )
 }
 
+/* D-59 · 策略 01「拆解表单，简化复杂任务」(高 2428)
+   这类策略详情屏**没有区块大标题**,舞台就是整块画板。
+   结构:顶部策略名 → PROBLEM(两条现象 + 霍夫斯泰德柱图)
+        → DESIGN 01 步骤条 → DESIGN 02 表单折叠。
+   截图一律「定框 + 内部 <img> 百分比取景」,不预裁图。 */
+const d59At = makeAt(1440, 2428)
+
+/* 裁切框:box 是框在稿中的位置尺寸,img 是内部图相对框的百分比偏移 */
+function Crop({ src, alt, box, img, radius }) {
+  return (
+    <div className="p2-crop" style={{ ...box, borderRadius: radius }}>
+      <img src={src} alt={alt} style={img} />
+    </div>
+  )
+}
+
+/* 表单折叠对比:右栏 5 张小卡 y 递增 51,左栏两张大卡 */
+const foldRight = [1900, 1951, 2002, 2053, 2104]
+
+function Strategy01() {
+  return (
+    <section data-screen="D-59">
+      <div className="p2-stage" style={{ aspectRatio: `${1440} / ${2428}` }}>
+        {/* ---- 顶部策略名 ---- */}
+        <p className="p2-strat-num" style={d59At(24, 28)}>
+          01
+        </p>
+        <h3 className="p2-strat-title" style={d59At(74, 24)}>
+          拆解表单，简化复杂任务
+        </h3>
+
+        {/* ---- PROBLEM ---- */}
+        <p className="p2-eyebrow" style={d59At(24, 160)}>
+          PROBLEM
+        </p>
+        <hr className="p2-rule" style={d59At(378, 160, 330)} />
+        <p className="p2-body" style={d59At(378, 192, 330)}>
+          申请页表单流程长
+        </p>
+        <p className="p2-body p2-body--dim" style={d59At(378, 224, 330)}>
+          对于不熟悉流程的海外用户任务压力大，难以定位当前进度
+        </p>
+        <hr className="p2-rule" style={d59At(378, 304, 330)} />
+        <p className="p2-body" style={d59At(378, 336, 330)}>
+          存在超长表单场景
+        </p>
+        <p className="p2-body p2-body--dim" style={d59At(378, 368, 330)}>
+          每个出差申请单中行程添加上限为20个，因此极易出现超长表单
+        </p>
+
+        {/* 超长表单示意:实心柱 + 两截撕口色块 */}
+        <div className="p2-fill" style={d59At(732, 160, 94, 244)} />
+        <p className="p2-label" style={d59At(750, 172)}>
+          基础信息
+        </p>
+        <img src={d59Rect304} alt="" style={d59At(732, 420, 94, 66)} />
+        <img
+          src={d59Rect305}
+          alt=""
+          style={{ ...d59At(732, 480, 94, 40), transform: 'rotate(180deg)' }}
+        />
+        <p
+          className="p2-label"
+          style={{ ...d59At(778.5, 432), transform: 'translateX(-50%)', whiteSpace: 'nowrap' }}
+        >
+          行程信息
+        </p>
+
+        {/* 申请页截图:上截图 → 灰色透视连接块 → 下截图 */}
+        <Crop
+          src={d59Img2042}
+          alt="出差申请页表单下半部分"
+          box={d59At(968, 270, 448, 250)}
+          radius="0 0 8px 8px"
+          img={{ width: '100.1%', height: '336.01%', left: '-0.05%', top: '-232.01%' }}
+        />
+        <img src={d59Rect303} alt="" style={d59At(841, 260, 590, 234)} />
+        <Crop
+          src={d59Img2044}
+          alt="出差申请页表单上半部分"
+          box={d59At(850, 160, 448, 320)}
+          radius="8px 8px 0 0"
+          img={{ width: '100%', height: '264.5%', left: 0, top: '-0.06%' }}
+        />
+
+        {/* 不确定性规避柱图 */}
+        <hr className="p2-rule" style={d59At(378, 552, 1038)} />
+        <div className="p2-gauge" style={d59At(378, 584, 142, 218)} />
+        <img src={d59Bars} alt="各国不确定性规避指数对比" style={d59At(402, 633, 94, 125)} />
+        <p className="p2-label p2-label--dim" style={d59At(544, 600)}>
+          高
+        </p>
+        <p className="p2-label p2-label--dim" style={d59At(544, 746)}>
+          低
+        </p>
+        <p
+          className="p2-label p2-label--dim"
+          style={{ ...d59At(449, 615), transform: 'translateX(-50%)', whiteSpace: 'nowrap' }}
+        >
+          韩
+        </p>
+        <p
+          className="p2-label p2-label--dim"
+          style={{ ...d59At(429, 605, 14), transform: 'translateX(-50%)', textAlign: 'center' }}
+        >
+          日
+        </p>
+        <p
+          className="p2-label p2-label--dim"
+          style={{ ...d59At(449, 766, 142), transform: 'translateX(-50%)', textAlign: 'center' }}
+        >
+          不确定性规避
+        </p>
+        <p className="p2-body p2-body--dim" style={d59At(732, 584, 330)}>
+          现象
+        </p>
+        <p className="p2-body" style={d59At(732, 616, 448)}>
+          作为东亚国家代表的日本和韩国在“不确定性规避”指数上高于其他国家
+        </p>
+        <p className="p2-label p2-label--bright" style={d59At(544, 620)}>
+          精确 &amp; 可预期
+        </p>
+        <hr className="p2-rule" style={d59At(732, 696, 684)} />
+        <p className="p2-body p2-body--dim" style={d59At(732, 728, 330)}>
+          设计方向
+        </p>
+        <p className="p2-label p2-label--bright" style={d59At(544, 766)}>
+          灵活 &amp; 宽松
+        </p>
+        <p className="p2-body" style={d59At(732, 759, 369)}>
+          强化信息披露，避免任务的不可预期感
+        </p>
+
+        {/* ---- DESIGN ---- */}
+        <hr className="p2-rule" style={d59At(24, 866, 1392)} />
+        <p className="p2-eyebrow" style={d59At(24, 930)}>
+          DESIGN
+        </p>
+
+        {/* 做法 01 · 步骤条 */}
+        <p className="p2-stepnum" style={d59At(378, 920)}>
+          01
+        </p>
+        <p className="p2-h3" style={d59At(462, 930)}>
+          将申请页拆解为两步，分页展示
+        </p>
+        <p className="p2-body" style={d59At(378, 1038, 330)}>
+          在每页表单的顶部展示步骤条，确保用户在任务中对于当前进度和下一步操作有所预期，降低焦虑
+        </p>
+        <img
+          className="p2-shot p2-shot--lift"
+          src={d59Img1}
+          alt="第二步:行程信息步骤条"
+          style={d59At(850, 1102, 566, 109)}
+        />
+        <img
+          className="p2-shot p2-shot--float"
+          src={d59Img2}
+          alt="第一步:基础信息步骤条"
+          style={d59At(732, 1038, 566, 109)}
+        />
+
+        <p className="p2-marknum" style={d59At(496, 1269)}>
+          1
+        </p>
+        <p className="p2-subhead" style={d59At(522, 1276)}>
+          基础信息
+        </p>
+        <p className="p2-marknum" style={d59At(968, 1269)}>
+          2
+        </p>
+        <p className="p2-subhead" style={d59At(1001, 1276)}>
+          行程信息
+        </p>
+        <Crop
+          src={d59Img12}
+          alt="基础信息填写页"
+          box={d59At(496, 1344, 448, 280)}
+          radius="8px"
+          img={{ width: '160%', height: '160.16%', left: '-30%', top: '-19.45%' }}
+        />
+        <Crop
+          src={d59Img2043}
+          alt="行程信息填写页"
+          box={d59At(968, 1344, 448, 280)}
+          radius="8px"
+          img={{ width: '160%', height: '160.16%', left: '-30%', top: '-19.45%' }}
+        />
+        <hr className="p2-rule" style={d59At(378, 1344, 94)} />
+        <p className="p2-body" style={d59At(378, 1376)}>
+          填写步骤
+        </p>
+        <hr className="p2-rule" style={d59At(378, 1432, 94)} />
+        <hr className="p2-rule p2-rule--accent" style={d59At(520, 1432, 872)} />
+        <p className="p2-body" style={d59At(378, 1516)}>
+          内容填写区
+        </p>
+
+        {/* 做法 02 · 表单折叠 */}
+        <hr className="p2-rule" style={d59At(378, 1656, 1038)} />
+        <p className="p2-stepnum" style={d59At(378, 1710)}>
+          02
+        </p>
+        <p className="p2-h3" style={d59At(462, 1720)}>
+          表单可折叠，方便快速浏览比对信息
+        </p>
+        <p className="p2-subhead" style={d59At(378, 1828)}>
+          表单展开
+        </p>
+        <p className="p2-caption" style={d59At(483, 1837)}>
+          默认状态，可编辑内容
+        </p>
+        <p className="p2-subhead" style={d59At(968, 1828)}>
+          表单折叠
+        </p>
+        <p className="p2-caption" style={d59At(1073, 1837)}>
+          一屏浏览多张卡片，快速查看信息
+        </p>
+        <Crop
+          src={d59Img5}
+          alt="表单展开状态"
+          box={d59At(378, 1896, 448, 280)}
+          radius="8px"
+          img={{ width: '100%', height: '361.56%', left: 0, top: '-34.71%' }}
+        />
+        <Crop
+          src={d59Img6}
+          alt="表单折叠状态"
+          box={d59At(968, 1896, 448, 280)}
+          radius="8px"
+          img={{ width: '100.09%', height: '173.93%', left: '-0.04%', top: '-34.64%' }}
+        />
+        <img src={d59Rect322} alt="" style={d59At(731, 1900, 332, 161)} />
+        <p className="p2-label" style={d59At(838, 1924, 118)}>
+          表单折叠时，展示已填写的主要信息
+        </p>
+        <div className="p2-card" style={d59At(481, 1900, 242, 160)} />
+        <div className="p2-card" style={d59At(481, 2064, 242, 110)} />
+        {foldRight.map((y) => (
+          <div className="p2-card" key={y} style={d59At(1071, y, 242, 47)} />
+        ))}
+        <p className="p2-body" style={d59At(378, 2208)}>
+          一屏内完整展示1个行程卡片，沉浸填写
+        </p>
+        <p className="p2-body" style={d59At(968, 2208)}>
+          一屏内可完整展示5个行程卡片，全局概览
+        </p>
+        {/* 稿中这句右对齐到内容区右边 */}
+        <p
+          className="p2-label p2-label--dim"
+          style={{ right: pct(24, 1440), top: pct(2264, 2428), textAlign: 'right', whiteSpace: 'nowrap' }}
+        >
+          *假定屏幕可见范围1440*900
+        </p>
+        <hr className="p2-rule" style={d59At(24, 2372, 1392)} />
+      </div>
+    </section>
+  )
+}
+
 function Project2() {
   return (
     <>
@@ -447,7 +720,8 @@ function Project2() {
         enSub="Usability Enhancement"
         strategies={['拆解表单，简化复杂任务', '新增草稿功能，解决用户痛点', '增加提示，提供即时帮助']}
       />
-      {/* TODO: D-59/ D-62/ D-61 */}
+      <Strategy01 />
+      {/* TODO: D-62 1464 / D-61 1452 */}
 
       <ObjectiveOpener
         screen="D-62a"
