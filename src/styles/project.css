@@ -1679,16 +1679,16 @@
   white-space: nowrap;
 }
 
-/* Product Impact 纯文字舞台 */
-.p1-impact {
+/* Product Impact 纯文字舞台(跨项目共享:project 1 D-53 · project 2 D-77) */
+.proj-impact {
   position: relative;
 }
 
-.p1-impact > * {
+.proj-impact > * {
   position: absolute;
 }
 
-.p1-impact-kicker {
+.proj-impact-kicker {
   font-size: var(--text-h4);
   line-height: var(--leading-h4);
   font-weight: 500;
@@ -1696,7 +1696,7 @@
   white-space: nowrap;
 }
 
-.p1-impact-num {
+.proj-impact-num {
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: var(--text-h1);
@@ -1705,7 +1705,7 @@
   color: var(--color-heading);
 }
 
-.p1-impact-title {
+.proj-impact-title {
   font-size: var(--text-h3);
   line-height: var(--leading-h3);
   font-weight: 500;
@@ -1713,18 +1713,18 @@
   white-space: nowrap;
 }
 
-.p1-impact-body {
+.proj-impact-body {
   color: var(--color-body-2);
 }
 
-.p1-impact-quote {
+.proj-impact-quote {
   font-size: var(--text-h4);
   line-height: 36px;
   font-weight: 500;
   color: var(--color-heading);
 }
 
-.p1-impact-mark {
+.proj-impact-mark {
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: var(--text-h1);
@@ -1733,7 +1733,7 @@
   color: var(--accent-primary);
 }
 
-.p1-impact-src {
+.proj-impact-src {
   font-size: var(--text-body-2);
   letter-spacing: var(--tracking-label);
   line-height: var(--leading-body-2);
@@ -1744,7 +1744,7 @@
   white-space: nowrap;
 }
 
-.p1-impact-rule {
+.proj-impact-rule {
   border: 0;
   border-top: 1px solid var(--dark-border-dark);
   margin: 0;

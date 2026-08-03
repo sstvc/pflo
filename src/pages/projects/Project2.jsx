@@ -60,6 +60,9 @@ import d67B5 from '../../assets/projects/p2/d67-b5.png'
 import d67B6 from '../../assets/projects/p2/d67-b6.png'
 import d67B7 from '../../assets/projects/p2/d67-b7.png'
 import d67IconPc from '../../assets/projects/p2/d67-icon-pc.svg'
+import d77WordLaunch from '../../assets/projects/p2/d77-word-launch.svg'
+import d77WordOverseas from '../../assets/projects/p2/d77-word-overseas.svg'
+import d77WordTravel from '../../assets/projects/p2/d77-word-travel.svg'
 import d59Img2043 from '../../assets/projects/p2/d59-img2043.png'
 import d61Bars from '../../assets/projects/p2/d61-bars.svg'
 import d61Tips from '../../assets/projects/p2/d61-tips.png'
@@ -1774,6 +1777,72 @@ function Sustainable02() {
   )
 }
 
+/* D-77 · PRODUCT IMPACT(高 524;标题块 96 在舞台外 → 舞台 428)
+   与 project 1 的同名子屏同构,复用 .proj-impact-* */
+const impactAt = makeAt(1440, 428)
+const I = (y) => y - 96
+
+const impacts = [
+  ['01', 24, '项目顺利落地', '功能上线并投入各海外站点使用，目前周均使用200+，未出现因交互问题产生的客诉'],
+  [
+    '02',
+    614,
+    '支持功能迭代',
+    'PC端和App端依次上线之后，又在页面基础上陆续拓展了“单据修改”等更多功能，进一步丰富了服务范围',
+  ],
+]
+
+function ProductImpact() {
+  return (
+    <section data-screen="D-77">
+      <SectionHeading>PRODUCT IMPACT</SectionHeading>
+      <div className="proj-impact" style={{ aspectRatio: `${1440} / ${428}` }}>
+        <span className="proj-impact-kicker" style={impactAt(24, I(160))}>
+          项目成果总结
+        </span>
+        {impacts.map(([num, x, title, body]) => (
+          <Fragment key={num}>
+            <span className="proj-impact-num" style={impactAt(x, I(228))}>
+              {num}
+            </span>
+            <span className="proj-impact-title" style={impactAt(x, I(312))}>
+              {title}
+            </span>
+            <p className="proj-impact-body" style={impactAt(x, I(372), 448)}>
+              {body}
+            </p>
+          </Fragment>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+/* 2026 · 收尾字幕(高 768,无区块标题)
+   三行描边空心大字是导出的 SVG(稿中 opacity 0.6),不是可排版文本 */
+const closeAt = makeAt(1440, 768)
+
+function Closer() {
+  return (
+    <section data-screen="2026">
+      <div className="p2-stage" style={{ aspectRatio: `${1440} / ${768}` }}>
+        <hr className="p2-rule" style={closeAt(24, 24, 1392)} />
+        <img
+          src={d77WordTravel}
+          alt="Travel Request"
+          style={closeAt(24, 128, 1323, 159.568)}
+        />
+        <img src={d77WordLaunch} alt="Launch" style={closeAt(24, 287.57, 530.927, 133.287)} />
+        <img
+          src={d77WordOverseas}
+          alt="for Overseas Site"
+          style={closeAt(24, 421, 1392, 142.584)}
+        />
+      </div>
+    </section>
+  )
+}
+
 function Project2() {
   return (
     <>
@@ -1815,8 +1884,8 @@ function Project2() {
       />
       <Sustainable01 />
       <Sustainable02 />
-
-      {/* TODO: Frame 2147237933—— D-77 / 2026 收尾 */}
+      <ProductImpact />
+      <Closer />
     </>
   )
 }
