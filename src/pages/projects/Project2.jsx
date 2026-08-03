@@ -26,15 +26,18 @@ import d59Img12 from '../../assets/projects/p2/d59-img12.png'
 import d59Img2 from '../../assets/projects/p2/d59-img2.png'
 import d59Img2042 from '../../assets/projects/p2/d59-img2042.png'
 import d59Img2043 from '../../assets/projects/p2/d59-img2043.png'
-import d59Img2044 from '../../assets/projects/p2/d59-img2044.png'
+import d61Bars from '../../assets/projects/p2/d61-bars.svg'
+import d61Tips from '../../assets/projects/p2/d61-tips.png'
 import d59Img5 from '../../assets/projects/p2/d59-img5.png'
 import d62Avatar from '../../assets/projects/p2/d62-avatar.svg'
 import d62Dialog from '../../assets/projects/p2/d62-dialog.png'
 import d62FlowBack from '../../assets/projects/p2/d62-flow-back.svg'
 import d62FlowLong from '../../assets/projects/p2/d62-flow-long.svg'
 import d62FlowShort from '../../assets/projects/p2/d62-flow-short.svg'
-/* 申请页「表单折叠」截图 D-59 与 D-62 共用同一张,故不带屏号 */
+/* 申请页的两张截图被多个子屏共用(md5 相同),故不带屏号:
+   折叠态 D-59 + D-62,表单态 D-59 + D-61 */
 import p2ApplyCollapsed from '../../assets/projects/p2/p2-apply-collapsed.png'
+import p2ApplyForm from '../../assets/projects/p2/p2-apply-form.png'
 import p2List from '../../assets/projects/p2/p2-list.png'
 import d59Rect303 from '../../assets/projects/p2/d59-rect303.svg'
 import d59Rect304 from '../../assets/projects/p2/d59-rect304.svg'
@@ -529,7 +532,7 @@ function Strategy01() {
         />
         <img src={d59Rect303} alt="" style={d59At(841, 260, 590, 234)} />
         <Crop
-          src={d59Img2044}
+          src={p2ApplyForm}
           alt="出差申请页表单上半部分"
           box={d59At(850, 160, 448, 320)}
           radius="8px 8px 0 0"
@@ -894,6 +897,134 @@ function Strategy02() {
   )
 }
 
+/* D-61 · 策略 03「增加提示，提供即时帮助」(高 1452)
+   与 D-59 同构:PROBLEM(两条现状 + 纵乐主义柱图)→ DESIGN(三条做法)。
+   两张现状截图是同一张申请页表单图的不同取景。 */
+const d61At = makeAt(1440, 1452)
+
+/* PROBLEM 左栏三条:[分割线 y, 文案 y, 文案] */
+const tipProblems = [
+  [160, 192, '填写内容概念易混淆，缺乏解释说明'],
+  [248, 280, '中文措辞在多语言翻译后，难以保证内容意思准确明了'],
+]
+
+/* DESIGN 左栏三条 */
+const tipDesigns = [
+  [920, 952, '填写框暗文字展示填写示例'],
+  [1008, 1040, '在关键内容标题后新增说明入口'],
+]
+
+function Strategy03() {
+  return (
+    <section data-screen="D-61">
+      <div className="p2-stage" style={{ aspectRatio: `${1440} / ${1452}` }}>
+        <p className="p2-strat-num" style={d61At(24, 28)}>
+          03
+        </p>
+        <h3 className="p2-strat-title" style={d61At(74, 24)}>
+          增加提示，提供即时帮助
+        </h3>
+
+        {/* ---- PROBLEM ---- */}
+        <p className="p2-eyebrow" style={d61At(24, 160)}>
+          PROBLEM
+        </p>
+        {tipProblems.map(([ry, ty, text]) => (
+          <Fragment key={text}>
+            <hr className="p2-rule" style={d61At(378, ry, 330)} />
+            <p className="p2-body" style={d61At(378, ty, 330)}>
+              {text}
+            </p>
+          </Fragment>
+        ))}
+        <Crop
+          src={p2ApplyForm}
+          alt="填写内容缺乏解释说明"
+          box={d61At(732, 160, 684, 136)}
+          radius="8px"
+          img={{ width: '185.05%', height: '1755.89%', left: '-38.41%', top: '-102.4%' }}
+        />
+        <Crop
+          src={p2ApplyForm}
+          alt="多语言翻译后措辞不明"
+          box={d61At(732, 312, 684, 90)}
+          radius="8px"
+          img={{ width: '185.05%', height: '2653.35%', left: '-38.41%', top: '-679.18%' }}
+        />
+
+        {/* 纵乐主义柱图 */}
+        <hr className="p2-rule" style={d61At(378, 434, 1038)} />
+        <div className="p2-gauge" style={d61At(378, 466, 142, 218)} />
+        <img src={d61Bars} alt="各国纵乐主义指数对比" style={d61At(402, 562, 94, 78)} />
+        <p className="p2-label p2-label--dim" style={d61At(544, 482)}>
+          高
+        </p>
+        <p className="p2-label p2-label--dim" style={d61At(544, 628)}>
+          低
+        </p>
+        <p className="p2-label p2-label--dim" style={centered(d61At(490, 534))}>
+          马
+        </p>
+        <p
+          className="p2-label p2-label--dim"
+          style={{ ...d61At(470, 551, 14), transform: 'translateX(-50%)', textAlign: 'center' }}
+        >
+          泰
+        </p>
+        <p
+          className="p2-label p2-label--dim"
+          style={{ ...d61At(449, 648, 142), transform: 'translateX(-50%)', textAlign: 'center' }}
+        >
+          纵乐主义
+        </p>
+        <p className="p2-body p2-body--dim" style={d61At(732, 466, 330)}>
+          现象
+        </p>
+        <p className="p2-body" style={d61At(732, 498, 448)}>
+          作为东南亚国家代表的泰国和马来西亚在“纵乐主义”指数上高于其他国家
+        </p>
+        <p className="p2-label p2-label--bright" style={d61At(544, 502)}>
+          轻松 &amp; 低负担
+        </p>
+        <hr className="p2-rule" style={d61At(732, 578, 684)} />
+        <p className="p2-body p2-body--dim" style={d61At(732, 610, 330)}>
+          设计方向
+        </p>
+        <p className="p2-label p2-label--bright" style={d61At(544, 648)}>
+          克制 &amp; 延迟满足
+        </p>
+        <p className="p2-body" style={d61At(732, 641, 369)}>
+          简化复杂任务，减少认知负担，降低挫败感
+        </p>
+
+        {/* ---- DESIGN ----(稿中 y=748 有两条完全重合的分割线,只画一条) */}
+        <hr className="p2-rule" style={d61At(24, 748, 1392)} />
+        <p className="p2-eyebrow" style={d61At(24, 812)}>
+          DESIGN
+        </p>
+        <p className="p2-h3" style={d61At(378, 812)}>
+          通过填写示例和提示说明，帮助用户理解内容
+        </p>
+        {tipDesigns.map(([ry, ty, text]) => (
+          <Fragment key={text}>
+            <hr className="p2-rule" style={d61At(378, ry, 330)} />
+            <p className="p2-body" style={d61At(378, ty, 330)}>
+              {text}
+            </p>
+          </Fragment>
+        ))}
+        <Crop
+          src={d61Tips}
+          alt="填写示例与说明入口"
+          box={d61At(732, 920, 684, 428)}
+          radius="8px"
+          img={{ width: '174.44%', height: '282.09%', left: '-37.22%', top: '-73.53%' }}
+        />
+      </div>
+    </section>
+  )
+}
+
 function Project2() {
   return (
     <>
@@ -912,7 +1043,7 @@ function Project2() {
       />
       <Strategy01 />
       <Strategy02 />
-      {/* TODO: D-61 1452 */}
+      <Strategy03 />
 
       <ObjectiveOpener
         screen="D-62a"
