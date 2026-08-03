@@ -1466,6 +1466,38 @@
   white-space: nowrap;
 }
 
+/* ---- D-71 DESIGN OBJECTIVES 三栏总览 ---- */
+/* 空心大号数字:与区块标题同一手法(填充盖底色 + paint-order 让描边垫底),
+   只是描边换成项目主色 */
+.p2-objnum {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-display-xl);
+  line-height: var(--leading-display-xl);
+  letter-spacing: var(--tracking-display-xl);
+  color: var(--color-bg-1);
+  -webkit-text-stroke: 2px var(--accent-primary);
+  paint-order: stroke fill;
+  white-space: nowrap;
+}
+
+.p2-objbar {
+  background: var(--accent-primary);
+}
+
+.p2-objtitle {
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  font-weight: 500;
+  color: var(--color-heading);
+  white-space: nowrap;
+}
+
+.p2-objitem {
+  color: var(--dark-text-body-1);
+  white-space: nowrap;
+}
+
 /* Product Impact 纯文字舞台 */
 .p1-impact {
   position: relative;

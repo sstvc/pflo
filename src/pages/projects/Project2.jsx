@@ -381,6 +381,56 @@ function DesignPrinciples() {
   )
 }
 
+/* D-71 · DESIGN OBJECTIVES(高 736;标题块 96 在舞台外 → 舞台 640)
+   三栏总览,纯文字 + CSS。每栏固定三条分割线(400/488/576),
+   即使该栏只有两条策略,末尾那条也照留 —— 稿中就是这样。 */
+const objAt = makeAt(1440, 640)
+const O = (y) => y - 96 // 稿中绝对 y → 舞台内 y
+
+const objectives = [
+  [
+    '01',
+    378,
+    '使用体验优化',
+    ['拆解表单，简化复杂任务', '新增草稿功能，解决用户痛点', '增加提示，提供即时帮助'],
+  ],
+  ['02', 732, '多语言与本地化适配', ['按多语言要求调整字段展示', '制定特殊场景字段展示规则']],
+  ['03', 1086, '高效推进与体验保障', ['基于固有逻辑，通过前端展示优化体验', 'PC & App 分批上线']],
+]
+
+function DesignObjectives() {
+  return (
+    <section data-screen="D-71">
+      <SectionHeading>DESIGN OBJECTIVES</SectionHeading>
+      <div className="p2-stage" style={{ aspectRatio: `${1440} / ${640}` }}>
+        <p className="proj-kicker" style={objAt(24, O(160))}>
+          设计目标
+        </p>
+        <div className="p2-objbar" style={objAt(24, O(228), 40, 72)} />
+
+        {objectives.map(([num, x, title, items]) => (
+          <Fragment key={num}>
+            <p className="p2-objnum" style={objAt(x, O(144))}>
+              {num}
+            </p>
+            <p className="p2-objtitle" style={objAt(x, O(324))}>
+              {title}
+            </p>
+            {[400, 488, 576].map((y) => (
+              <hr className="p2-rule" key={y} style={objAt(x, O(y), 330)} />
+            ))}
+            {items.map((s, i) => (
+              <p className="p2-objitem" key={s} style={objAt(x, O(432 + i * 88))}>
+                {s}
+              </p>
+            ))}
+          </Fragment>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 function Project2() {
   return (
     <>
@@ -388,8 +438,7 @@ function Project2() {
       <Background />
       <Introduction />
       <DesignPrinciples />
-
-      {/* TODO: D-71 736 */}
+      <DesignObjectives />
 
       <ObjectiveOpener
         screen="D-37"
