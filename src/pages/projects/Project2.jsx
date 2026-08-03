@@ -28,7 +28,14 @@ import d59Img2042 from '../../assets/projects/p2/d59-img2042.png'
 import d59Img2043 from '../../assets/projects/p2/d59-img2043.png'
 import d59Img2044 from '../../assets/projects/p2/d59-img2044.png'
 import d59Img5 from '../../assets/projects/p2/d59-img5.png'
-import d59Img6 from '../../assets/projects/p2/d59-img6.png'
+import d62Avatar from '../../assets/projects/p2/d62-avatar.svg'
+import d62Dialog from '../../assets/projects/p2/d62-dialog.png'
+import d62FlowBack from '../../assets/projects/p2/d62-flow-back.svg'
+import d62FlowLong from '../../assets/projects/p2/d62-flow-long.svg'
+import d62FlowShort from '../../assets/projects/p2/d62-flow-short.svg'
+/* 申请页「表单折叠」截图 D-59 与 D-62 共用同一张,故不带屏号 */
+import p2ApplyCollapsed from '../../assets/projects/p2/p2-apply-collapsed.png'
+import p2List from '../../assets/projects/p2/p2-list.png'
 import d59Rect303 from '../../assets/projects/p2/d59-rect303.svg'
 import d59Rect304 from '../../assets/projects/p2/d59-rect304.svg'
 import d59Rect305 from '../../assets/projects/p2/d59-rect305.svg'
@@ -670,7 +677,7 @@ function Strategy01() {
           img={{ width: '100%', height: '361.56%', left: 0, top: '-34.71%' }}
         />
         <Crop
-          src={d59Img6}
+          src={p2ApplyCollapsed}
           alt="表单折叠状态"
           box={d59At(968, 1896, 448, 280)}
           radius="8px"
@@ -704,6 +711,189 @@ function Strategy01() {
   )
 }
 
+/* D-62 · 策略 02「新增草稿功能，解决用户痛点」(高 1464)
+   PROBLEM:两条现状 + 一条「填写→提交→审批→打回重填」的流程示意
+   DESIGN:三张申请页/单据列表截图压到 40%,局部细节同源裁切叠在上面全亮。 */
+const d62At = makeAt(1440, 1464)
+
+/* 居中定位的小字:稿中带 -translate-x-1/2,给的是中心 x */
+const centered = (at) => ({ ...at, transform: 'translateX(-50%)', whiteSpace: 'nowrap' })
+
+/* PROBLEM 两栏:[标题, 说明, x] */
+const painPoints = [
+  [
+    '单据填写耗时长',
+    '当前中国站平均用时7分钟，内容复杂的单据往往需要10分钟以上。对于业务熟练度较低的海外用户，耗时会进一步增加',
+    378,
+  ],
+  ['每张单据需要审批', '每一张单据填写完成后都需要提交审批，审批通过后才会生效', 850],
+]
+
+/* 流程示意里的三个角色标签:[文案, 中心 x] */
+const flowRoles = [
+  ['提交人', 424.5],
+  ['申请单', 896.5],
+  ['审批人', 1132.5],
+]
+
+function Strategy02() {
+  return (
+    <section data-screen="D-62">
+      <div className="p2-stage" style={{ aspectRatio: `${1440} / ${1464}` }}>
+        <p className="p2-strat-num" style={d62At(24, 28)}>
+          02
+        </p>
+        <h3 className="p2-strat-title" style={d62At(74, 24)}>
+          新增草稿功能，解决用户痛点
+        </h3>
+
+        {/* ---- PROBLEM ---- */}
+        <p className="p2-eyebrow" style={d62At(24, 160)}>
+          PROBLEM
+        </p>
+        <hr className="p2-rule" style={d62At(378, 160, 1038)} />
+        {painPoints.map(([head, note, x]) => (
+          <Fragment key={head}>
+            <p className="p2-body" style={d62At(x, 192, 448)}>
+              {head}
+            </p>
+            <p className="p2-body p2-body--dim" style={d62At(x, 224, 448)}>
+              {note}
+            </p>
+          </Fragment>
+        ))}
+
+        {/* 流程示意:提交人 —填写→ 申请单 —提交→ 审批人,审批结果回落重填 */}
+        <img src={d62Avatar} alt="" style={d62At(378, 336, 94, 94)} />
+        <div className="p2-chip" style={d62At(854, 340, 86, 86)} />
+        <div className="p2-chip" style={d62At(862, 348, 70, 12)} />
+        <div className="p2-chip" style={d62At(862, 368, 70, 50)} />
+        <img src={d62Avatar} alt="" style={d62At(1086, 336, 94, 94)} />
+        <img src={d62FlowLong} alt="" style={d62At(472, 365, 382, 36)} />
+        <img src={d62FlowShort} alt="" style={d62At(940, 365, 146, 36)} />
+        <p className="p2-body" style={centered(d62At(661, 351))}>
+          填写
+        </p>
+        <p className="p2-body" style={centered(d62At(1015, 351))}>
+          提交
+        </p>
+        <p className="p2-label p2-label--accent" style={centered(d62At(660.5, 391))}>
+          耗时长
+        </p>
+        {flowRoles.map(([name, cx]) => (
+          <p className="p2-label p2-label--dim" key={name} style={centered(d62At(cx, 438))}>
+            {name}
+          </p>
+        ))}
+        {/* 回流箭头:稿中做了一次水平镜像(rotate180 叠 scaleY(-1)) */}
+        <img
+          src={d62FlowBack}
+          alt=""
+          style={{ ...d62At(411, 470, 722, 32), transform: 'scaleX(-1)' }}
+        />
+        <p className="p2-body" style={centered(d62At(772, 510))}>
+          审批结果
+        </p>
+
+        <hr className="p2-rule" style={d62At(378, 566, 1038)} />
+        <p className="p2-body p2-body--dim" style={d62At(378, 598)}>
+          痛点 1
+        </p>
+        <p className="p2-body" style={d62At(378, 630)}>
+          填写中途若需要确认补充信息，确认后需要重新填写
+        </p>
+        <p className="p2-body p2-body--dim" style={d62At(850, 598)}>
+          痛点 2
+        </p>
+        <p className="p2-body" style={d62At(850, 630)}>
+          提交多张单据时，需要多次向审批人提交审批，效率低下
+        </p>
+
+        {/* ---- DESIGN ---- */}
+        <hr className="p2-rule" style={d62At(24, 718, 1392)} />
+        <p className="p2-eyebrow" style={d62At(24, 782)}>
+          DESIGN
+        </p>
+        <p className="p2-h3" style={d62At(378, 782)}>
+          使用草稿功能提高容错率，满足统一提交多张单据审批需求
+        </p>
+        <p className="p2-subhead" style={d62At(378, 890)}>
+          申请页
+        </p>
+        <p className="p2-subhead" style={d62At(1086, 890)}>
+          单据列表
+        </p>
+
+        {/* 三张压暗底图 */}
+        <Crop
+          src={p2ApplyCollapsed}
+          alt="申请页"
+          box={{ ...d62At(378, 958, 330, 210), opacity: 0.4 }}
+          radius="8px"
+          img={{ width: '100%', height: '170.67%', left: 0, top: '-65.81%' }}
+        />
+        <Crop
+          src={p2ApplyCollapsed}
+          alt="申请页"
+          box={{ ...d62At(732, 958, 330, 210), opacity: 0.4 }}
+          radius="8px"
+          img={{ width: '100%', height: '170.67%', left: 0, top: '-65.81%' }}
+        />
+        <Crop
+          src={p2List}
+          alt="单据列表"
+          box={{ ...d62At(1086, 958, 330, 210), opacity: 0.4 }}
+          radius="8px"
+          img={{ width: '100%', height: '104.76%', left: 0, top: 0 }}
+        />
+        {/* 叠在底图上的全亮局部 */}
+        <Crop
+          src={p2List}
+          alt="列表顶部的草稿条目"
+          box={d62At(1104, 1017, 294, 21)}
+          radius="4px"
+          img={{ width: '112.24%', height: '1047.62%', left: '-6.12%', top: '-280.95%' }}
+        />
+        <img
+          className="p2-shot"
+          src={d62Dialog}
+          alt="保存草稿的二次确认弹窗"
+          style={d62At(842, 1044, 110.4, 37.72)}
+        />
+        <Crop
+          src={p2ApplyCollapsed}
+          alt="保存草稿按钮"
+          box={d62At(505, 1130, 50, 26)}
+          radius="4px"
+          img={{ width: '660%', height: '1378.53%', left: '-254%', top: '-1193.11%' }}
+        />
+
+        <hr className="p2-rule" style={d62At(378, 1200, 1038)} />
+        <p className="p2-body p2-body--dim" style={d62At(378, 1232)}>
+          保存草稿
+        </p>
+        <p className="p2-body" style={d62At(378, 1264)}>
+          用户可在填写全流程选择保存当前进度
+        </p>
+        <p className="p2-body p2-body--dim" style={d62At(732, 1232)}>
+          二次确认
+        </p>
+        <p className="p2-body" style={d62At(732, 1264)}>
+          确认操作，并提示后续操作方式
+        </p>
+        <p className="p2-body p2-body--dim" style={d62At(1086, 1232)}>
+          查看/编辑草稿
+        </p>
+        <ol className="p2-ol" style={d62At(1086, 1264)}>
+          <li>在列表顶部展示草稿，方便用户查找并编辑</li>
+          <li>可同时选择多个草稿合并提交审批</li>
+        </ol>
+        <hr className="p2-rule" style={d62At(24, 1424, 1392)} />
+      </div>
+    </section>
+  )
+}
+
 function Project2() {
   return (
     <>
@@ -721,7 +911,8 @@ function Project2() {
         strategies={['拆解表单，简化复杂任务', '新增草稿功能，解决用户痛点', '增加提示，提供即时帮助']}
       />
       <Strategy01 />
-      {/* TODO: D-62 1464 / D-61 1452 */}
+      <Strategy02 />
+      {/* TODO: D-61 1452 */}
 
       <ObjectiveOpener
         screen="D-62a"

@@ -1626,6 +1626,34 @@
   box-shadow: 0 4px 20px rgb(0 0 0 / 0.15);
 }
 
+/* 放大镜手法:底图压到 40%,局部细节以同源裁切叠在上面全亮显示 */
+.p2-crop--dim {
+  opacity: 0.4;
+}
+
+.p2-label--accent {
+  color: var(--accent-secondary);
+}
+
+/* 流程示意里的浅色占位块(输入框、卡片) */
+.p2-chip {
+  box-sizing: border-box;
+  border: 1px solid var(--dark-border-light);
+  border-radius: 4px;
+  background: var(--dark-border-light-20);
+}
+
+/* 稿中的编号列表:序号在 24px 缩进外,条目间距 8 */
+.p2-ol {
+  padding-left: 24px;
+  list-style: decimal;
+  color: var(--color-heading);
+}
+
+.p2-ol > li + li {
+  margin-top: 8px;
+}
+
 /* Product Impact 纯文字舞台 */
 .p1-impact {
   position: relative;
