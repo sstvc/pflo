@@ -201,28 +201,31 @@ const D = px => Math.round((px / scale) * 10) / 10;          // 渲染 px → �
 
 ### 6.2 竖向节奏体检(收尾必跑)
 
-⚠️ **不要用「区块高度」直接比** —— 会被塌陷的上下外边距双向误导(曾据此误判开屏差 20px,实则正确)。**必须用相邻真实边界之差**,并补回以标题开头的区块塌陷出去的 24px:
+`.page--project > section` 已设 `display: flow-root`,**每个 section 盒 = 一块画板,section 之间间隙恒为 0**。所以直接比盒高即可:
 
 ```js
-(() => {
+(async () => {
+  await document.fonts.ready;
   const main = document.querySelector('main.page--project');
   const scale = main.getBoundingClientRect().width / 1440;
-  const D = px => Math.round((px / scale) * 10) / 10;
-  const designH = [/* 各子屏画板高,按顺序 */];
-  const secs = [...document.querySelectorAll('main.page--project section')];
-  const starts = secs.map(s => {
-    const lead = s.querySelector(':scope > .proj-heading') ? 24 : 0;  // 塌陷出去的上边距
-    return s.getBoundingClientRect().top + scrollY - lead * scale;
-  });
-  starts.push(main.getBoundingClientRect().bottom + scrollY);
-  return secs.map((s, i) => ({
-    i, 跨度: D(starts[i + 1] - starts[i]), 设计: designH[i],
-    误差: Math.round((D(starts[i + 1] - starts[i]) - designH[i]) * 10) / 10,
-  })).filter(r => Math.abs(r.误差) > 6);
+  const D = px => Math.round(px / scale);
+  const designH = { '105': 812, 'D-72': 540, /* …按 data-screen 填 */ };
+  const secs = [...main.querySelectorAll('section')];
+  const gaps = secs.slice(0, -1).map((s, i) =>
+    Math.round(secs[i + 1].getBoundingClientRect().top - s.getBoundingClientRect().bottom));
+  return {
+    间隙: gaps,                                   // 必须全 0,非 0 说明有外边距逃出去了
+    误差: secs.map(s => {
+      const n = s.dataset.screen, h = D(s.getBoundingClientRect().height);
+      return `${n}: ${h} / ${designH[n]} → ${h - designH[n]}`;
+    }),
+  };
 })()
 ```
 
-**达标线:单屏误差 ≤10px。** project 1 最终 15/19 屏 ≤10px、最大 14px。
+**达标线**:带区块大标题的屏 **+2**(`.proj-heading` 上下各 1px 边框),不带的 **0**。超出即是真错。
+
+> ⚠️ **`flow-root` 是防外边距逃逸的,别去掉。** 逃出去的外边距会和相邻 section 的**合并(取最大值,不是相加)**:`.proj-objopen` 的 40px 下边距碰上下一屏 `.proj-heading` 的 24px 上边距,两者并成 40 —— 白丢 24px,而且盒高看着都对,只有量「原点距」才发现(D-62a 曾据此差 22px)。
 
 ### 6.3 单屏逐元素对位
 

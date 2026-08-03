@@ -80,6 +80,14 @@
   margin: 0;
 }
 
+/* 一个 section = 稿中一块画板,盒子必须自包含。
+   否则子元素的外边距会逃出去并与相邻 section 的**合并**(取最大值,不是相加):
+   .proj-objopen 的 40px 下边距碰上下一屏 .proj-heading 的 24px 上边距时,
+   两者并成 40,白丢 24px —— 章节开屏后面接标题屏的地方全中招。 */
+.page--project > section {
+  display: flow-root;
+}
+
 /* 区块大标题:描边空心字 + 上下分割线 */
 .proj-heading {
   margin: 24px 24px 0;
