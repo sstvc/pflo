@@ -1626,11 +1626,6 @@
   box-shadow: 0 4px 20px rgb(0 0 0 / 0.15);
 }
 
-/* 放大镜手法:底图压到 40%,局部细节以同源裁切叠在上面全亮显示 */
-.p2-crop--dim {
-  opacity: 0.4;
-}
-
 .p2-label--accent {
   color: var(--accent-secondary);
 }
@@ -1652,6 +1647,25 @@
 
 .p2-ol > li + li {
   margin-top: 8px;
+}
+
+/* 版式示意图里的色条(标签用辅助色,内容用主色,统一 40% 透明) */
+.p2-bar {
+  background: var(--accent-primary);
+  opacity: 0.4;
+}
+
+.p2-bar--sec {
+  background: var(--accent-secondary);
+}
+
+/* 主色横幅上的黑体标题 */
+.p2-h3strong {
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  font-weight: 900;
+  color: var(--color-heading);
+  white-space: nowrap;
 }
 
 /* Product Impact 纯文字舞台 */

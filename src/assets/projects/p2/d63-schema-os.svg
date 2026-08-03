@@ -1,0 +1,8 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="507" height="112" viewBox="0 0 507 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame 2147237900">
+<path d="M8 0.5H499C503.142 0.5 506.5 3.85786 506.5 8V104C506.5 108.142 503.142 111.5 499 111.5H8C3.85787 111.5 0.5 108.142 0.5 104V8C0.500002 3.85787 3.85787 0.5 8 0.5Z" stroke="#888A8E"/>
+<rect id="Rectangle 339" x="24" y="24" width="240" height="16" rx="8" fill="#D97B3F"/>
+<path id="Rectangle 355" d="M28 48.5H463C464.933 48.5 466.5 50.067 466.5 52V84C466.5 85.933 464.933 87.5 463 87.5H28C26.067 87.5 24.5 85.933 24.5 84V52C24.5 50.067 26.067 48.5 28 48.5Z" fill="#DADCE0" fill-opacity="0.2" stroke="#DADCE0"/>
+<line id="Line 63" x1="23" y1="12" x2="23" y2="100" stroke="#D97B3F" stroke-width="2"/>
+</g>
+</svg>

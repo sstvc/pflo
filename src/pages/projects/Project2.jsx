@@ -24,7 +24,14 @@ import d59Bars from '../../assets/projects/p2/d59-bars.svg'
 import d59Img1 from '../../assets/projects/p2/d59-img1.png'
 import d59Img12 from '../../assets/projects/p2/d59-img12.png'
 import d59Img2 from '../../assets/projects/p2/d59-img2.png'
-import d59Img2042 from '../../assets/projects/p2/d59-img2042.png'
+import d63FormOs from '../../assets/projects/p2/d63-form-os.png'
+import d63InfoCn from '../../assets/projects/p2/d63-info-cn.png'
+import d63InfoOs from '../../assets/projects/p2/d63-info-os.png'
+import d63Lang1 from '../../assets/projects/p2/d63-lang1.png'
+import d63Lang2 from '../../assets/projects/p2/d63-lang2.png'
+import d63Lang3 from '../../assets/projects/p2/d63-lang3.png'
+import d63SchemaCn from '../../assets/projects/p2/d63-schema-cn.svg'
+import d63SchemaOs from '../../assets/projects/p2/d63-schema-os.svg'
 import d59Img2043 from '../../assets/projects/p2/d59-img2043.png'
 import d61Bars from '../../assets/projects/p2/d61-bars.svg'
 import d61Tips from '../../assets/projects/p2/d61-tips.png'
@@ -35,9 +42,10 @@ import d62FlowBack from '../../assets/projects/p2/d62-flow-back.svg'
 import d62FlowLong from '../../assets/projects/p2/d62-flow-long.svg'
 import d62FlowShort from '../../assets/projects/p2/d62-flow-short.svg'
 /* 申请页的两张截图被多个子屏共用(md5 相同),故不带屏号:
-   折叠态 D-59 + D-62,表单态 D-59 + D-61 */
+   折叠态 D-59 + D-62,表单上半 D-59 + D-61,表单下半 D-59 + D-63 */
 import p2ApplyCollapsed from '../../assets/projects/p2/p2-apply-collapsed.png'
 import p2ApplyForm from '../../assets/projects/p2/p2-apply-form.png'
+import p2ApplyFormLower from '../../assets/projects/p2/p2-apply-form-lower.png'
 import p2List from '../../assets/projects/p2/p2-list.png'
 import d59Rect303 from '../../assets/projects/p2/d59-rect303.svg'
 import d59Rect304 from '../../assets/projects/p2/d59-rect304.svg'
@@ -524,7 +532,7 @@ function Strategy01() {
 
         {/* 申请页截图:上截图 → 灰色透视连接块 → 下截图 */}
         <Crop
-          src={d59Img2042}
+          src={p2ApplyFormLower}
           alt="出差申请页表单下半部分"
           box={d59At(968, 270, 448, 250)}
           radius="0 0 8px 8px"
@@ -1025,6 +1033,179 @@ function Strategy03() {
   )
 }
 
+/* D-63 · 目标2 策略 01「按多语言要求调整字段展示」(高 2074)
+   PROBLEM 三条多语言差异(三张截图)+ 核心问题;
+   DESIGN 两组「中国站 vs 海外站」对照:表单版式、信息展示版式。 */
+const d63At = makeAt(1440, 2074)
+
+/* PROBLEM 三栏:[x, 序号, 说明…] */
+const langDiffs = [
+  [378, d63Lang1, '多语言差异 1', ['统一字段翻译后，字段长度差异显著 ', '同字号字段的视觉高度不一']],
+  [732, d63Lang2, '多语言差异 2', ['不同的语言存在不同的词汇分界方式']],
+  [1086, d63Lang3, '多语言差异 3', ['其他语言难以和中文一样通过缩略控制长度']],
+]
+
+/* 信息展示示意图的色条。左侧(中国站)两列四行,标签 40 + 内容 152;
+   右侧(海外站)是通栏,尺寸各不相同,照抄。 */
+const infoRowsCn = [1671, 1716, 1761, 1806]
+const infoColsCn = [411, 638]
+const infoBarsOs = [
+  [949, 1699, 56, true],
+  [1012, 1699, 372, false],
+  [949, 1756, 435, false],
+  [949, 1781, 56, true],
+  [1012, 1781, 372, false],
+  [949, 1813, 113, false],
+]
+
+function Localization01() {
+  return (
+    <section data-screen="D-63">
+      <div className="p2-stage" style={{ aspectRatio: `${1440} / ${2074}` }}>
+        <p className="p2-strat-num" style={d63At(24, 28)}>
+          01
+        </p>
+        <h3 className="p2-strat-title" style={d63At(74, 24)}>
+          按多语言要求调整字段展示
+        </h3>
+
+        {/* ---- PROBLEM ---- */}
+        <p className="p2-eyebrow" style={d63At(24, 160)}>
+          PROBLEM
+        </p>
+        {langDiffs.map(([x, src, kicker, notes]) => (
+          <Fragment key={kicker}>
+            <Crop
+              src={src}
+              alt={kicker}
+              box={d63At(x, 160, 330, 266)}
+              radius="8px"
+              img={
+                src === d63Lang3
+                  ? { width: '100%', height: '105.09%', left: 0, top: '-4.99%' }
+                  : { width: '100.17%', height: '105.26%', left: '-0.08%', top: '-2.63%' }
+              }
+            />
+            <p className="p2-body p2-body--dim" style={d63At(x, 458)}>
+              {kicker}
+            </p>
+            {notes.map((n, i) => (
+              <p className="p2-body" key={n} style={d63At(x, 490 + i * 32, 330)}>
+                {n}
+              </p>
+            ))}
+          </Fragment>
+        ))}
+        <hr className="p2-rule" style={d63At(378, 578, 1038)} />
+        <p className="p2-body p2-body--dim" style={d63At(378, 610)}>
+          核心问题
+        </p>
+        <p className="p2-body" style={d63At(378, 642)}>
+          多语言页面无法直接套用翻译基于中文环境设计规则的页面
+        </p>
+
+        {/* ---- DESIGN ---- */}
+        <hr className="p2-rule" style={d63At(24, 730, 1392)} />
+        <p className="p2-eyebrow" style={d63At(24, 794)}>
+          DESIGN
+        </p>
+        <p className="p2-h3" style={d63At(378, 794)}>
+          精简多余字段；调整信息展示结构，保留水平空间
+        </p>
+
+        {/* 对照一 · 表单版式 */}
+        <p className="p2-subhead" style={d63At(378, 902)}>
+          中国站
+        </p>
+        <p className="p2-subhead" style={d63At(909, 902)}>
+          海外站
+        </p>
+        <div className="p2-fill" style={d63At(24, 970, 330, 94)} />
+        <p className="p2-h3strong" style={d63At(48, 986)}>
+          表单
+        </p>
+        <Crop
+          src={p2ApplyFormLower}
+          alt="中国站表单版式"
+          box={{ ...d63At(378, 970, 507, 320), opacity: 0.8 }}
+          radius="8px"
+          img={{ width: '347.78%', height: '1042.38%', left: '-75.6%', top: '-528.25%' }}
+        />
+        <Crop
+          src={d63FormOs}
+          alt="海外站表单版式"
+          box={d63At(909, 970, 507, 320)}
+          radius="8px"
+          img={{ width: '186.13%', height: '666.55%', left: '-43.04%', top: '-173.7%' }}
+        />
+        <img src={d63SchemaCn} alt="" style={d63At(378, 1322, 507, 112)} />
+        <img src={d63SchemaOs} alt="" style={d63At(909, 1322, 507, 112)} />
+        <p className="p2-body" style={d63At(378, 1466, 330)}>
+          表单标签与右对齐与填写框水平排列
+        </p>
+        <p className="p2-body" style={d63At(909, 1466)}>
+          表单标签与填写框左对齐垂直排列，减少标签字段长度限制
+        </p>
+
+        {/* 对照二 · 信息展示版式 */}
+        <hr className="p2-rule" style={d63At(378, 1522, 1038)} />
+        <p className="p2-subhead" style={d63At(378, 1586)}>
+          中国站
+        </p>
+        <p className="p2-subhead" style={d63At(909, 1586)}>
+          海外站
+        </p>
+        <div className="p2-fill" style={d63At(24, 1654, 330, 94)} />
+        <p className="p2-h3strong" style={d63At(48, 1670)}>
+          信息展示
+        </p>
+        <Crop
+          src={d63InfoCn}
+          alt="中国站信息展示版式"
+          box={{ ...d63At(378, 1654, 507, 188), opacity: 0.8 }}
+          radius="8px"
+          img={{ width: '107.01%', height: '330.25%', left: '-3.51%', top: '-55.15%' }}
+        />
+        <Crop
+          src={d63InfoOs}
+          alt="海外站信息展示版式"
+          box={d63At(909, 1654, 507, 188)}
+          radius="8px"
+          img={{ width: '139.33%', height: '340.22%', left: '-3.99%', top: '-75.85%' }}
+        />
+        {infoRowsCn.flatMap((y) =>
+          infoColsCn.map((x) => (
+            <Fragment key={`${x}-${y}`}>
+              <div className="p2-bar p2-bar--sec" style={d63At(x, y, 40, 10)} />
+              <div className="p2-bar" style={d63At(x, y + 16, 152, 10)} />
+            </Fragment>
+          )),
+        )}
+        {infoBarsOs.map(([x, y, w, isSec]) => (
+          <div
+            className={`p2-bar${isSec ? ' p2-bar--sec' : ''}`}
+            key={`${x}-${y}-${w}`}
+            style={d63At(x, y, w, 10)}
+          />
+        ))}
+        <p className="p2-body" style={d63At(378, 1874, 330)}>
+          信息标题与内容对应
+        </p>
+        <p className="p2-body" style={d63At(378, 1906, 330)}>
+          水平分栏展示信息
+        </p>
+        <p className="p2-body" style={d63At(909, 1874, 507)}>
+          通过结构调整区分内容，省略非必要标题
+        </p>
+        <p className="p2-body" style={d63At(909, 1906, 507)}>
+          取消水平分栏，充分利用空间宽度，避免长字段折行
+        </p>
+        <hr className="p2-rule" style={d63At(24, 2034, 1392)} />
+      </div>
+    </section>
+  )
+}
+
 function Project2() {
   return (
     <>
@@ -1052,7 +1233,8 @@ function Project2() {
         enSub="Localization Adaptation"
         strategies={['按多语言要求调整字段展示', '制定特殊场景字段展示规则']}
       />
-      {/* TODO: D-63/ D-64 */}
+      <Localization01 />
+      {/* TODO: D-64 2868 */}
 
       {/* ⚠️ 稿中本屏第 2 条策略比另两屏低 8px(y=364 vs 356),疑似手误;
              这里按统一节奏渲染,待作者确认 */}
