@@ -41,6 +41,13 @@ src/
 - **原生 CSS + CSS 变量** —— 无 Tailwind、无 UI 组件库
 - **自托管可变字体** —— Montserrat / Inter / Noto Sans SC,境内外访问一致
 
+## 当前进度
+
+- Project 1：19 个子屏，已完成
+- Project 2：17 个子屏，已完成
+- Project 3 / 4：占位路由已建立，尚未开始
+- 正式首页、Resume 与移动端：待设计/实现
+
 ## 部署
 
 托管在 **Cloudflare Workers**(静态资源模式,非经典 Pages)。推送到 `main` 自动触发构建部署:

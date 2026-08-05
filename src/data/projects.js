@@ -11,17 +11,17 @@ export const projects = [
     title: 'Flight List Page Redesign',
     titleZh: '机票列表页改版项目',
     accent: 1,
-    figmaNodeId: '1:161',
+    figmaNodeId: '6:120',
   },
   {
     slug: 'project-2',
     title: 'Travel Request Launch for Overseas Site',
     titleZh: '出差申请单功能海外站落地',
     accent: 2,
-    figmaNodeId: '4:1125',
+    figmaNodeId: '6:1087',
   },
-  { slug: 'project-3', title: 'Project 3', accent: 3, figmaNodeId: '167:501' },
-  { slug: 'project-4', title: 'Project 4', accent: 4, figmaNodeId: '167:998' },
+  { slug: 'project-3', title: 'Project 3', accent: 3, figmaNodeId: '6:1993' },
+  { slug: 'project-4', title: 'Project 4', accent: 4, figmaNodeId: '6:2490' },
 ]
 
 export function getProject(slug) {

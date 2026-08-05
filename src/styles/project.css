@@ -151,7 +151,8 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  padding: 32px 24px 80px;
+  /* D-32:统计说明底部到画板尾部保留 104px；扣除标题块两条实体边框的累计偏移。 */
+  padding: 32px 24px 102px;
 }
 
 .proj-stat__value {
@@ -166,7 +167,7 @@
   color: var(--color-heading);
 }
 
-/* ---- P1 · Background(1:181 上半) ---- */
+/* ---- P1 · Background(6:140 上半，节点快照 2026-08-06) ---- */
 .p1-bg-grid {
   display: grid;
   grid-template-columns: 330fr 507fr 507fr;
@@ -216,7 +217,7 @@
   grid-column: 3;
 }
 
-/* ---- P1 · Introduction(1:181 下半) ---- */
+/* ---- P1 · Introduction(6:140 下半，节点快照 2026-08-06) ---- */
 .p1-intro {
   padding-bottom: 104px;
 }
@@ -366,7 +367,7 @@
   color: var(--dark-text-body-1);
 }
 
-/* ---- P1 · Existing Problem(1:268) ---- */
+/* ---- P1 · Existing Problem(6:227，节点快照 2026-08-06) ---- */
 .p1-prob-body {
   display: grid;
   grid-template-columns: 330fr 448fr 566fr;
@@ -442,7 +443,7 @@
   aspect-ratio: 566 / 1124;
 }
 
-/* ---- P1 · Design Objectives(1:308) ---- */
+/* ---- P1 · Design Objectives(6:267，节点快照 2026-08-06) ---- */
 .p1-obj-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1508,6 +1509,16 @@
   font-weight: 500;
   color: var(--color-heading);
   white-space: nowrap;
+}
+
+/* D-71 / D-62 的长标题坐标随画板宽度缩放；不足 1440px 时字号也同步缩放，
+   避免在常见 1280px 桌面视口产生横向滚动。1440px 原稿值仍为 36/44。 */
+@media (max-width: 1439px) {
+  [data-screen='D-71'] .p2-objtitle,
+  [data-screen='D-62'] .p2-h3 {
+    font-size: 2.5vw;
+    line-height: 3.056vw;
+  }
 }
 
 .p2-objitem {

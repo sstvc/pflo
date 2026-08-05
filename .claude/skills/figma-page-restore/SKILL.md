@@ -1,11 +1,11 @@
 ---
 name: figma-page-restore
-description: 从 Figma 稿还原 pflo 的项目详情页(project 2/3/4 或任何新增 project 页)。当需要"还原设计稿""搭 project N 页面""按 Figma 做页面""对比设计稿自检"时使用。内含分屏读稿流程、坐标舞台技术、复用基元、15 类已知坑与三个必跑验证脚本 —— 全部来自 project 1 的实战与返工。
+description: 从 Figma 稿还原 pflo 的项目详情页(project 3/4 或任何新增 project 页)。当需要"还原设计稿""搭 project N 页面""按 Figma 做页面""对比设计稿自检"时使用。内含分屏读稿流程、坐标舞台技术、复用基元、15 类已知坑与三个必跑验证脚本 —— 来自 project 1/2 的实战与返工。
 ---
 
 # 从 Figma 还原项目页面
 
-这份 skill 是 project 1(机票列表页改版,19 个子屏)还原全过程 + 多轮走查返工的沉淀。**开工前完整读一遍,能省掉至少 12 类已经踩过的坑。**
+这份 skill 是 project 1（19 个子屏）和 project 2（17 个子屏）还原全过程 + 多轮走查返工的沉淀。**开工前完整读一遍,能省掉至少 15 类已经踩过的坑。**
 
 配套阅读:`docs/figma-restoration.md`(背景与画板对照)、`CLAUDE.md`(硬规则)。
 

@@ -74,15 +74,15 @@ import {
 
 /**
  * Project 1 — Flight List Page Redesign / 机票列表页改版项目
- * Figma: Page 1 → project 1 (1:161), 1440×23513
- * 区块:104 头图(1:162)/ 背景&介绍(1:181)/ 问题&目标(1:267)
- *      / 目标1(1:343)/ 目标2(1:628)/ 目标3(1:901)/ 对比&总结(1:1045)
+ * Figma: Page 1 → project 1 (6:120), 1440×23513（节点快照 2026-08-06）
+ * 区块:104 头图(6:121)/ 背景&介绍(6:140)/ 问题&目标(6:226)
+ *      / 目标1(6:302)/ 目标2(6:587)/ 目标3(6:860)/ 对比&总结(6:1004)
  */
 
-/* 104 · 头图(1:162) */
+/* 104 · 头图(6:121) */
 const Hero = () => (
   <ProjectHero
-    nodeId="1:162"
+    nodeId="6:121"
     label="Project 1"
     enTitle="Flight List Page Redesign"
     cnTitle="机票列表页改版项目"
@@ -95,10 +95,10 @@ const Hero = () => (
   />
 )
 
-/* 背景(1:182):项目背景 + 现状截图 + 三项统计 */
+/* 背景(6:141):项目背景 + 现状截图 + 三项统计 */
 function Background() {
   return (
-    <section data-node-id="1:182">
+    <section data-node-id="6:141">
       <SectionHeading>Background</SectionHeading>
       <div className="p1-bg-grid">
         <div className="p1-bg-text">
@@ -145,7 +145,7 @@ function Background() {
   )
 }
 
-/* 介绍(1:207):预订流程三步(高亮列表页) */
+/* 介绍(6:166):预订流程三步(高亮列表页) */
 const introSteps = [
   {
     num: '01',
@@ -182,7 +182,7 @@ const introSteps = [
 
 function Introduction() {
   return (
-    <section className="p1-intro" data-node-id="1:207">
+    <section className="p1-intro" data-node-id="6:166">
       <SectionHeading>Introduction</SectionHeading>
       <div className="p1-intro-body">
         <p className="proj-kicker p1-intro-lead">列表页在机票预订流程：</p>
@@ -223,7 +223,7 @@ function Introduction() {
   )
 }
 
-/* 问题分析(1:268):两组问题清单 + 现状长截图 */
+/* 问题分析(6:227):两组问题清单 + 现状长截图 */
 const problemGroups = [
   {
     num: '01',
@@ -248,7 +248,7 @@ const problemGroups = [
 
 function Problem() {
   return (
-    <section data-node-id="1:268">
+    <section data-node-id="6:227">
       <SectionHeading>Existing Problem</SectionHeading>
       <div className="p1-prob-body">
         <p className="proj-kicker">问题分析</p>
@@ -276,7 +276,7 @@ function Problem() {
   )
 }
 
-/* 设计目标(1:308):三列目标卡(描边大序号) */
+/* 设计目标(6:267):三列目标卡(描边大序号) */
 const objectives = [
   {
     num: '01',
@@ -301,7 +301,7 @@ const objectives = [
 
 function Objectives() {
   return (
-    <section data-node-id="1:308">
+    <section data-node-id="6:267">
       <SectionHeading>Design Objectives</SectionHeading>
       <div className="p1-obj-grid">
         <div className="p1-obj-side">
@@ -326,7 +326,7 @@ function Objectives() {
   )
 }
 
-/* 目标1 · 策略01 页面框架重构(1:364)—— BEFORE / DESIGN / AFTER */
+/* 目标1 · 策略01 页面框架重构(6:323)—— BEFORE / DESIGN / AFTER */
 
 /* 截图标注层(672×351):搜索模块/筛选栏/航班卡片/运价卡片 */
 const annoBefore = {
@@ -468,7 +468,7 @@ const frameConcepts = [
 
 function Strategy1() {
   return (
-    <section data-node-id="1:364">
+    <section data-node-id="6:323">
       <div className="proj-strathead">
         <strong>01</strong>
         <span>页面框架重构</span>
@@ -558,7 +558,7 @@ function Strategy1() {
   )
 }
 
-/* 目标1 · 策略02 航班卡片信息元素分区(1:480)*/
+/* 目标1 · 策略02 航班卡片信息元素分区(6:439)*/
 
 /* BEFORE:卡片元素按优先级拆解(舞台 1062×208,较内容列左溢 24px) */
 const priBefore = [
@@ -610,7 +610,7 @@ const priAfter = [
 
 function Strategy2() {
   return (
-    <section data-node-id="1:480">
+    <section data-node-id="6:439">
       <div className="proj-strathead">
         <strong>02</strong>
         <span>航班卡片信息元素分区</span>
@@ -687,10 +687,10 @@ function Strategy2() {
   )
 }
 
-/* 目标1 · 策略03 使用容器拓展页面层级(1:566)*/
+/* 目标1 · 策略03 使用容器拓展页面层级(6:525)*/
 function Strategy3() {
   return (
-    <section data-node-id="1:566">
+    <section data-node-id="6:525">
       <div className="proj-strathead">
         <strong>03</strong>
         <span>使用容器拓展页面层级</span>
@@ -751,7 +751,7 @@ function Strategy3() {
   )
 }
 
-/* 目标2 · 策略01 页面核心流程强化(1:649)*/
+/* 目标2 · 策略01 页面核心流程强化(6:608)*/
 
 /* 功能分区爆炸图:同源截图裁片(crop = 稿内百分比参数直译) */
 const coreFrags = [
@@ -780,7 +780,7 @@ function O2Strategy1() {
   const XW = 1038
   const XH = 300
   return (
-    <section data-node-id="1:649">
+    <section data-node-id="6:608">
       <div className="proj-strathead">
         <strong>01</strong>
         <span>页面核心流程强化</span>
@@ -900,7 +900,7 @@ function O2Strategy1() {
   )
 }
 
-/* 目标2 · 策略02 关键信息减轻查看依赖(1:725)*/
+/* 目标2 · 策略02 关键信息减轻查看依赖(6:684)*/
 
 /* 暗化条带的同源裁切参数(稿内直译) */
 const depBeforeCropTop = { h: '750%', l: '-14.07%', t: '-390.18%', w: '128.14%' }
@@ -921,7 +921,7 @@ function O2Strategy2() {
   const BH = 330
   const AH = 616
   return (
-    <section data-node-id="1:725">
+    <section data-node-id="6:684">
       <div className="proj-strathead">
         <strong>02</strong>
         <span>关键信息减轻查看依赖</span>
@@ -1012,13 +1012,13 @@ function O2Strategy2() {
   )
 }
 
-/* 目标2 · 策略03 卡片交互方式规范化(1:764)
+/* 目标2 · 策略03 卡片交互方式规范化(6:723)
    交互区标注合成图 = 整屏导出后 CSS 切片;文字/图例/分割线保持真实元素 */
 
 function O2Strategy3() {
   const W = 1440
   return (
-    <section data-node-id="1:764">
+    <section data-node-id="6:723">
       <div className="proj-strathead">
         <strong>03</strong>
         <span>卡片交互方式规范化</span>
@@ -1115,7 +1115,7 @@ function O2Strategy3() {
   )
 }
 
-/* 目标3 · 策略01 航班优势信息强化(1:919)*/
+/* 目标3 · 策略01 航班优势信息强化(6:878)*/
 
 /* 旧卡片截图的两种裁切(同源) */
 const advCropTop = { h: '750%', l: '-14.07%', t: '-203.57%', w: '128.14%' }
@@ -1132,7 +1132,7 @@ function O3Strategy1() {
   const BH = 416
   const AH = 771
   return (
-    <section data-node-id="1:919">
+    <section data-node-id="6:878">
       <div className="proj-strathead">
         <strong>01</strong>
         <span>航班优势信息强化</span>
@@ -1212,7 +1212,7 @@ function O3Strategy1() {
   )
 }
 
-/* 目标3 · 策略02 多运价信息对比效率提升(1:1009)*/
+/* 目标3 · 策略02 多运价信息对比效率提升(6:968)*/
 const fareRows = [
   { rule: 6, dt: '标题', dtY: 38, dds: [{ y: 38, text: '舱位等级' }] },
   {
@@ -1243,7 +1243,7 @@ function O3Strategy2() {
   const H = 500
   const cards = [fareCard1, fareCard2, fareCard3, fareCard4]
   return (
-    <section data-node-id="1:1009">
+    <section data-node-id="6:968">
       <div className="proj-strathead">
         <strong>02</strong>
         <span>多运价信息对比效率提升</span>
@@ -1302,7 +1302,7 @@ function O3Strategy2() {
   )
 }
 
-/* 对比&总结 · 页面主要节点对比(1:1046)
+/* 对比&总结 · 页面主要节点对比(6:1005)
    卡片 507×280;光标/浮层坐标按卡片百分比 */
 const cmpRows = [
   { label: '初始状态', before: cmpBefore1, after: cmpAfter1 },
@@ -1323,7 +1323,7 @@ const Cursor = (props) => <FigmaCursor src={cmpCursor} {...props} />
 
 function Comparison() {
   return (
-    <section data-node-id="1:1046">
+    <section data-node-id="6:1005">
       <SectionHeading>Redesign Comparison</SectionHeading>
       <div className="p1-split" style={{ paddingBottom: 0 }}>
         <p className="proj-kicker" style={{ gridColumn: 1 }}>
@@ -1366,7 +1366,7 @@ function Comparison() {
   )
 }
 
-/* 对比&总结 · Product Impact 项目成果 + 团队反馈(1:1092)*/
+/* 对比&总结 · Product Impact 项目成果 + 团队反馈(6:1051)*/
 function ProductImpact() {
   const W = 1440
   const H = 1088
@@ -1376,7 +1376,7 @@ function ProductImpact() {
   const SH = H - HEAD
   const at = (x, y, w) => ({ left: pct(x, W), top: pct(y - HEAD, SH), ...(w != null && { width: pct(w, W) }) })
   return (
-    <section data-node-id="1:1092">
+    <section data-node-id="6:1051">
       <SectionHeading>Product Impact</SectionHeading>
       <div className="proj-impact" style={{ aspectRatio: `${W} / ${SH}` }}>
         <span className="proj-impact-kicker" style={at(24, 160)}>项目成果总结</span>
@@ -1433,7 +1433,7 @@ function Project1() {
       <Problem />
       <Objectives />
       <ObjectiveOpener
-        nodeId="1:344"
+        nodeId="6:303"
         heading="Objective No.1"
         goal="提升拓展性"
         cnTitle="优化信息展示结构"
@@ -1444,7 +1444,7 @@ function Project1() {
       <Strategy2 />
       <Strategy3 />
       <ObjectiveOpener
-        nodeId="1:629"
+        nodeId="6:588"
         heading="Objective No.2"
         goal="提升可用性"
         cnTitle="交互链路提效"
@@ -1455,7 +1455,7 @@ function Project1() {
       <O2Strategy2 />
       <O2Strategy3 />
       <ObjectiveOpener
-        nodeId="1:902"
+        nodeId="6:861"
         heading="Objective No.3"
         goal="提升可用性"
         cnTitle="强化关键信息感知"
@@ -1467,7 +1467,7 @@ function Project1() {
       <Comparison />
       <ProductImpact />
       {/* 收尾屏:稿中 '2025' 帧紧贴 Desktop-58,自带背景与顶部分割线,无外边距 */}
-      <section data-node-id="1:1116">
+      <section data-node-id="6:1075">
         <img
           src={endTitle}
           alt="Flight List Page Redesign"

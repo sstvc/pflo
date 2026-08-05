@@ -1873,14 +1873,14 @@ function Project2() {
       <Localization01 />
       <Localization02 />
 
-      {/* ⚠️ 稿中本屏第 2 条策略比另两屏低 8px(y=364 vs 356),疑似手误;
-             这里按统一节奏渲染,待作者确认 */}
+      {/* 第一条策略会折成两行；原稿将第二行的序号、文字和分割线整体下移 8px。 */}
       <ObjectiveOpener
         screen="D-65"
         heading="OBJECTIVE NO.3"
         cnTitle="高效推进与体验保障"
         enSub="Sustainable Experience"
         strategies={['基于固有逻辑，通过前端展示优化体验', 'PC & App 分批上线']}
+        strategyOffsets={[0, 8]}
       />
       <Sustainable01 />
       <Sustainable02 />

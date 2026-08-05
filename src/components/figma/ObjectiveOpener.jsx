@@ -14,7 +14,18 @@ const at = makeAt(W, H)
  *
  * 坐标为带内相对值(稿中绝对 y 减去带顶 96)。
  */
-export default function ObjectiveOpener({ heading, goal, cnTitle, enSub, strategies, nodeId, screen }) {
+export default function ObjectiveOpener({
+  heading,
+  goal,
+  cnTitle,
+  enSub,
+  strategies,
+  strategyOffsets = [],
+  nodeId,
+  screen,
+}) {
+  const rowOffset = (index) => strategyOffsets[index] ?? 0
+
   return (
     <section data-node-id={nodeId} data-screen={screen}>
       <SectionHeading>{heading}</SectionHeading>
@@ -33,17 +44,29 @@ export default function ObjectiveOpener({ heading, goal, cnTitle, enSub, strateg
           设计策略
         </p>
         {strategies.map((s, i) => (
-          <strong className="proj-objopen__num" key={`n${s}`} style={at(968, 124 + i * 136)}>
+          <strong
+            className="proj-objopen__num"
+            key={`n${s}`}
+            style={at(968, 124 + i * 136 + rowOffset(i))}
+          >
             {String(i + 1).padStart(2, '0')}
           </strong>
         ))}
         {strategies.map((s, i) => (
-          <span className="proj-objopen__item" key={`t${s}`} style={at(1048, 132 + i * 136, 368)}>
+          <span
+            className="proj-objopen__item"
+            key={`t${s}`}
+            style={at(1048, 132 + i * 136 + rowOffset(i), 368)}
+          >
             {s}
           </span>
         ))}
         {strategies.slice(1).map((s, i) => (
-          <hr className="proj-objopen__rule" key={`r${s}`} style={at(968, 228 + i * 136, 448)} />
+          <hr
+            className="proj-objopen__rule"
+            key={`r${s}`}
+            style={at(968, 228 + i * 136 + rowOffset(i + 1), 448)}
+          />
         ))}
       </div>
     </section>
