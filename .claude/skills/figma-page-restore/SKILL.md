@@ -1,11 +1,11 @@
 ---
 name: figma-page-restore
-description: 从 Figma 稿还原 pflo 的项目详情页(project 3/4 或任何新增 project 页)。当需要"还原设计稿""搭 project N 页面""按 Figma 做页面""对比设计稿自检"时使用。内含分屏读稿流程、坐标舞台技术、复用基元、15 类已知坑与三个必跑验证脚本 —— 来自 project 1/2 的实战与返工。
+description: 从 Figma 稿还原 pflo 的项目详情页(project 3/4 或任何新增 project 页)。当需要"还原设计稿""搭 project N 页面""按 Figma 做页面""对比设计稿自检"时使用。内含分屏读稿流程、坐标舞台技术、复用基元、16 类已知坑与三个必跑验证脚本 —— 来自 project 1/2 的实战与返工。
 ---
 
 # 从 Figma 还原项目页面
 
-这份 skill 是 project 1（19 个子屏）和 project 2（17 个子屏）还原全过程 + 多轮走查返工的沉淀。**开工前完整读一遍,能省掉至少 15 类已经踩过的坑。**
+这份 skill 是 project 1（19 个子屏）和 project 2（17 个子屏）还原全过程 + 多轮走查返工的沉淀。**开工前完整读一遍,能省掉至少 16 类已经踩过的坑。**
 
 配套阅读:`docs/figma-restoration.md`(背景与画板对照)、`CLAUDE.md`(硬规则)。
 
@@ -136,7 +136,7 @@ import { makeAt, SectionHeading, ObjectiveOpener, WfStage, PriStage,
 
 ---
 
-## 5. 已知坑(15 类,全部踩过)
+## 5. 已知坑(16 类,全部踩过)
 
 ### 布局 / 节奏
 
@@ -159,6 +159,8 @@ import { makeAt, SectionHeading, ObjectiveOpener, WfStage, PriStage,
 **⑦b `display: contents` 挡住 `> *`。** 舞台靠 `.stage > * { position: absolute }` 定位,而 `display: contents` 的包装器**本身**才是那个直接子元素 —— 真正的内容降了一级,选择器够不着,整组塌回舞台顶部(D-73 的页面卡曾因此从 y=1710 掉到 566)。循环里要包多个元素,用带 key 的 `<Fragment>`,不要用 `<div style={{display:'contents'}}>`。
 
 **⑦c 舞台只重置了 `margin`,没重置 `padding`。** `<ul>/<ol>` 自带 UA 的 `padding-left: 40px`,加上项目**没有全局 `border-box`**,`width: 212px` 实际占 252px → 整页横向溢出。舞台里放列表,自己写 `padding: 0; list-style: none`。
+
+**⑦d 内层定位容器不能覆盖舞台赋予的 `position: absolute`。** `.stage > * { position: absolute }` 与后写的 `.chart { position: relative }` 特异性相同，后者会把图表改成相对定位。Chrome 可能仍按预期计算百分比 `top`，Safari 会在父级高度由 `aspect-ratio` 推导时把纵向偏移解析为 0，导致整组内容塌到舞台顶部。需要内部定位上下文时，元素保持 `position: absolute` 即可；absolute 本身也会成为绝对定位子元素的 containing block。
 
 **⑧ 覆盖层要用 `::after`,不能塌进父元素。** Figma 导出若以 `<div className="absolute inset-0 pointer-events-none shadow-[inset_…]" />` 结尾,说明该效果画在**内容之上**。写成父元素自己的 `box-shadow: inset` 是错的 —— CSS 把父元素的背景/边框/内阴影画在**子元素下面**,任何不透明子元素都会盖掉它。**照搬 Figma 的样式值不够,还要照搬子元素顺序。**
 

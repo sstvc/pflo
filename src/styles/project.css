@@ -1394,7 +1394,9 @@
 
 /* ---- 霍夫斯泰德文化维度图(684×168) ---- */
 .p2-hof {
-  position: relative;
+  /* 图表本身必须相对 .p2-stage 绝对定位；absolute 同时可作为内部柱形的定位上下文。
+     不要改成 relative：Safari 会把由 aspect-ratio 得出的纵向百分比偏移解析为 0。 */
+  position: absolute;
 }
 
 .p2-hof > * {
